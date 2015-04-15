@@ -10,6 +10,20 @@
 using namespace boost;
 using namespace std;
 
+void command_fix(char* command)
+{
+    char* altered_command[50000];
+    for(int i = 0, int x = 0; command[x] != '\0'; ++x, ++j))
+    {
+        if(command[x] == '#')
+        {
+            
+
+
+
+
+
+
 
 int main(int argc, char **argv)
 {
