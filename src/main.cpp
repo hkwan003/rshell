@@ -1,3 +1,4 @@
+#include <sstream>
 #include <iostream>
 #include <stdio.h>
 #include <unistd.h>
@@ -56,7 +57,10 @@ int main(int argc, char **argv)
 {
     
 
-    char prompt_holder[50000];
+    vector <string> Vctr_of_commands;
+    char prompt_holder[50000];//orginal array to hold prompt
+    char *token;//used to break up using string tokenizer
+
 
     cout  << "$ ";
     string converter;                           //converts all bits of string into one piece
@@ -70,6 +74,23 @@ int main(int argc, char **argv)
 
     possible_connector(to_be_tokenized ,to_be_tokenized.size());
 
+    token = (prompt_holder);
+    cout << "output what is suppose to be tokenized" << endl;
+    while(token != NULL)
+    {
+        cout << token << endl;
+        char foo[10000] = {*token};
+        string s(foo);
+        cout << "output strings: " << s << endl;
+        Vctr_of_commands.push_back(s);
+        cout<< "What is suppose to output: "  << Vctr_of_commands[0] << endl;
+        token = strtok(NULL, "|;&");
+    }
+
+
+
+    string finished_tok = strtok(prompt_holder, " &|;");
+    
     int i = fork();
     if(i == 0)
     {
@@ -83,12 +104,12 @@ int main(int argc, char **argv)
         cout << "hello world" << endl;
     }
 
-    for(int x = 0; x < connect_Pos.size() ; x++)
+    for(unsigned int x = 0; x < connect_Pos.size() ; x++)
     {
         cout << "Connect_pos: " << connect_Pos.at(x) << endl;
     }
 
-    for(int x = 0; x < kinds_of_connect.size() ; x++)
+    for(unsigned int x = 0; x < kinds_of_connect.size() ; x++)
     {
         cout << "kinds of connect: " << kinds_of_connect.at(x) << endl;
     }
