@@ -1,61 +1,81 @@
 #include <iostream>
-#include <string>
 #include <stdio.h>
-#include <vector>
-#include <stdlib.h>   
-#include <string.h>
-#include <boost/tokenizer.hpp>
 #include <unistd.h>
+#include "errno.h"
+#include <string>
+#include <list>
+#include <string.h>
+#include <vector>
 
-using namespace boost;
+
 using namespace std;
 
-void command_fix(char* command)
+
+
+
+
+
+vector<int> connect_Pos; //holds the positions of possible connectors in prompt
+vector<int> kinds_of_connect; //holds what kind of connector are in prompt
+
+
+void possible_connector(string prompt,int size)
 {
-    char* altered_command[50000];
-    for(int i = 0, int x = 0; command[x] != '\0'; ++x, ++j))
+for(int x = 0; x < size; x++)
     {
-        if(command[x] == '#')
+        if(prompt.at(x)  == ';')
         {
-            
+            connect_Pos.push_back(x);
+            kinds_of_connect.push_back(0);
+         }
+        else if(prompt[x] ==  '|' && prompt[x + 1] == '|') 
+        {
+            connect_Pos.push_back(x);
+            kinds_of_connect.push_back(1);
+            kinds_of_connect.push_back(1);
+        }
+        else if(prompt[x] == '&' && prompt[x + 1] == '&')
+        {
+            connect_Pos.push_back(x);
+            kinds_of_connect.push_back(2);
+            kinds_of_connect.push_back(2);
 
-
-
-
+        }
+        kinds_of_connect.push_back(-1);        
+    }
+}
 
 
 
 int main(int argc, char **argv)
 {
+    
+    char prompt_holder[50000];
 
-    vector<string> command;
     cout  << "$ ";
     string converter;                           //converts all bits of string into one piece
     string to_be_tokenized;
     getline(cin, to_be_tokenized);
-    char_separator<char> delim("^&| ", ";", keep_empty_tokens);
-    tokenizer< char_separator<char>  > mytok(to_be_tokenized, delim); 
- 
-    for(auto it = mytok.begin(); it != mytok.end(); ++it)
+    for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
     {
-        converter += *it;
+        prompt_holder[x] =  to_be_tokenized.at(x);
     }
-    cout << converter << endl;
-    converter += '\0';
-    const char *cstr = converter.c_str();
-    command.push_back(converter);
-   int i = fork();
-   if(i == 0)
-   {
-       if(-1 == execvp(cstr, argv))
-       {
-           perror("execvp");
-       }
-   }
-   else
-   {
-       cout << "hello world" << endl;
-   }
+    prompt_holder[to_be_tokenized.size()] = '\0';
+
+    possible_connector(to_be_tokenized ,to_be_tokenized.size() + 1);
+
+    int i = fork();
+    if(i == 0)
+    {
+        if(-1 == execvp(prompt_holder, argv))
+        {
+            perror("execvp");
+        }
+    }
+    else
+    {
+        cout << "hello world" << endl;
+    }
 
 
 
@@ -74,7 +94,7 @@ ls -a
 
 [ls] [-a]
 
-execvp([ls],[[ls],[-a]])
+exekcvp([ls],[[ls],[-a]])
 char* argumentList[50000];
 char executable[50000];
 argumentList[0] = executable;
