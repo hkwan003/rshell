@@ -13,7 +13,7 @@
 
 
 using namespace std;
-
+bool global_continue = true;
 void fixing_spacing_command(char *org_prompt)
 {
     char *finished_prompt = (char*)malloc(50000);
@@ -57,6 +57,7 @@ void fixing_spacing_command(char *org_prompt)
     strcpy(org_prompt, finished_prompt);
    
 }
+
 void execute(char* command, char* command_list[], int conect_type)
 {
     int status;
@@ -68,9 +69,12 @@ void execute(char* command, char* command_list[], int conect_type)
     }
     else if(process_ID == 0)            //child process
     {
+        cout << "output status: " << status << endl;
+
         if(execvp(command, command_list) == -1)
         {
             perror("error with passed in argument list");
+            cout << "outuput inner status: " << status << endl;
             exit(1);
         }
     }
@@ -80,6 +84,14 @@ void execute(char* command, char* command_list[], int conect_type)
         {
             perror("error with waitpid()");
         }
+    }
+    if(status != 0 && conect_type == 1)
+    {
+        global_continue = true; 
+    }
+    if(status != 0 && conect_type == 2)
+    {
+        global_continue = false;
     }
 }
 
@@ -132,7 +144,7 @@ int main(int argc, char **argv)
         }
         fixing_spacing_command(prompt_holder);
         
-        token = strtok(prompt_holder, "\t");
+        token = strtok(prompt_holder, "\t ");
         while(token != NULL  &&  prompter)
         {
             if(!strcmp(token, ";")) connect_check = 0;
@@ -140,17 +152,17 @@ int main(int argc, char **argv)
             else if(!strcmp(token, "&&")) connect_check = 2;
             else connect_check = -1;
             
-            if(connect_check == -1 && sequence < 1)
-            {
-                comd_arr[comd_arr_cnt] = token;
-                comd_arr_cnt++;
-                sequence++;                     //increment only once to see which is executable
-            }
-            else if(sequence > 0 && connect_check == -1)
+            if(sequence > 0 && connect_check == -1)
             {
                 comd_arr[comd_arr_cnt] = token;
                 comd_arr_cnt++;
                 
+            }
+            else if(connect_check == -1 && sequence < 1)
+            {
+                comd_arr[comd_arr_cnt] = token;
+                comd_arr_cnt++;
+                sequence++;                     //increment only once to see which is executable
             }
             else if(connect_check != -1)
             {
@@ -159,7 +171,7 @@ int main(int argc, char **argv)
                 comd_arr_cnt = 0;
                 execute(comd_arr[0], comd_arr, connect_check);
             }
-            token = strtok(NULL, " ");
+            token = strtok(NULL, "\t ");
             if(connect_check == -1 && token == NULL)
             {
                 comd_arr[comd_arr_cnt] = '\0';
@@ -187,6 +199,5 @@ unsigned int size = 0;
 ls -a \0
 execvp(argumentList[0], argumentList);
 */
-
 
     
