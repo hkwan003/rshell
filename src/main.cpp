@@ -60,6 +60,7 @@ void fixing_spacing_command(char *org_prompt)
 
 void execute(char* command, char* command_list[], int conect_type)
 {
+    int exec_status;
     int status;
     int process_ID = fork();
     if(process_ID <= -1)
@@ -69,12 +70,11 @@ void execute(char* command, char* command_list[], int conect_type)
     }
     else if(process_ID == 0)            //child process
     {
-        cout << "output status: " << status << endl;
 
-        if(execvp(command, command_list) == -1)
+        exec_status = (execvp(command, command_list));
+        if(exec_status == -1)
         {
             perror("error with passed in argument list");
-            cout << "outuput inner status: " << status << endl;
             exit(1);
         }
     }
@@ -85,14 +85,24 @@ void execute(char* command, char* command_list[], int conect_type)
             perror("error with waitpid()");
         }
     }
-    if(status != 0 && conect_type == 1)
+    if(exec_status == -1  && conect_type == 1)
     {
+        cout << "execstatus: " << exec_status << endl;
         global_continue = true; 
     }
-    if(status != 0 && conect_type == 2)
+    if(exec_status == -1  && conect_type == 2)
     {
+        cout << "second one fucked up" << endl;
         global_continue = false;
     }
+}
+
+int check_connections(char* check)
+{
+    if(!strcmp(token, ";")) return  0;
+    else if(!strcmp(token, "||")) return  1;
+    else if(!strcmp(token, "&&")) return  2;
+    else return -1;
 }
 
 
@@ -125,7 +135,6 @@ int main(int argc, char **argv)
     {
         cout << userinfo << "@" << host << " $ ";
         //////////////////////////////////////////////login part done, next is all shell commands 
-        int connect_check = 0;           //holds to see what kind of connectors I have 
         char prompt_holder[50000];//orginal array to hold prompt
         char *comd_arr[50000];
         for(int x = 0; x < 50001; x++)
@@ -143,37 +152,37 @@ int main(int argc, char **argv)
             prompt_holder[x] =  to_be_tokenized.at(x);
         }
         fixing_spacing_command(prompt_holder);
+       
         
         token = strtok(prompt_holder, "\t ");
+
         while(token != NULL  &&  prompter)
         {
-            if(!strcmp(token, ";")) connect_check = 0;
-            else if(!strcmp(token, "||")) connect_check = 1;
-            else if(!strcmp(token, "&&")) connect_check = 2;
-            else connect_check = -1;
-            
-            if(sequence > 0 && connect_check == -1)
-            {
-                comd_arr[comd_arr_cnt] = token;
-                comd_arr_cnt++;
-                
-            }
-            else if(connect_check == -1 && sequence < 1)
+            if(connect_check == -1 && sequence < 1)
             {
                 comd_arr[comd_arr_cnt] = token;
                 comd_arr_cnt++;
                 sequence++;                     //increment only once to see which is executable
             }
-            else if(connect_check != -1)
+            else if(sequence > 0 && connect_check == -1)
             {
-                comd_arr[comd_arr_cnt] = '\0';
+                comd_arr[comd_arr_cnt] = token;
+                comd_arr_cnt++;
+                
+            }
+            else if(connect_check != -1 && global_continue == true)
+            {
+                cout << "outputting token: " << token << endl;
+                comd_arr[comd_arr_cnt] = '\0' ;
                 sequence = 0;
                 comd_arr_cnt = 0;
                 execute(comd_arr[0], comd_arr, connect_check);
             }
             token = strtok(NULL, "\t ");
-            if(connect_check == -1 && token == NULL)
+            cout << "outputlast token: " << token << endl;
+            if(connect_check == -1 && token == NULL && global_continue == true)
             {
+                cout << "did this execute" << endl;
                 comd_arr[comd_arr_cnt] = '\0';
                 execute(comd_arr[0], comd_arr, connect_check);
             }
