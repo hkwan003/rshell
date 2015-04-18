@@ -9,18 +9,17 @@
 #include <vector>
 #include <cstdlib>
 #include <sys/wait.h>
-
-
+#include <string.h> 
 
 
 using namespace std;
 
 void fixing_spacing_command(char *org_prompt)
 {
-    char *finished_prompt[50000];
+    char *finished_prompt = (char*)malloc(50000);
     //x is passed in prompt
     //i is finished prompt after changing spaces
-    for(int x = 0, int i = 0; org_prompt[x] != '\0'; x++, i++)
+    for(int x = 0,i = 0; org_prompt[x] != '\0'; x++, i++)
     {
         if(org_prompt[x] == '#')
         {
@@ -56,11 +55,39 @@ void fixing_spacing_command(char *org_prompt)
         if(org_prompt[x + 1] == '\0') finished_prompt[i + 1] = '\0';
     }
     strcpy(org_prompt, finished_prompt);
+   
+}
+void execute(char* command, char* command_list[], int conect_type)
+{
+    int status;
+    int process_ID = fork();
+    if(process_ID <= -1)
+    {
+        perror("Error occured during forking()");
+        exit(1);
+    }
+    else if(process_ID == 0)            //child process
+    {
+        if(execvp(command, command_list) == -1)
+        {
+            perror("error with passed in argument list");
+            exit(1);
+        }
+    }
+    else if(process_ID > 0)
+    {
+        if(waitpid(process_ID, &status,0) == -1)
+        {
+            perror("error with waitpid()");
+        }
+    }
+}
 
 
 
 int main(int argc, char **argv)
 {
+    int sequence = 0;           //sequence of which is executable and flags
     int status;
     char* host = (char*)malloc(500);
     string userinfo;
@@ -86,9 +113,14 @@ int main(int argc, char **argv)
     {
         cout << userinfo << "@" << host << " $ ";
         //////////////////////////////////////////////login part done, next is all shell commands 
-        int connect_check = ;           //holds to see what kind of connectors I have 
+        int connect_check = 0;           //holds to see what kind of connectors I have 
         char prompt_holder[50000];//orginal array to hold prompt
         char *comd_arr[50000];
+        for(int x = 0; x < 50001; x++)
+        {
+            prompt_holder[x] = 0;
+            comd_arr[x] = 0;
+        }
         unsigned int comd_arr_cnt = 0;
 
         string converter;                           //converts all bits of string into one piece
@@ -98,67 +130,43 @@ int main(int argc, char **argv)
         {
             prompt_holder[x] =  to_be_tokenized.at(x);
         }
-        prompt_holder[to_be_tokenized.size()] = '\0';
-        fixed_spacing_command(prompt_holder);
-        token = strtok(prompt_holder, "\t ";
-        while(token != NULL && prompter)
+        fixing_spacing_command(prompt_holder);
+        
+        token = strtok(prompt_holder, "\t");
+        while(token != NULL  &&  prompter)
         {
             if(!strcmp(token, ";")) connect_check = 0;
             else if(!strcmp(token, "||")) connect_check = 1;
             else if(!strcmp(token, "&&")) connect_check = 2;
-            connect_check = -1;
-
-            if(connect_check == -1)
+            else connect_check = -1;
+            
+            if(connect_check == -1 && sequence < 1)
             {
                 comd_arr[comd_arr_cnt] = token;
                 comd_arr_cnt++;
+                sequence++;                     //increment only once to see which is executable
             }
-
-        }
-
-        
-      
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-        
-        int i = fork();
-        if(i <= -1)     //this would be an error
-        {
-            perror("an error occured with fork()");
-            exit(1);
-        }
-        else if(i == 0)
-        {
-            if(-1 == execvp(comd_arr[0], comd_arr))
+            else if(sequence > 0 && connect_check == -1)
             {
-                perror("There is a problem with the prompt entered");
+                comd_arr[comd_arr_cnt] = token;
+                comd_arr_cnt++;
+                
             }
-        }
-        else if(i > 0)          //parent process
-        {
-            if(waitpid(i,&status, 0) == -1)
+            else if(connect_check != -1)
             {
-                perror("Error with waitpid");
+                comd_arr[comd_arr_cnt] = '\0';
+                sequence = 0;
+                comd_arr_cnt = 0;
+                execute(comd_arr[0], comd_arr, connect_check);
             }
-
+            token = strtok(NULL, " ");
+            if(connect_check == -1 && token == NULL)
+            {
+                comd_arr[comd_arr_cnt] = '\0';
+                execute(comd_arr[0], comd_arr, connect_check);
+            }
         }
-
-    }  
+    }
 
 }
 
