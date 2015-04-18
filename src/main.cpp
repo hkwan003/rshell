@@ -19,7 +19,7 @@ using namespace std;
 vector<int> connect_Pos; //holds the positions of possible connectors in prompt
 vector<int> kinds_of_connect; //holds what kind of connector are in prompt
 
-//kinds_of_connect 0 = ';' 1 = "||" 2 = "$$" 3 = '#'
+
 
 
 
@@ -49,11 +49,6 @@ for(int x = 0; x < size; x++)
             x++;
 
         }
-        else if(prompt[x] == '#')
-        {
-            connect_Pos.push_back(x);
-            kinds_of_connect.push_back(3);
-        }
         else
         {
             kinds_of_connect.push_back(-1);        
@@ -67,7 +62,6 @@ int main(int argc, char **argv)
 {
     char* host = (char*)malloc(500);
     string userinfo;
-    bool prompt = true;             //when true, will keep executing until exit
 
     //error checks the user
     if(getlogin() != NULL)
@@ -84,89 +78,52 @@ int main(int argc, char **argv)
         perror("Error getting host name");
     }
     //outputs the userinfo with login and host 
+    cout << userinfo << "@" << host << "$";
+    //////////////////////////////////////////////login part done, next is all shell commands 
+    char prompt_holder[50000];//orginal array to hold prompt
+    char *token;//used to break up using string tokenizer
+    char *comd_arr[50000];
+    unsigned int comd_arr_cnt = 0;
+
+    string converter;                           //converts all bits of string into one piece
+    string to_be_tokenized;
+    getline(cin, to_be_tokenized);
+    for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+    {
+        prompt_holder[x] =  to_be_tokenized.at(x);
+    }
+    prompt_holder[to_be_tokenized.size()] = '\0';
+    possible_connector(to_be_tokenized ,to_be_tokenized.size());//function to see pos of connectors
+
+    token = (prompt_holder);
+    while(token != NULL)
+    {
+        cout << *token << endl;
+        comd_arr[comd_arr_cnt] = token;
+        comd_arr_cnt++;
+        token = strtok(NULL, "|; &");
+    }
     
-
-    while(prompt)
-    { 
-        cout << userinfo << "@" << host << "$";
-        //////////////////////////////////////////////login part done, next is all shell commands 
-        char prompt_holder[50000];//orginal array to hold prompt
-        char *token;//used to break up using string tokenizer
-        char *comd_arr[50000];
-        unsigned int comd_arr_cnt = 0;
-
-        string converter;                           //converts all bits of string into one piece
-        string to_be_tokenized;                     //holding all orginal commands from getline
-        getline(cin, to_be_tokenized);
-        possible_connector(to_be_tokenized ,to_be_tokenized.size());//function to see pos of connectors
-        unsigned int Token_len = to_be_tokenized.size();
-        for(unsigned int x = 0; x < Token_len; x++)
+    for(unsigned int x  = 0; x < comd_arr_cnt; x++)
+    {
+        cout << comd_arr[x] << " "; 
+    }
+    
+    int i = fork();
+    if(i == 0)
+    {
+        if(-1 == execvp(comd_arr[0], comd_arr))
         {
-            int char_value = kinds_of_connect.at(x);
-            if(char_value == 0)
-            {
-                prompt_holder[x] = ';';
-                x++;
-                Token_len++;
-            }
-            else if(char_value == 1)
-            {
-                prompt_holder[x] = '|';
-                x++;
-                Token_len++;
-            }
-            else if(char_value == 2)
-            {
-                prompt_holder[x] = '&';
-                x++;
-                Token_len++;
-            }
-            else if(char_value == 3)
-            {
-                prompt_holder[x] = '\0';
-                x++;
-                Token_len++;
-            }
-            else
-            {
-                prompt_holder[x] =  to_be_tokenized.at(x);
-            }
-        }
-        prompt_holder[Token_len] = '\0';
-
-        token = (prompt_holder);
-        while(token != NULL)
-        {
-            cout << *token << endl;
-            comd_arr[comd_arr_cnt] = token;
-            comd_arr_cnt++;
-            token = strtok(NULL, "\t|; &");
-        }
-        
-        for(unsigned int x  = 0; x < comd_arr_cnt; x++)
-        {
-            cout << comd_arr[x] << " "; 
-        }
-        
-        int Process_id = fork();
-        if(Process_id <= -1)
-        {
-            perror("There is an error with fork() process");
-            exit(1);
-        } 
-        if(Process_id == 0)                 //child process
-        {
-            if(-1 == execvp(comd_arr[0], comd_arr))
-            {
-                perror("There is a problem with the prompt entered");
-            }
-        }
-        else if(Process_id > 0)             //parent process
-        {
-            wait();
-            cout << "lets do it again" << endl;
+            perror("There is a problem with the prompt entered");
         }
     }
+    else
+    {
+        cout << "hello world" << endl;
+    }
+
+      
+
 }
 
 /* || && ;
