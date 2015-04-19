@@ -58,7 +58,7 @@ void fixing_spacing_command(char *org_prompt)
    
 }
 
-void execute(char* command, char* command_list[], int conect_type)
+bool execute(char* command, char* command_list[], int conect_type)
 {
     int exec_status;
     int status;
@@ -85,16 +85,7 @@ void execute(char* command, char* command_list[], int conect_type)
             perror("error with waitpid()");
         }
     }
-    if(exec_status == -1  && conect_type == 1)
-    {
-        cout << "execstatus: " << exec_status << endl;
-        global_continue = true; 
-    }
-    if(exec_status == -1  && conect_type == 2)
-    {
-        cout << "second one fucked up" << endl;
-        global_continue = false;
-    }
+    return(!(status == 0 && conect_type == -1) ||( status > 0 && conect_type == 2));
 }
 
 int check_connections(char* check)
@@ -143,7 +134,7 @@ int main(int argc, char **argv)
             comd_arr[x] = 0;
         }
         unsigned int comd_arr_cnt = 0;
-
+        
         string converter;                           //converts all bits of string into one piece
         string to_be_tokenized;
         getline(cin, to_be_tokenized);
@@ -152,12 +143,14 @@ int main(int argc, char **argv)
             prompt_holder[x] =  to_be_tokenized.at(x);
         }
         fixing_spacing_command(prompt_holder);
-        int connect_check;   
-        
+        int connect_check;                          //indicates which connection is in token
+        int exec_result; 
         token = strtok(prompt_holder, "\t ");
-        connect_check = check_connections(token);
         while(token != NULL  &&  prompter)
         {
+            connect_check = check_connections(token);
+            cout << "connect_check: " << connect_check << endl;
+            cout << "first token: " << token << endl;
             if(connect_check == -1 && sequence < 1)
             {
                 comd_arr[comd_arr_cnt] = token;
@@ -176,10 +169,10 @@ int main(int argc, char **argv)
                 comd_arr[comd_arr_cnt] = '\0' ;
                 sequence = 0;
                 comd_arr_cnt = 0;
-                execute(comd_arr[0], comd_arr, connect_check);
+                exec_result = execute(comd_arr[0], comd_arr, connect_check);
+                cout << "exex_result: " << exec_result << endl;
             }
-            token = strtok(NULL, "\t ");
-            cout << "outputlast token: " << token << endl;
+            token = strtok(NULL, " ");
             if(connect_check == -1 && token == NULL && global_continue == true)
             {
                 cout << "did this execute" << endl;
@@ -188,7 +181,6 @@ int main(int argc, char **argv)
             }
         }
     }
-
 }
 
 /* || && ;
