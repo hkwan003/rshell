@@ -78,7 +78,7 @@ bool execute(char* command, char* command_list[], int conect_type)
             exit(1);
         }
     }
-    else if(process_ID > 0)
+    else if(process_ID > 0)                 //parent process
     {
         if(waitpid(process_ID, &status,0) == -1)
         {
@@ -175,12 +175,24 @@ int main(int argc, char **argv)
                 comd_arr[comd_arr_cnt] = '\0' ;
                 sequence = 0;
                 comd_arr_cnt = 0;
+
                 exec_result = execute(comd_arr[0], comd_arr, connect_check);
                 if(exec_result == true && connect_check == 1)
                 {
                    exec_result = false;
                 }
-                    
+                if(exec_result == false && connect_check == 1)
+                {
+                    exec_result = true;
+                }
+                if(connect_check  == 0)
+                {
+                    exec_result = true;
+                }
+                if(exec_result == false && connect_check == 2)
+                {
+                    exec_result = false;
+                }
             }
             token = strtok(NULL, " ");
             if(connect_check == -1 && token == NULL && exec_result)
