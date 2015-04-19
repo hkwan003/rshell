@@ -57,9 +57,11 @@ void fixing_spacing_command(char *org_prompt)
    
 }
 
+int exec_status;
+bool str_continue = true;
 bool execute(char* command, char* command_list[], int conect_type)
 {
-    int exec_status;
+    cout << "beginning of execution: " << endl;
     int status;
     int process_ID = fork();
     if(process_ID <= -1)
@@ -71,6 +73,7 @@ bool execute(char* command, char* command_list[], int conect_type)
     {
 
         exec_status = (execvp(command, command_list));
+        //cout << "output exec status: " << exec_status << endl;
         if(exec_status == -1)
         {
             perror("error with passed in argument list");
@@ -141,7 +144,7 @@ int main(int argc, char **argv)
             comd_arr[x] = 0;
         }
         unsigned int comd_arr_cnt = 0;
-        
+        str_continue = true; 
         //string converter;                           //converts all bits of string into one piece
         string to_be_tokenized;
         getline(cin, to_be_tokenized);
@@ -153,18 +156,19 @@ int main(int argc, char **argv)
         int connect_check;                          //indicates which connection is in token
         token = strtok(prompt_holder, "\t ");
         exec_result = true;
-        while(token != NULL  && exec_result)
+        while(token != NULL  && exec_result && str_continue)
         {
             connect_check = check_connections(token);
             check_exit(token);
-            if(connect_check == -1 && sequence < 1)
+            if(connect_check == -1 && sequence < 1 && str_continue)
             {
+                //cout << "does this come out on top" << endl;
                 check_exit(token);
                 comd_arr[comd_arr_cnt] = token;
                 comd_arr_cnt++;
                 sequence++;                     //increment only once to see which is executable
             }
-            else if(sequence > 0 && connect_check == -1)
+            else if(sequence > 0 && connect_check == -1 && str_continue)
             {
                 comd_arr[comd_arr_cnt] = token;
                 comd_arr_cnt++;
@@ -176,27 +180,37 @@ int main(int argc, char **argv)
                 comd_arr[comd_arr_cnt] = '\0' ;
                 sequence = 0;
                 comd_arr_cnt = 0;
+                //cout << "does it output second iteration " << endl;
                 exec_result = execute(comd_arr[0], comd_arr, connect_check);
-                if(exec_result != 0 && connect_check == 1)
+                //cout << "output exec_status: " << exec_status << endl;
+                //cout << "output exec_result tho: " << exec_result << endl;
+                //cout << "connect_check: " << connect_check << endl;
+                //cout << "str_continue: " << str_continue << endl;  
+                if(exec_status == 0)
                 {
-                   exec_result = false;
+                    if(connect_check == 2)
+                    {
+                        str_continue = false;
+                        //cout << "str_continue: " << str_continue << endl;
+                    }
+                    if(connect_check == 1)
+                    {
+                        str_continue = false;
+                    }
                 }
-                //if(exec_result == false && connect_check == 1)
-                //{
-                //    exec_result = true;
-                //}
-                if(connect_check  == 0)
+                if(exec_result == 1)
                 {
-                    exec_result = true;
-                }
-                if(exec_result != 0  && connect_check == 2)
-                {
-                    exec_result = true;
+                    if(connect_check == 2)
+                    {
+                        str_continue = true;
+                    }
                 }
             }
+
             token = strtok(NULL, "\t ");
-            if(connect_check == -1 && token == NULL && exec_result)
+            if(connect_check == -1 && token == NULL && exec_result && str_continue)
             {
+                //cout << "guess this executeisw ith this " << endl;
                 comd_arr[comd_arr_cnt] = '\0';
                 execute(comd_arr[0], comd_arr, connect_check);
             }
