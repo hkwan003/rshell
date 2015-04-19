@@ -95,7 +95,15 @@ int check_connections(char* check)
     else if(!strcmp(check, "&&")) return  2;
     else return -1;
 }
-
+void check_exit(char *str)
+{
+    if(!strcmp(str, "exit"))
+    {
+        exit(0);
+    }
+}
+        
+    
 
 
 int main(int argc, char **argv)
@@ -106,7 +114,7 @@ int main(int argc, char **argv)
     string userinfo;
     bool prompter = true;
     char* token;            //will be bit of code strtok cuts off
-
+    bool exec_result = true;
     //error checks the user
     if(getlogin() != NULL)
     {
@@ -121,6 +129,7 @@ int main(int argc, char **argv)
     {
         perror("Error getting host name");
     }
+  
     //outputs the userinfo with login and host
     while(prompter)
     {
@@ -144,15 +153,13 @@ int main(int argc, char **argv)
         }
         fixing_spacing_command(prompt_holder);
         int connect_check;                          //indicates which connection is in token
-        int exec_result; 
         token = strtok(prompt_holder, "\t ");
-        while(token != NULL  &&  prompter)
+        while(token != NULL  && exec_result)
         {
             connect_check = check_connections(token);
-            cout << "connect_check: " << connect_check << endl;
-            cout << "first token: " << token << endl;
             if(connect_check == -1 && sequence < 1)
             {
+                check_exit(token);
                 comd_arr[comd_arr_cnt] = token;
                 comd_arr_cnt++;
                 sequence++;                     //increment only once to see which is executable
@@ -163,19 +170,21 @@ int main(int argc, char **argv)
                 comd_arr_cnt++;
                 
             }
-            else if(connect_check != -1 && global_continue == true)
+            else if(connect_check != -1)
             {
-                cout << "outputting token: " << token << endl;
                 comd_arr[comd_arr_cnt] = '\0' ;
                 sequence = 0;
                 comd_arr_cnt = 0;
                 exec_result = execute(comd_arr[0], comd_arr, connect_check);
-                cout << "exex_result: " << exec_result << endl;
+                if(exec_result == true && connect_check == 1)
+                {
+                   exec_result = false;
+                }
+                    
             }
             token = strtok(NULL, " ");
-            if(connect_check == -1 && token == NULL && global_continue == true)
+            if(connect_check == -1 && token == NULL && exec_result)
             {
-                cout << "did this execute" << endl;
                 comd_arr[comd_arr_cnt] = '\0';
                 execute(comd_arr[0], comd_arr, connect_check);
             }
