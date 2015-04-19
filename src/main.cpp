@@ -13,7 +13,6 @@
 
 
 using namespace std;
-bool global_continue = true;
 void fixing_spacing_command(char *org_prompt)
 {
     char *finished_prompt = (char*)malloc(50000);
@@ -109,7 +108,6 @@ void check_exit(char *str)
 int main(int argc, char **argv)
 {
     int sequence = 0;           //sequence of which is executable and flags
-    int status;
     char* host = (char*)malloc(500);
     string userinfo;
     bool prompter = true;
@@ -144,7 +142,7 @@ int main(int argc, char **argv)
         }
         unsigned int comd_arr_cnt = 0;
         
-        string converter;                           //converts all bits of string into one piece
+        //string converter;                           //converts all bits of string into one piece
         string to_be_tokenized;
         getline(cin, to_be_tokenized);
         for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
@@ -154,9 +152,11 @@ int main(int argc, char **argv)
         fixing_spacing_command(prompt_holder);
         int connect_check;                          //indicates which connection is in token
         token = strtok(prompt_holder, "\t ");
+        exec_result = true;
         while(token != NULL  && exec_result)
         {
             connect_check = check_connections(token);
+            check_exit(token);
             if(connect_check == -1 && sequence < 1)
             {
                 check_exit(token);
@@ -172,29 +172,29 @@ int main(int argc, char **argv)
             }
             else if(connect_check != -1)
             {
+                check_exit(token);
                 comd_arr[comd_arr_cnt] = '\0' ;
                 sequence = 0;
                 comd_arr_cnt = 0;
-
                 exec_result = execute(comd_arr[0], comd_arr, connect_check);
-                if(exec_result == true && connect_check == 1)
+                if(exec_result != 0 && connect_check == 1)
                 {
                    exec_result = false;
                 }
-                if(exec_result == false && connect_check == 1)
-                {
-                    exec_result = true;
-                }
+                //if(exec_result == false && connect_check == 1)
+                //{
+                //    exec_result = true;
+                //}
                 if(connect_check  == 0)
                 {
                     exec_result = true;
                 }
-                if(exec_result == false && connect_check == 2)
+                if(exec_result != 0  && connect_check == 2)
                 {
-                    exec_result = false;
+                    exec_result = true;
                 }
             }
-            token = strtok(NULL, " ");
+            token = strtok(NULL, "\t ");
             if(connect_check == -1 && token == NULL && exec_result)
             {
                 comd_arr[comd_arr_cnt] = '\0';
