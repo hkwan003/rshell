@@ -38,7 +38,7 @@ void fixing_spacing_command(char *org_prompt)
             finished_prompt[++i] = '&';
             finished_prompt[++i] = '&';
             finished_prompt[++i] = ' ';
-            ++i;
+            ++x;
         }
         else if(org_prompt[x] == '|' && org_prompt[x] == '|')
         {
@@ -46,7 +46,7 @@ void fixing_spacing_command(char *org_prompt)
             finished_prompt[++i] = '|';
             finished_prompt[++i] = '|';
             finished_prompt[++i] = ' ';
-            ++i;
+            ++x;
         }
         else
         {
@@ -99,9 +99,9 @@ void execute(char* command, char* command_list[], int conect_type)
 
 int check_connections(char* check)
 {
-    if(!strcmp(token, ";")) return  0;
-    else if(!strcmp(token, "||")) return  1;
-    else if(!strcmp(token, "&&")) return  2;
+    if(!strcmp(check, ";")) return  0;
+    else if(!strcmp(check, "||")) return  1;
+    else if(!strcmp(check, "&&")) return  2;
     else return -1;
 }
 
@@ -152,10 +152,10 @@ int main(int argc, char **argv)
             prompt_holder[x] =  to_be_tokenized.at(x);
         }
         fixing_spacing_command(prompt_holder);
-       
+        int connect_check;   
         
         token = strtok(prompt_holder, "\t ");
-
+        connect_check = check_connections(token);
         while(token != NULL  &&  prompter)
         {
             if(connect_check == -1 && sequence < 1)
