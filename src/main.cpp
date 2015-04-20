@@ -15,53 +15,48 @@
 using namespace std;
 void fixing_spacing_command(char *org_prompt)
 {
-    char *finished_prompt = (char*)malloc(50000);
+    char *fin_prompt = (char*)malloc(50000);
+    char connect[4];
+    connect[0] = ';';
+    connect[1] = '&';
+    connect[2] = '|';
+    connect[3] = '#';
     //x is passed in prompt
     //i is finished prompt after changing spaces
     for(int x = 0,i = 0; org_prompt[x] != '\0'; x++, i++)
     {
-        if(org_prompt[x] == '#')
+        if(org_prompt[x] == connect[3])
         {
-            org_prompt[x] = '\0';
-            finished_prompt[i] = '\0';
+            org_prompt[x] = '\0'; fin_prompt[i] = '\0';
         }
-        else if(org_prompt[x] == ';')
+        else if(org_prompt[x] == connect[0])
         {
-            finished_prompt[i] = ' ';
-            finished_prompt[++i] = ';';
-            finished_prompt[++i] = ' ';
+            fin_prompt[i] = ' ';fin_prompt[++i] = ';';fin_prompt[++i] = ' ';
         }
-        else if(org_prompt[x] == '&' && org_prompt[x] == '&')
+        else if(org_prompt[x] == connect[1] && org_prompt[x + 1] == connect[1])
         {
-            finished_prompt[i] = ' ';
-            finished_prompt[++i] = '&';
-            finished_prompt[++i] = '&';
-            finished_prompt[++i] = ' ';
+            fin_prompt[i] = ' ';fin_prompt[++i] = '&';fin_prompt[++i] = '&';fin_prompt[++i] = ' ';
             ++x;
         }
-        else if(org_prompt[x] == '|' && org_prompt[x] == '|')
+        else if(org_prompt[x] == connect[3] && org_prompt[x + 1] == connect[3])
         {
-            finished_prompt[i] = ' ';
-            finished_prompt[++i] = '|';
-            finished_prompt[++i] = '|';
-            finished_prompt[++i] = ' ';
+            fin_prompt[i] = ' ';fin_prompt[++i] = '|';fin_prompt[++i] = '|';fin_prompt[++i] = ' ';
             ++x;
         }
         else
         {
-            finished_prompt[i] = org_prompt[x];
+            fin_prompt[i] = org_prompt[x];
         }
-        if(org_prompt[x + 1] == '\0') finished_prompt[i + 1] = '\0';
+        if(org_prompt[x + 1] == '\0') fin_prompt[i + 1] = '\0';
     }
-    strcpy(org_prompt, finished_prompt);
-   
+    strcpy(org_prompt, fin_prompt);        //copies altered version
 }
-
+bool conect_bool = false;
 int exec_status;
 bool str_continue = true;
-bool execute(char* command, char* command_list[], int conect_type)
+void execute(char* command, char* command_list[], int conect_type)
 {
-    cout << "beginning of execution: " << endl;
+    //cout << "beginning of execution: " << endl;
     int status;
     int process_ID = fork();
     if(process_ID <= -1)
@@ -71,11 +66,11 @@ bool execute(char* command, char* command_list[], int conect_type)
     }
     else if(process_ID == 0)            //child process
     {
-
+        //cout << "output exec status in function first: " << exec_status << endl;
         exec_status = (execvp(command, command_list));
-        //cout << "output exec status: " << exec_status << endl;
         if(exec_status == -1)
         {
+            conect_bool = 0;
             perror("error with passed in argument list");
             exit(1);
         }
@@ -87,9 +82,11 @@ bool execute(char* command, char* command_list[], int conect_type)
             perror("error with waitpid()");
         }
     }
-    return(!(status == 0 && conect_type == -1) ||( status > 0 && conect_type == 2));
+    exec_status = (!(status == 0 && conect_type == -1) ||( status > 0 && conect_type == 2));
+    //cout << "return value: "  << (!(status == 0 && conect_type == -1) || (status > 0 && conect_type == 2)) << endl;
+    //cout << "output execstatus during return: " << exec_status << endl;
+    //return(!(status == 0 && conect_type == -1) ||( status > 0 && conect_type == 2));
 }
-
 int check_connections(char* check)
 {
     if(!strcmp(check, ";")) return  0;
@@ -104,20 +101,26 @@ void check_exit(char *str)
         exit(0);
     }
 }
-        
-    
-
-
+void check_clear(char *str)
+{
+    if(!strcmp(str, "clear"))
+    {
+        for(int x = 0; x < 80; x++)
+        {
+            cout << endl;
+        }
+    }
+}
 int main(int argc, char **argv)
 {
+    conect_bool = true;
     int sequence = 0;           //sequence of which is executable and flags
     char* host = (char*)malloc(500);
     string userinfo;
     bool prompter = true;
     char* token;            //will be bit of code strtok cuts off
-    bool exec_result = true;
-    //error checks the user
-    if(getlogin() != NULL)
+    bool exec_result;
+    if(getlogin() != NULL)      //checks if login is valid
     {
         userinfo = getlogin();
     }
@@ -125,7 +128,6 @@ int main(int argc, char **argv)
     {
         perror("error getting user info");
     }
-
     if(gethostname(host, 500) == -1)
     {
         perror("Error getting host name");
@@ -138,16 +140,15 @@ int main(int argc, char **argv)
         //////////////////////////////////////////////login part done, next is all shell commands 
         char prompt_holder[50000];//orginal array to hold prompt
         char *comd_arr[50000];
-        for(int x = 0; x < 50001; x++)
+        for(int x = 0; x < 50001; x++)              //reinitalizes all arrays to zero
         {
             prompt_holder[x] = 0;
             comd_arr[x] = 0;
         }
         unsigned int comd_arr_cnt = 0;
         str_continue = true; 
-        //string converter;                           //converts all bits of string into one piece
         string to_be_tokenized;
-        getline(cin, to_be_tokenized);
+        getline(cin, to_be_tokenized);                        
         for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
         {
             prompt_holder[x] =  to_be_tokenized.at(x);
@@ -158,11 +159,12 @@ int main(int argc, char **argv)
         exec_result = true;
         while(token != NULL  && exec_result && str_continue)
         {
+            // cout << "outputing token: " << token << endl;
             connect_check = check_connections(token);
             check_exit(token);
+            check_clear(token);         //added clear function
             if(connect_check == -1 && sequence < 1 && str_continue)
             {
-                //cout << "does this come out on top" << endl;
                 check_exit(token);
                 comd_arr[comd_arr_cnt] = token;
                 comd_arr_cnt++;
@@ -181,32 +183,28 @@ int main(int argc, char **argv)
                 sequence = 0;
                 comd_arr_cnt = 0;
                 //cout << "does it output second iteration " << endl;
-                exec_result = execute(comd_arr[0], comd_arr, connect_check);
+                execute(comd_arr[0], comd_arr, connect_check);
                 //cout << "output exec_status: " << exec_status << endl;
                 //cout << "output exec_result tho: " << exec_result << endl;
                 //cout << "connect_check: " << connect_check << endl;
-                //cout << "str_continue: " << str_continue << endl;  
-                if(exec_status == 0)
+                //cout << "str_continue: " << str_continue << endl; 
+                if(exec_status == 1)
                 {
                     if(connect_check == 2)
                     {
                         str_continue = false;
-                        //cout << "str_continue: " << str_continue << endl;
                     }
+                }
+                }
+                else if(exec_result == 0)
+                {
                     if(connect_check == 1)
-                    {
+                    { 
+                        cout << "is this outputting plz " << endl;
                         str_continue = false;
                     }
                 }
-                if(exec_result == 1)
-                {
-                    if(connect_check == 2)
-                    {
-                        str_continue = true;
-                    }
-                }
-            }
-
+            
             token = strtok(NULL, "\t ");
             if(connect_check == -1 && token == NULL && exec_result && str_continue)
             {
