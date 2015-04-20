@@ -10,6 +10,12 @@ Rshell is a linux terminal written in C++ and it does only basic operations from
 * User recognition
 * Comment recognition 
 
+## How to use rshell
+* compile with the prompt ``make``
+* A directory will be created called bin which will hold rshell my executable
+* One should make clean everytime before executing the directory
+* ``make clean``
+
 
 ##Prerequisities
 
