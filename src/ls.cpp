@@ -9,6 +9,11 @@
 #include <errno.h>
 #include <string.h>
 #include <stdio.h>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+
 
 
 
@@ -16,8 +21,37 @@ using namespace std;
 
 
 
+bool Alphabetical(string c1, string c2)
+{
+    for(int i = 0; i < c1.size(); i++)
+    {
+        c1.at(i) = tolower(c1.at(i));
+    }
+    for(int i = 0; i < c2.size(); i++)
+    {
+        c2.at(i) = tolower(c2.at(i));
+    }
+    return c1.compare(c2) < 0;
+}
+
+void print_files(vector<string> V)
+{
+    for(int x = 0; x < V.size(); x++)
+    {
+        cout << V.at(x) << " ";
+    }
+}
+
+
+
+
+
+
+
 int main(int argc, char ** argv)
-{   
+{ 
+    vector<string> file_store;
+      
     if(argc <= 1)
     {
         cout << "Nothing passed in to argv." << endl;
@@ -39,8 +73,10 @@ int main(int argc, char ** argv)
         errno = 0;
         while(NULL != (filespecs = readdir(dirp)))
         {
-            cout << filespecs->d_name << " ";
+             file_store.push_back(filespecs->d_name);
         }
+        sort(file_store.begin(), file_store.end(), Alphabetical);
+        print_files(file_store); 
         if(errno != 0)
         {
             perror("There was an error with readdir(). ");
