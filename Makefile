@@ -1,7 +1,7 @@
 CXX = g++
 CFGLAGS = -Wall -Werror -ansi -pedantic
-FILEPATH = ./src/main.cpp
-OUTPATH = ./bin/rshell
+FILEPATH = ./src/ls.cpp
+OUTPATH = ./bin/ls
 
 all: 
 		mkdir -p ./bin

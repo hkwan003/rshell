@@ -173,8 +173,8 @@ int main(int argc, char ** argv)
         }
         
       
-      
-       
+         
+         
 
         DIR *dirp;
         if(NULL == (dirp = opendir(argv[0])))
@@ -201,6 +201,6 @@ int main(int argc, char ** argv)
             perror("There was an error with closedir(). ");
         }
        
-    
+        
     return 0;
 }
