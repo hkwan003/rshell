@@ -5,7 +5,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <cstdlib.h>
+#include <cstdlib>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <time.h>
@@ -18,6 +18,64 @@
 using namespace std;
 
 
+bool a_flag = false;
+bool l_flag = false;
+bool r_flag = false;
+
+
+void output_directories(const char *names, string file_path)
+{
+    string files = names;
+    bool open_directory = false;
+    bool directory = false;
+    bool files_in_hiding = false;
+
+    struct stat content;                //syscall stat to call my directories
+
+
+    int curr_status = stat(file_path.c_str(), &content);
+    if(curr_status == -1)
+    {
+        perror("Error with stat(file_path.c_str(), &content");
+    }
+    if(content.st_mode & S_IXUSR)
+    {
+        open_directory = true;
+    }
+    if(content.st_nlink > 1)
+    {
+        directory = true;
+    }
+    if(names[0] == '.')
+    {
+        if(files != ".." && files != ".")
+        {
+            files_in_hiding = true;
+        }
+    } 
+
+    if(directory)
+    {
+        if(!files_in_hiding)
+        {
+            cout << "\033[1;34m" << names << "/\033[0m ";
+        }
+        else
+        {
+            cout << "\033[1;34m\033[1;40m" << names << "/\033[0m\033[0m ";
+        }
+    }
+
+    else if(open_directory)
+    {
+        cout << "\033[1;32m" << names << "*\033[0m ";
+    }
+    else
+    {
+        cout << names << " ";
+    }
+    return;
+}
 
 
 int main(int argc, char *argv[])
@@ -40,9 +98,7 @@ int main(int argc, char *argv[])
     while(user_input.at(0) != "ls")
     {
         bool address_block = false;
-        bool -a_flag = false;
-        bool -l_flag = false;
-        bool -r_flag = false;
+      
         string dir_names;           //names of directories passed in
 
 
@@ -55,26 +111,26 @@ int main(int argc, char *argv[])
                 {
                     for(int i = 1; i < sz_temp; i++)
                     {
-                        if(input.at(x).at(i) == 'a')
+                        if(user_input.at(x).at(i) == 'a')
                         {
-                            -a_flag = true;
+                            a_flag = true;
                         }
-                        else if(input.at(x).at(i) == 'l')
+                        else if(user_input.at(x).at(i) == 'l')
                         {
-                            -l_flag = true;
+                            l_flag = true;
                         }
-                        else if(input.at(x).at(i) == 'R')
+                        else if(user_input.at(x).at(i) == 'R')
                         {
-                            -r_flag = true;
+                            r_flag = true;
                         }
-                    }
-
-                    else
-                    {
-                        dir_names = user_input.at(x);
-                        address_block = true;
                     }
                 }
+                else
+                {
+                    dir_names = user_input.at(x);
+                    address_block = true;
+                }
+                
             }
         }
     
@@ -85,7 +141,7 @@ int main(int argc, char *argv[])
         }
         if(-r_flag)
         {
-
+            string path = name_of_directory;
             cout << "work on recursive output later" << endl;
         }
 
@@ -120,8 +176,24 @@ int main(int argc, char *argv[])
                 {
                     if(file_paths[0] != '.')
                     {
-                        cout << "print the columsn with paths"
+                        output_directories(file_paths, file_paths); 
                         cout << " ";
+                    }
+                }
+                if(-l_flag)
+                {
+                    string path = name_of_directory;
+
+                    if(!-a_flag)
+                    {
+                        if(file_paths[0] != '.')
+                        {
+                            ls_list(name_of_directory, path);
+                        }
+                    }
+                    else
+                    {
+                        ls_list(name_of_directory, path);
                     }
                 }
 
