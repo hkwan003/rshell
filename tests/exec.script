@@ -1,0 +1,136 @@
+Script started on Sun 19 Apr 2015 11:27:55 PM PDT
+~
+hkwan003@hammer $ cs100
+[0;91m
+===============================================================================
+|                                                                             |
+| You have enabled settings specific for cs100.  Everything you do is being   |
+| recorded to measure your progress in the class.                             |
+|                                                                             |
+| Important commands for the class:                                           |
+|   * calcgrade.sh          displays a detailed breakdown of your grade       |
+|   * typespeed             practice typing unix commands                     |
+|                                                                             |
+| Important commands for general C++ programming:                             |
+|   * make                  don't call g++ manually; let make do the work!    |
+|   * gdb                   the GNU debugger                                  |
+|   * valgrind              get rid of your memory leaks                      |
+|   * cppcheck              static analysis tool                              |
+|   * man                   find help about any syscall / terminal command    |
+|                                                                             |
+===============================================================================
+[0m
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m ls
+c61 FOLDEER  CS100  CS-14  Desktop    Downloads	Music	  Public  Templates  WINDOWS
+calvin	    cs12   CS61   Documents  gitlearn	Pictures  quiz	  Videos
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd CS100/
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m ls
+Lab1  Lab2  rshell
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m cd rshell/
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (exec) [0;36m$[0m ls
+LICENSE  main.cpp  Makefile  README.md	src  tests
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (exec) [0;36m$[0m make
+mkdir -p ./bin
+g++  ./src/main.cpp -o ./bin/rshell
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (exec) [0;36m$[0m bin/rshell 
+hkwan003@hammer.cs.ucr.edu $ ls
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ ls -a
+.  ..  bin  .git  LICENSE  main.cpp  Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ ls ;;; la
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+error with passed in argument list: No such file or directory
+hkwan003@hammer.cs.ucr.edu $ ls ;;			ls -a
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+.  ..  bin  .git  LICENSE  main.cpp  Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ ls -l -l -l -l -l -l -l -l ls
+ls: cannot access ls: No such file or directory
+hkwan003@hammer.cs.ucr.edu $ ls -l -l -l -l	-l	-l; ls
+total 24
+drwx------ 2 hkwan003 csmajs 4096 Apr 19 23:22 bin
+-rw------- 1 hkwan003 csmajs 1079 Apr 19 22:28 LICENSE
+-rw------- 1 hkwan003 csmajs 1052 Apr 19 22:11 main.cpp
+-rw------- 1 hkwan003 csmajs  261 Apr 19 23:00 Makefile
+-rw------- 1 hkwan003 csmajs   28 Apr 14 12:09 README.md
+drwx------ 2 hkwan003 csmajs 4096 Apr 19 23:21 src
+drwx------ 2 hkwan003 csmajs 4096 Apr 19 23:22 tests
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ ls -l			-l  #spaces a  nd tabs
+total 24
+drwx------ 2 hkwan003 csmajs 4096 Apr 19 23:22 bin
+-rw------- 1 hkwan003 csmajs 1079 Apr 19 22:28 LICENSE
+-rw------- 1 hkwan003 csmajs 1052 Apr 19 22:11 main.cpp
+-rw------- 1 hkwan003 csmajs  261 Apr 19 23:00 Makefile
+-rw------- 1 hkwan003 csmajs   28 Apr 14 12:09 README.md
+drwx------ 2 hkwan003 csmajs 4096 Apr 19 23:21 src
+drwx------ 2 hkwan003 csmajs 4096 Apr 19 23:22 tests
+hkwan003@hammer.cs.ucr.edu $ echo hi && echo good bye
+hi
+good bye
+hkwan003@hammer.cs.ucr.edu $ echo hi || go  echo good bye
+hi
+hkwan003@hammer.cs.ucr.edu $ echo false ||               false || echo good bye
+hkwan003@hammer.cs.ucr.edu $ ls
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ ;			#incorrectlly      characters
+hkwan003@hammer.cs.ucr.edu $ true ; ls #connectors
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ true || ls #\ || conectors
+hkwan003@hammer.cs.ucr.edu $ false && ls
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ false && ls  #otu  utputs i as error in my code
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ ls #comment will work
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ ls workds
+ls: cannot access workds: No such file or directory
+hkwan003@hammer.cs.ucr.edu $ alksdjfkaksldf jkjldasfklkljasdklfklasdkflkasjkld #ranc dom
+error with passed in argument list: No such file or directory
+hkwan003@hammer.cs.ucr.edu $ ls
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ ls 	;	ls && false || ls;
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ #previous op[             echo preb viosly outpu           iously outputted correctly
+previously outputted correctly
+hkwan003@hammer.cs.ucr.edu $ ls;&&||ls #many connectors
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+error with passed in argument list: No such file or directory
+hkwan003@hammer.cs.ucr.edu $ ||||||
+error with passed in argument list: No such file or directory
+hkwan003@hammer.cs.ucr.edu $ ls
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ mkdir dir
+hkwan003@hammer.cs.ucr.edu $ ls
+bin  dir  LICENSE  main.cpp  Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ rm dir
+rm: cannot remove `dir': Is a directory
+hkwan003@hammer.cs.ucr.edu $ ls
+bin  dir  LICENSE  main.cpp  Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ rmdir r dir
+hkwan003@hammer.cs.ucr.edu $ ls
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ exit
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (exec) [0;36m$[0m make clean
+rm -rf ./bin
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (exec) [0;36m$[0m make
+mkdir -p ./bin
+g++  ./src/main.cpp -o ./bin/rshell
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (exec) [0;36m$[0m bin/rshell 
+hkwan003@hammer.cs.ucr.edu $ ls
+bin  LICENSE  main.cpp	Makefile  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ echo works again
+works again
+hkwan003@hammer.cs.ucr.edu $ exit
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (exec) [0;36m$[0m cl[K[Kbin /root/
+bash: bin: command not found
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (exec) [0;36m$[0m bin/rshell 
+hkwan003@hammer.cs.ucr.edu $ clear
+[H[2Jhkwan003@hammer.cs.ucr.edu $ exit
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (exec) [0;36m$[0m exit
+exit
+~
+hkwan003@hammer $ exit
+exit
+
+Script done on Sun 19 Apr 2015 11:33:14 PM PDT
