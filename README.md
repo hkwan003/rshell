@@ -1,7 +1,8 @@
-# Linux shell for assignment 0 CS100
+# Linux ls command
 
-## Shell Functions
-Rshell is a linux terminal written in C++ and it does only basic operations from listing directories to echoing out messages
+## Ls functionality
+
+Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It only has basic functionalties for now but more will be added onto it later.
 
 * A command prompt
 * Recognition of various commands
@@ -10,34 +11,15 @@ Rshell is a linux terminal written in C++ and it does only basic operations from
 * User login recognition
 * Comment recognition
 
-## How to use Rshell
-* compile witht he prompt ``make``  
-* A directory will be created called bin which will hold the rshell executable
-* One should make clean everytime before executing the directory
-* ``make clean``
+## How to use Ls
 
-##Prerequisities
-
-* Knowledge of basic C++
-* Usage of string tokenizer
-* Fork() and Exec() command for executing commands
-
-##Bugs
-* when the first executable is false in &&, the seond part excutes as well, but needs to be fixed in the future
-* The connector | one or symbol is not recognized and does not run with ls in front of it
-
-
-
-##Prerequisities
-
-* Knowledge of basic c++
-* usage of string tokenizer
-* Fork() and exec() command for executing commands
-
+* First compile the program by typing ``make``
+* After compiling, type in ``bin/ls``
+* Special flags like -a, -l, and -R could be appended after typing in ``bin/ls``
+* The program can also handle directories with the flags that can be appended behind it
+``bin/ls -a src -R. -l``
 
 ##Limitations
-* Command has a limit of 50,000 characters
+* Commands has a limit of 50,000 characters
 * host have a name character limit of 500 characters
 * cd does not work in this shell
- 
-
