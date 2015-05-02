@@ -1,0 +1,414 @@
+Script started on Fri 01 May 2015 08:52:57 PM PDT
+~
+hkwan003@hammer $ cs100
+[0;91m
+===============================================================================
+|                                                                             |
+| You have enabled settings specific for cs100.  Everything you do is being   |
+| recorded to measure your progress in the class.                             |
+|                                                                             |
+| Important commands for the class:                                           |
+|   * calcgrade.sh          displays a detailed breakdown of your grade       |
+|   * checksyscalls.sh      is your cpp file doing proper error checking?     |
+|   * typespeed             practice typing unix commands                     |
+|                                                                             |
+| Important commands for general C++ programming:                             |
+|   * make                  don't call g++ manually; let make do the work!    |
+|   * gdb                   the GNU debugger                                  |
+|   * valgrind              get rid of your memory leaks                      |
+|   * cppcheck              static analysis tool                              |
+|   * man                   find help about any syscall / terminal command    |
+|                                                                             |
+===============================================================================
+[0m
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m [K[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m ls
+61 FOLDEER  calvin  cs100#1  CS-14  Desktop    Downloads  ls.cpp  Pictures  quiz       Videos
+a.out	    CS100   cs12     CS61   Documents  gitlearn   Music   Public    Templates  WINDOWS
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd CS100/
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m ls
+Lab1  Lab2  Lab3  rshell
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m cd rshell/
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m cd ..
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m ls
+Lab1  Lab2  Lab3  rshell
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m make
+make: *** No targets specified and no makefile found.  Stop.
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m cd ..
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m ls
+61 FOLDEER  calvin  cs100#1  CS-14  Desktop    Downloads  ls.cpp  Pictures  quiz       Videos
+a.out	    CS100   cs12     CS61   Documents  gitlearn   Music   Public    Templates  WINDOWS
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd CS100/
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m ls
+Lab1  Lab2  Lab3  rshell
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m cd rshell/
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m ls
+bin  LICENSE  Makefile	README.md  src	tests
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m make
+mkdir -p ./bin
+g++  ./src/ls.cpp -o ./bin/ls
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m bin/ls 
+Nothing passed in to argv.
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m bin/ls -a
+. .. .git bin LICENSE Makefile README.md src tests 
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m bin/ls -R
+. .. .git bin LICENSE Makefile README.md src tests 
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m bin/ls -L
+. .. .git bin LICENSE Makefile README.md src tests 
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m bin/ls -asldkfjlaksef
+. .. .git bin LICENSE Makefile README.md src tests 
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m bin/ls
+Nothing passed in to argv.
+[s%%%%%%%%%%[u[0;32mI have no name![0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m exit
+exit
+~
+hkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ [Khkwan003@hammer $ ks'[K[K[Kcs100
+[0;91m
+===============================================================================
+|                                                                             |
+| You have enabled settings specific for cs100.  Everything you do is being   |
+| recorded to measure your progress in the class.                             |
+|                                                                             |
+| Important commands for the class:                                           |
+|   * calcgrade.sh          displays a detailed breakdown of your grade       |
+|   * checksyscalls.sh      is your cpp file doing proper error checking?     |
+|   * typespeed             practice typing unix commands                     |
+|                                                                             |
+| Important commands for general C++ programming:                             |
+|   * make                  don't call g++ manually; let make do the work!    |
+|   * gdb                   the GNU debugger                                  |
+|   * valgrind              get rid of your memory leaks                      |
+|   * cppcheck              static analysis tool                              |
+|   * man                   find help about any syscall / terminal command    |
+|                                                                             |
+===============================================================================
+[0m
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m ls
+61 FOLDEER  calvin  cs100#1  CS-14  Desktop    Downloads  ls.cpp  Pictures  quiz       Videos
+a.out	    CS100   cs12     CS61   Documents  gitlearn   Music   Public    Templates  WINDOWS
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd CS100/
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m ls
+Lab1  Lab2  Lab3  rshell
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m cd rshell/
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m ls
+bin  LICENSE  Makefile	README.md  src	tests
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m make
+mkdir -p ./bin
+g++  ./src/ls.cpp -o ./bin/ls
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m cd tests/
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell/tests[0;95m (ls) [0;36m$[0m ls
+exec.script  ls.script
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell/tests[0;95m (ls) [0;36m$[0m rm ls.script 
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell/tests[0;95m (ls) [0;36m$[0m ls
+exec.script
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell/tests[0;95m (ls) [0;36m$[0m script lsl.[K[K.script
+Script started, file is ls.script
+~
+hkwan003@hammer $ cs100
+[0;91m
+===============================================================================
+|                                                                             |
+| You have enabled settings specific for cs100.  Everything you do is being   |
+| recorded to measure your progress in the class.                             |
+|                                                                             |
+| Important commands for the class:                                           |
+|   * calcgrade.sh          displays a detailed breakdown of your grade       |
+|   * checksyscalls.sh      is your cpp file doing proper error checking?     |
+|   * typespeed             practice typing unix commands                     |
+|                                                                             |
+| Important commands for general C++ programming:                             |
+|   * make                  don't call g++ manually; let make do the work!    |
+|   * gdb                   the GNU debugger                                  |
+|   * valgrind              get rid of your memory leaks                      |
+|   * cppcheck              static analysis tool                              |
+|   * man                   find help about any syscall / terminal command    |
+|                                                                             |
+===============================================================================
+[0m
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m ls
+61 FOLDEER  calvin  cs100#1  CS-14  Desktop    Downloads  ls.cpp  Pictures  quiz       Videos
+a.out	    CS100   cs12     CS61   Documents  gitlearn   Music   Public    Templates  WINDOWS
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd CS2[K100/
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m ls
+Lab1  Lab2  Lab3  rshell
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100[0;95m [0;36m$[0m cd rshell/
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m l
+bash: l: command not found
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m scfd[K[K[K[Kls
+bin  LICENSE  Makefile	README.md  src	tests
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m cd r[K[K[K[Kmake clean
+rm -rf ./bin
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m make
+mkdir -p ./bin
+g++  ./src/ls.cpp -o ./bin/ls
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m bin/ls -a
+. .. .git bin LICENSE Makefile README.md src tests 
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m bin/ls -B[Kr
+. .. .git bin LICENSE Makefile README.md src tests 
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m bin/ls -R
+. .. .git bin LICENSE Makefile README.md src tests 
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/CS100/rshell[0;95m (ls) [0;36m$[0m exit
+exit
+~
+hkwan003@hammer $ ls
+[0m[01;34m61 FOLDEER[0m/  [01;34mcalvin[0m/  [01;34mcs100#1[0m/  [01;34mCS-14[0m/  [01;34mDesktop[0m/    [01;34mDownloads[0m/  ls.cpp  [01;34mPictures[0m/  [01;34mquiz[0m/       [01;34mVideos[0m/
+[01;32ma.out[0m*       [01;34mCS100[0m/   [01;34mcs12[0m/     [01;34mCS61[0m/   [01;34mDocuments[0m/  [01;34mgitlearn[0m/   [01;34mMusic[0m/  [01;34mPublic[0m/    [01;34mTemplates[0m/  [01;34mWINDOWS[0m/
+[m~
+hkwan003@hammer $ cd CS100/
+~/CS100
+hkwan003@hammer $ l
+bash: l: command not found
+~/CS100
+hkwan003@hammer $ scd [K[K[K[Kls
+[0m[01;34mLab1[0m/  [01;34mLab2[0m/  [01;34mLab3[0m/  [01;34mrshell[0m/
+[m~/CS100
+hkwan003@hammer $ cd rshell/
+~/CS100/rshell
+hkwan003@hammer $ l
+bash: l: command not found
+~/CS100/rshell
+hkwan003@hammer $ s[Kls
+[0m[01;34mbin[0m/  LICENSE  Makefile  README.md  [01;34msrc[0m/  [01;34mtests[0m/
+[m~/CS100/rshell
+hkwan003@hammer $ cd r[K[Kt[K tests/
+~/CS100/rshell/tests
+hkwan003@hammer $ ls
+exec.script  ls.script
+~/CS100/rshell/tests
+hkwan003@hammer $ rm ls.script 
+/bin/rm: remove regular empty file `ls.script'? yes
+~/CS100/rshell/tests
+hkwan003@hammer $ ls
+exec.script
+~/CS100/rshell/tests
+hkwan003@hammer $ script ls.st[Kcript
+Script started, file is ls.script
+~
+hkwan003@hammer $ ls
+[0m[01;34m61 FOLDEER[0m/  [01;34mcalvin[0m/  [01;34mcs100#1[0m/  [01;34mCS-14[0m/  [01;34mDesktop[0m/    [01;34mDownloads[0m/  ls.cpp  [01;34mPictures[0m/  [01;34mquiz[0m/       [01;34mVideos[0m/
+[01;32ma.out[0m*       [01;34mCS100[0m/   [01;34mcs12[0m/     [01;34mCS61[0m/   [01;34mDocuments[0m/  [01;34mgitlearn[0m/   [01;34mMusic[0m/  [01;34mPublic[0m/    [01;34mTemplates[0m/  [01;34mWINDOWS[0m/
+[m~
+hkwan003@hammer $ cd CS100/
+~/CS100
+hkwan003@hammer $ l
+bash: l: command not found
+~/CS100
+hkwan003@hammer $ s[Kls
+[0m[01;34mLab1[0m/  [01;34mLab2[0m/  [01;34mLab3[0m/  [01;34mrshell[0m/
+[m~/CS100
+hkwan003@hammer $ cd rshell/
+~/CS100/rshell
+hkwan003@hammer $ ls
+[0m[01;34mbin[0m/  LICENSE  Makefile  README.md  [01;34msrc[0m/  [01;34mtests[0m/
+[m~/CS100/rshell
+hkwan003@hammer $ make
+mkdir -p ./bin
+g++  ./src/ls.cpp -o ./bin/ls
+~/CS100/rshell
+hkwan003@hammer $ bin/ls -a
+. .. .git bin LICENSE Makefile README.md src tests 
+~/CS100/rshell
+hkwan003@hammer $ bin/ls -R
+. .. .git bin LICENSE Makefile README.md src tests 
+~/CS100/rshell
+hkwan003@hammer $ bin.[K/l[Kp[Kls -Al[K[KalR
+. .. .git bin LICENSE Makefile README.md src tests 
+~/CS100/rshell
+hkwan003@hammer $ exit
+exit
+Script done, file is ls.script
+~/CS100/rshell/tests
+hkwan003@hammer $ ls
+exec.script  ls.script
+~/CS100/rshell/tests
+hkwan003@hammer $ vim ls.script 
+[?1049h[?1h=[1;60r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[60;1H"ls.script" 36L, 1413C[>c[1;1H[1m[33m  1 [mScript started on Fri 01 May 2015 09:03:44 PM PDT
+[1m[33m  2 [m~[1m[34m^M^M[m
+[1m[33m  3 [mhkwan003@hammer $ ls[1m[34m^M[m
+[1m[33m  4 [m[1m[34m^[[m[0m[1m[34m^[[m[01;34m61 FOLDEER[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mcalvin[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mcs100#1[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mCS-14[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mDesktop[1m[34m^[[m[0mm[5;1H[1m[33m    [m/    [1m[34m^[[m[01;34mDownloads[1m[34m^[[m[0m/  ls.cpp  [1m[34m^[[m[01;34mPictures[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mquiz[1m[34m^[[m[0m/       [1m[34m^[[m[01;34mVideos[1m[34m^[[m[0m/[1m[34m^M[m
+[1m[33m  5 [m[1m[34m^[[m[01;32ma.out[1m[34m^[[m[0m*       [1m[34m^[[m[01;34mCS100[1m[34m^[[m[0m/   [1m[34m^[[m[01;34mcs12[1m[34m^[[m[0m/     [1m[34m^[[m[01;34mCS61[1m[34m^[[m[0m/   [1m[34m^[[m[01;34mDocuments[1m[34m^[[m[0m/   [7;1H[1m[33m    [m[1m[34m^[[m[01;34mgitlearn[1m[34m^[[m[0m/   [1m[34m^[[m[01;34mMusic[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mPublic[1m[34m^[[m[0m/    [1m[34m^[[m[01;34mTemplates[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mWINDOWS[1m[34m^[[m[0m/[1m[34m^^[m[8;1H[1m[33m    [m[1m[34mM[m
+[1m[33m  6 [m[1m[34m^[[m[m~[1m[34m^M^M[m
+[1m[33m  7 [mhkwan003@hammer $ cd CS100/[1m[34m^M[m
+[1m[33m  8 [m~/CS100[1m[34m^M^M[m
+[1m[33m  9 [mhkwan003@hammer $ l[1m[34m^M[m
+[1m[33m 10 [mbash: l: command not found[1m[34m^M[m
+[1m[33m 11 [m~/CS100[1m[34m^M^M[m
+[1m[33m 12 [mhkwan003@hammer $ s[1m[34m^H^[[m[Kls[1m[34m^M[m
+[1m[33m 13 [m[1m[34m^[[m[0m[1m[34m^[[m[01;34mLab1[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mLab2[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mLab3[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mrshell[1m[34m^[[m[0m/[1m[34m^M[m
+[1m[33m 14 [m[1m[34m^[[m[m~/CS100[1m[34m^M^M[m
+[1m[33m 15 [mhkwan003@hammer $ cd rshell/[1m[34m^M[m
+[1m[33m 16 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 17 [mhkwan003@hammer $ ls[1m[34m^M[m
+[1m[33m 18 [m[1m[34m^[[m[0m[1m[34m^[[m[01;34mbin[1m[34m^[[m[0m/  LICENSE  Makefile  README.md  [1m[34m^[[m[01;34msrc[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mtests[1m[34m^[[m[0m/[1m[34m^M[m
+[1m[33m 19 [m[1m[34m^[[m[m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 20 [mhkwan003@hammer $ make[1m[34m^M[m
+[1m[33m 21 [mmkdir -p ./bin[1m[34m^M[m
+[1m[33m 22 [mg++  ./src/ls.cpp -o ./bin/ls[1m[34m^M[m
+[1m[33m 23 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 24 [mhkwan003@hammer $ bin/ls -a[1m[34m^M[m
+[1m[33m 25 [m. .. .git bin LICENSE Makefile README.md src tests [1m[34m^M[m
+[1m[33m 26 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 27 [mhkwan003@hammer $ bin/ls -R[1m[34m^M[m
+[1m[33m 28 [m. .. .git bin LICENSE Makefile README.md src tests [1m[34m^M[m
+[1m[33m 29 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 30 [mhkwan003@hammer $ bin.[1m[34m^H^[[m[K/l[1m[34m^H^[[m[Kp[1m[34m^H^[[m[Kls -Al[1m[34m^H^[[m[K[1m[34m^H^[[m[KalR[1m[34m^M[m
+[1m[33m 31 [m. .. .git bin LICENSE Makefile README.md src tests [1m[34m^M[m
+[1m[33m 32 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 33 [mhkwan003@hammer $ exit[1m[34m^M[m
+[1m[33m 34 [mexit[1m[34m^M[m
+[1m[33m 35 
+ 36 [mScript done on Fri 01 May 2015 09:04:07 PM PDT
+[1m[34m~                                                                                                                             [41;1H~                                                                                                                             [42;1H~                                                                                                                             [43;1H~                                                                                                                             [44;1H~                                                                                                                             [45;1H~                                                                                                                             [46;1H~                                                                                                                             [47;1H~                                                                                                                             [48;1H~                                                                                                                             [49;1H~                                                                                                                             [50;1H~                                                                                                                             [51;1H~                                                                                                                             [52;1H~                                                                                                                             [53;1H~                                                                                                                             [54;1H~                                                                                                                             [55;1H~                                                                                                                             [56;1H~                                                                                                                             [57;1H~                                                                                                                             [58;1H~                                                                                                                             [59;1H~                                                                                                                             [m[60;109H1,1[11CAll[1;5H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[60;1H[K[60;1H:[?12l[?25hw[?25l[?12l[?25hq[?25l[?12l[?25h[?25l[1m[37m[41mError detected while processing BufWrite Auto commands for "*":[m
+[1m[37m[41mE117: Unknown function: <SNR>7_StripTrailingWhitespaces[m
+"ls.script" 36L, 1413C written
+[1m[37m[41mError detected while processing BufWinLeave Auto commands for "*":[m
+[1m[37m[41mE739: Cannot create directory: /home/csmajs/hkwan003/.vim/view[m
+[1m[37m[41mE190: Cannot open "/home/csmajs/hkwan003/.vim/view/~=+CS100=+rshell=+tests=+ls.script=" for writing
+[m[?1l>[?12l[?25h[?1049l~/CS100/rshell/tests
+hkwan003@hammer $ ls[K[Krm ls.script 
+/bin/rm: remove regular file `ls.script'? yes
+~/CS100/rshell/tests
+hkwan003@hammer $ ls
+exec.script
+~/CS100/rshell/tests
+hkwan003@hammer $ script ls.sctipt[K[K[K[Ktipt[K[K[K[K[Kcript
+Script started, file is ls.script
+~
+hkwan003@hammer $ cd CS100/
+~/CS100
+hkwan003@hammer $ ls
+[0m[01;34mLab1[0m/  [01;34mLab2[0m/  [01;34mLab3[0m/  [01;34mrshell[0m/
+[m~/CS100
+hkwan003@hammer $ cd R[Krshell/
+~/CS100/rshell
+hkwan003@hammer $ ls
+[0m[01;34mbin[0m/  LICENSE  Makefile  README.md  [01;34msrc[0m/  [01;34mtests[0m/
+[m~/CS100/rshell
+hkwan003@hammer $ cd s[Ktests/[K[K[K[K[K[K[K[K[Kmake
+mkdir -p ./bin
+g++  ./src/ls.cpp -o ./bin/ls
+~/CS100/rshell
+hkwan003@hammer $ bin/ls -a
+. .. .git bin LICENSE Makefile README.md src tests 
+~/CS100/rshell
+hkwan003@hammer $ bin/ls 
+Nothing passed in to argv.
+~/CS100/rshell
+hkwan003@hammer $ bin/ls -R
+. .. .git bin LICENSE Makefile README.md src tests 
+~/CS100/rshell
+hkwan003@hammer $ bin/ls -
+. .. .git bin LICENSE Makefile README.md src tests 
+~/CS100/rshell
+hkwan003@hammer $ A[Kbin/ls -A[KalR
+. .. .git bin LICENSE Makefile README.md src tests 
+~/CS100/rshell
+hkwan003@hammer $ bin/ls -la
+. .. .git bin LICENSE Makefile README.md src tests 
+~/CS100/rshell
+hkwan003@hammer $ bin/ls #nothing else works but ls -a
+Nothing passed in to argv.
+~/CS100/rshell
+hkwan003@hammer $ bin/ls #at least it is in alpa[Khabetica lo[K[K[Kl order
+Nothing passed in to argv.
+~/CS100/rshell
+hkwan003@hammer $ bin/ls #starting[K[K[K[K[K[K[K[K[K-A[Ka src
+. .. .git bin LICENSE Makefile README.md src tests . . .. .. .git .git bin bin LICENSE LICENSE Makefile Makefile README.md README.md src src tests tests 
+~/CS100/rshell
+hkwan003@hammer $ bin/ls -[K`[K~
+. .. .git bin LICENSE Makefile README.md src tests 
+~/CS100/rshell
+hkwan003@hammer $ bin/ls a[K-s #[K[K[Ka any[K[K[K#any t[Ks[Karugment makes it output ls-a
+. .. .git bin LICENSE Makefile README.md src tests 
+~/CS100/rshell
+hkwan003@hammer $ exit
+exit
+Script done, file is ls.script
+~/CS100/rshell/tests
+hkwan003@hammer $ ls
+exec.script  ls.script
+~/CS100/rshell/tests
+hkwan003@hammer $ ls
+exec.script  ls.script
+~/CS100/rshell/tests
+hkwan003@hammer $ vim [K[K[K[Kgit add ls.script [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kls
+exec.script  ls.script
+~/CS100/rshell/tests
+hkwan003@hammer $ cd ..
+~/CS100/rshell
+hkwan003@hammer $ ls
+[0m[01;34mbin[0m/  LICENSE  Makefile  README.md  [01;34msrc[0m/  [01;34mtests[0m/
+[m~/CS100/rshell
+hkwan003@hammer $ git add T
+fatal: pathspec 'T' did not match any files
+~/CS100/rshell
+hkwan003@hammer $ git add tests/
+~/CS100/rshell
+hkwan003@hammer $ git commit -m "cin[K[K[Kfinally about to [K[K[K[K[K[K[Kle to get a scf[Kript going"
+[ls a63f274] finally able to get a script going
+ 3 files changed, 53 insertions(+), 0 deletions(-)
+ copy tests/{ls.script => .nfs0000000000354acb0000004e} (100%)
+ copy tests/{ls.script => .nfs0000000000354acc00000050} (100%)
+~/CS100/rshell
+hkwan003@hammer $ git push
+error: The requested URL returned error: 403 Forbidden while accessing https://github.com/hkwan003/rshell.git/info/refs
+
+fatal: HTTP request failed
+~/CS100/rshell
+hkwan003@hammer $ git push
+error: The requested URL returned error: 403 Forbidden while accessing https://github.com/hkwan003/rshell.git/info/refs
+
+fatal: HTTP request failed
+~/CS100/rshell
+hkwan003@hammer $ ls
+[0m[01;34mbin[0m/  LICENSE  Makefile  README.md  [01;34msrc[0m/  [01;34mtests[0m/
+[m~/CS100/rshell
+hkwan003@hammer $ cd tests/
+~/CS100/rshell/tests
+hkwan003@hammer $ ls
+exec.script  ls.script
+~/CS100/rshell/tests
+hkwan003@hammer $ l[Kvim ls.script 
+[?1049h[?1h=[1;60r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[60;1H"ls.script" 53L, 1964C[>c[1;1H[1m[33m  1 [mScript started on Fri 01 May 2015 09:04:36 PM PDT
+[1m[33m  2 [m~[1m[34m^M^M[m
+[1m[33m  3 [mhkwan003@hammer $ cd CS100/[1m[34m^M[m
+[1m[33m  4 [m~/CS100[1m[34m^M^M[m
+[1m[33m  5 [mhkwan003@hammer $ ls[1m[34m^M[m
+[1m[33m  6 [m[1m[34m^[[m[0m[1m[34m^[[m[01;34mLab1[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mLab2[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mLab3[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mrshell[1m[34m^[[m[0m/[1m[34m^M[m
+[1m[33m  7 [m[1m[34m^[[m[m~/CS100[1m[34m^M^M[m
+[1m[33m  8 [mhkwan003@hammer $ cd R[1m[34m^G^H^[[m[Krshell/[1m[34m^M[m
+[1m[33m  9 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 10 [mhkwan003@hammer $ ls[1m[34m^M[m
+[1m[33m 11 [m[1m[34m^[[m[0m[1m[34m^[[m[01;34mbin[1m[34m^[[m[0m/  LICENSE  Makefile  README.md  [1m[34m^[[m[01;34msrc[1m[34m^[[m[0m/  [1m[34m^[[m[01;34mtests[1m[34m^[[m[0m/[1m[34m^M[m
+[1m[33m 12 [m[1m[34m^[[m[m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 13 [mhkwan003@hammer $ cd s[1m[34m^H^[[m[Ktests/[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^G^G[mmake[1m[34m^M[m
+[1m[33m 14 [mmkdir -p ./bin[1m[34m^M[m
+[1m[33m 15 [mg++  ./src/ls.cpp -o ./bin/ls[1m[34m^M[m
+[1m[33m 16 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 17 [mhkwan003@hammer $ bin/ls -a[1m[34m^M[m
+[1m[33m 18 [m. .. .git bin LICENSE Makefile README.md src tests [1m[34m^M[m
+[1m[33m 19 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 20 [mhkwan003@hammer $ bin/ls [1m[34m^M[m
+[1m[33m 21 [mNothing passed in to argv.[1m[34m^M[m
+[1m[33m 22 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 23 [mhkwan003@hammer $ bin/ls -R[1m[34m^M[m
+[1m[33m 24 [m. .. .git bin LICENSE Makefile README.md src tests [1m[34m^M[m
+[1m[33m 25 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 26 [mhkwan003@hammer $ bin/ls -[1m[34m^M[m
+[1m[33m 27 [m. .. .git bin LICENSE Makefile README.md src tests [1m[34m^M[m
+[1m[33m 28 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 29 [mhkwan003@hammer $ A[1m[34m^H^[[m[Kbin/ls -A[1m[34m^H^[[m[KalR[1m[34m^M[m
+[1m[33m 30 [m. .. .git bin LICENSE Makefile README.md src tests [1m[34m^M[m
+[1m[33m 31 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 32 [mhkwan003@hammer $ bin/ls -la[1m[34m^M[m
+[1m[33m 33 [m. .. .git bin LICENSE Makefile README.md src tests [1m[34m^M[m
+[1m[33m 34 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 35 [mhkwan003@hammer $ bin/ls #nothing else works but ls -a[1m[34m^M[m
+[1m[33m 36 [mNothing passed in to argv.[1m[34m^M[m
+[1m[33m 37 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 38 [mhkwan003@hammer $ bin/ls #at least it is in alpa[1m[34m^H^[[m[Khabetica lo[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[Kl order[1m[34m^M[m
+[1m[33m 39 [mNothing passed in to argv.[1m[34m^M[m
+[1m[33m 40 [m~/CS100/rshell[1m[34m^M^M[m
+[1m[33m 41 [mhkwan003@hammer $ bin/ls #starting[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K[1m[34m^H^[[m[K-A[1m[34m^H^[[m[Ka src[1m[34m^M[m
+[1m[33m 42 [m. .. .git bin
