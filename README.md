@@ -23,3 +23,5 @@ Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It o
 * Commands has a limit of 50,000 characters
 * host have a name character limit of 500 characters
 * cd does not work in this shell
+* Any argument passed into shell acts as ls -a
+* not matter what is passed in, nothing else works but ls -a
