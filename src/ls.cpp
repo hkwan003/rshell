@@ -12,13 +12,18 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <sstream>
-#include <pwd.h>
-#include <grp.h>
+
+
+
+
 
 using namespace std;
 
 
+string convert_to_string(char *Data)
+{
+    return string(Data);
+}
 
 
 bool Alphabetical(string c1, string c2)
@@ -34,92 +39,168 @@ bool Alphabetical(string c1, string c2)
     return c1.compare(c2) < 0;
 }
 
-void check_colored_output(string s)
+
+vector<int> flag_index;                     //global vector for checing which flags
+vector<string> file_store;
+string converted_string; 
+
+
+void type_of_flag(string s)
 {
-    int size = s.size();
-    char  index = s.at(size - 1);
-    if(index == '1')
-    {
-        cout << "\033[1;34m" << s.substr(0, size - 2) << "/\033[0m ";
-    }
-    else if(index == '2')
-    {
-        cout << "\033[1;34m\033[1;40m" << s.substr(0, size - 2)  << "/\033[0m\033[0m ";
-    }
-    else if(index == '3')
-    {
-        cout << "\033[1;32m" << s.substr(0, size - 2)  << "*\033[0m ";
-    }
-    else if(index == '4')
-    {
-        cout << s.substr(0, size - 2);
-    }
-    else 
-    {
-        cout << s;
+    for(int x = 0; x < s.size(); x++)           // 0 = "-" dash
+    {                                           // 1 = "a"
+        if(s.at(x) == '-')                      // 2 = "l"
+        {                                       // 3 = "R"
+            flag_index.push_back(0);
+        }
+        else if(s.at(x) == 'a')
+        {
+            flag_index.push_back(1);
+        }
+        else if(s.at(x) == 'l')
+        {
+            flag_index.push_back(2);
+        }
+        else if(s.at(x) == 'R')
+        {
+            flag_index.push_back(3);
+        }
+        else
+        {
+            flag_index.push_back(-1);
+        }
     }
 }
+
+
+void print_files(vector<string> V)
+{
+    for(int x = 0; x < V.size(); x++)
+    {
+        cout << V.at(x) << " ";
+    }
+}
+
+
+void execute(int arg, char ** agv)
+{
+    DIR *dirp;
+    dirp = opendir(agv[0]);
+    if(NULL == dirp)
+    { 
+        perror("opendir()");
+        exit(1);
+    }
+    struct dirent *filespecs;
+    while(NULL != (filespecs = readdir(dirp)))
+    {
+        file_store.push_back(filespecs->d_name);
+    }
+    sort(file_store.begin(), file_store.end(), Alphabetical);
+    print_files(file_store); 
+
+    if(-1 == closedir(dirp))
+    {
+        perror("closedir");
+        exit(1);
+    }
+}
+
+
+
+int main(int argc, char ** argv)
+{
+    bool A_check;
+    bool L_check;
+    bool R_check;
+    string flags;               //holds all flags of user input
+    if(argc <= 1)
+    {
+        cout << "Nothing passed in to argv." << endl;
+        exit(1);
+    }
+   
+        vector<char *> flags_finder;
     
-int main(int argc, char *argv[])
-{
-	vector<bool> flags(false);        //initalizes all boolean values in vector to false;      
-	flags.resize(3);
-	vector<string> paths;
-	vector<string> filenames;
-	if (argc < 1)
-	{
-		cout << "Error opening file" << endl;
-		exit(1);
-	}
-	else if (argc > 1) //run ls with path or flags
-	{
-		for (int i = 1; i < argc; ++i)
-		{
-			tokenize(flags, argv[i], paths);
-		}
-	}
-	if (!paths.size()) 
-    {
-        paths.push_back("."); 
-    }	
-	dirent *direntp;
-	stack<string> rdir;
-	string processdir;
-	for (int i = paths.size() - 1; i >= 0; --i) 
-    {
-        rdir.push(paths[i]);
-    }
-	while (!rdir.empty())
-	{
-		processdir = rdir.top();
-		rdir.pop();
-		cout << processdir << ": " << endl;
-		DIR *dirp = opendir(processdir.c_str());
-		if (dirp == NULL)
-		{
-			perror("Error with opendir()");
-			exit(1);
-		}
-		while ((direntp = readdir(dirp)))
-		{
-			if (direntp < 0)
-			{
-				perror("Error with readdir()");
-				exit(1);
-			}
-			string s(direntp->d_name);
-			filenames.push_back(s);
-		}
-		sort(filenames.begin(), filenames.end(), scompare);
-		displayls(filenames, flags, processdir, rdir);
-		if (closedir(dirp) == -1)
-		{
-			perror("Error with closedir()");
-			exit(1);
-		}
-		filenames.clear();
+        for(int x = 1; x < argc; x++)
+        {
+            flags_finder.push_back(argv[x]);
+        }
+    
+        char* Sec_Arr = new char[2];
+        Sec_Arr[0] = '.';
+        strcpy(Sec_Arr,".");
+        argv[0] = Sec_Arr;
+        for(int x = 1; x < argc; x++)
+        {
+            converted_string += convert_to_string(argv[x]);
+            converted_string += " ";
+        }
+        //cout << converted_string;
+        for(int x = 0; x < flags_finder.size(); x++)
+        {
+            converted_string += convert_to_string(flags_finder.at(x));
+            for(int i = 0; i < converted_string.size(); i++)
+            {
+                if(converted_string.at(i) == '-')
+                {
+                    for(int v = 1; v < converted_string.size(); v++)
+                    {
+                        flags += converted_string.at(x);
+                    }
+                }
+            }
+        }
+        for(int i = 0; i < flags.size(); i++)
+        {   
+            if(flags.at(i) == 'a')
+            {
+                A_check = true;
+            }
+            else if(flags.at(i) == 'l')
+            {
+                L_check = true;
+            }
+            else if(flags.at(i) == 'R')
+            {
+                R_check == true;
+            }
 
-		if (!rdir.empty()) cout << endl;
-	}
+        }
+        if(A_check)
+        {
+            execute(argc, argv);
+        }
+        
+      
+         
+         
+
+        DIR *dirp;
+        if(NULL == (dirp = opendir(argv[0])))
+        {
+            perror("There was an error with opendir(). ");
+            exit(1);
+        }
+        struct dirent *filespecs;
+        errno = 0;
+        while(NULL != (filespecs = readdir(dirp)))
+        {
+            file_store.push_back(filespecs->d_name);
+        }
+        sort(file_store.begin(), file_store.end(), Alphabetical);
+        print_files(file_store); 
+        if(errno != 0)
+        {
+            perror("There was an error with readdir(). ");
+            exit(1);
+        }
+        cout << endl;
+        if(-1 == closedir(dirp))
+        {
+            perror("There was an error with closedir(). ");
+        }
+       
+        
+    return 0;
 }
-
