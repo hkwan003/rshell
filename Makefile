@@ -1,4 +1,4 @@
-#Initializes the aliases to be used in target recipies
+#nitializes the aliases to be used in target recipies
 
 SOURCECODE    = main.cpp
 LsSOURCECODE  = ls.cpp

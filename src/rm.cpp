@@ -65,7 +65,11 @@ void removeShit(int argc, char * argv[], bool containsR){
 				continue;
 			}
 		}
-		if (S_ISREG(s.st_mode) ==  -1){	perror(argv[i]); exit(1);}
+		if (!S_ISREG(s.st_mode))
+        {	
+            perror(" file doesn not exist"  ); 
+            exit(1);
+        }
 		if (S_ISREG(s.st_mode) && !(S_ISDIR(s.st_mode))){
 			if (unlink(argv[i]) == -1){ perror("shit went wrong"); exit(1);}
 		}
