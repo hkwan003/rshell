@@ -76,7 +76,7 @@ void fixing_spacing_command(char *org_prompt, int check_redir)
 }
 int exec_status;
 bool str_continue = true;
-bool execute(char* command, char* command_list[], int conect_type, bool redir)
+bool execute(char* command, char* command_list[], int conect_type, int redir)
 {
     cout << "conect:type: " << conect_type << endl;
     int status;
@@ -88,11 +88,36 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir)
     }
     else if(process_ID == 0) //child process
     {
-        if(redir)
+        if(redir == 1)
         {	
             cout << "did this output" << endl;
             int fd;
             if((fd = open("outfile", O_RDWR | O_CREAT | O_TRUNC, 0744)) == -1)
+            {
+                perror("open");
+            }
+            if(close(1) == -1)
+            {
+                perror("close");
+            }
+            if(dup(fd) == -1)
+            {
+                perror("dup");
+            }
+            exec_status = (execvp(command, command_list));
+            //cout << "output exec status: " << exec_status << endl;
+            if(exec_status == -1)
+            {
+                perror("error with passed in argument list");
+                return exec_status;
+                exit(1);
+            }
+        }
+        if(redir == 2)
+        {
+            cout << "yay this should output now" << endl;
+            int fd;
+            if((fd = open("outfile", O_RDWR | O_CREAT | O_APPEND, 0744)) == -1)
             {
                 perror("open");
             }
@@ -151,16 +176,24 @@ void check_exit(char *str)
     }
 }
 
-bool chk_redir(string s)
+int chk_redir(string s)
 {
     for(int x = 0; x < s.size(); x++)
     {
+        //cout << "output x: " << x << endl;
         if(s.at(x) == '>')
         {
-            return true;
+            //cout << "output x: " << endl;
+            int y = x;
+            if(y++ < s.size() && s.at(x) == '>')
+            {
+                return 2;
+            }
+            else
+            {return 1;}
         }
     }
-    return false;
+    return 0;
 }
 
 int main(int argc, char **argv)
@@ -206,7 +239,7 @@ int main(int argc, char **argv)
         
         
         getline(cin, to_be_tokenized);
-        bool to_redir;
+        int to_redir;           //certain number corresponds to what redirection it is
         to_redir = chk_redir(to_be_tokenized);//checks if there is redirection sign in command
         for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
         {
