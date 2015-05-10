@@ -76,7 +76,7 @@ void fixing_spacing_command(char *org_prompt, int check_redir)
 }
 int exec_status;
 bool str_continue = true;
-bool execute(char* command, char* command_list[], int conect_type, int redir)
+bool execute(char* command, char* command_list[], int conect_type, int redir, string path_name)
 {
     cout << "conect:type: " << conect_type << endl;
     int status;
@@ -92,7 +92,7 @@ bool execute(char* command, char* command_list[], int conect_type, int redir)
         {	
             cout << "did this output" << endl;
             int fd;
-            if((fd = open("outfile", O_RDWR | O_CREAT | O_TRUNC, 0744)) == -1)
+            if((fd = open(path_name.c_str(), O_RDWR | O_CREAT | O_TRUNC, 0744)) == -1)
             {
                 perror("open");
             }
@@ -117,7 +117,7 @@ bool execute(char* command, char* command_list[], int conect_type, int redir)
         {
             cout << "yay this should output now" << endl;
             int fd;
-            if((fd = open("outfile", O_RDWR | O_CREAT | O_APPEND, 0744)) == -1)
+            if((fd = open(path_name.c_str(), O_RDWR | O_CREAT | O_APPEND, 0744)) == -1)
             {
                 perror("open");
             }
@@ -175,8 +175,8 @@ void check_exit(char *str)
         exit(0);
     }
 }
-
-int chk_redir(string s)
+string file_name;   //holds file name of file passed in
+int chk_redir(string &s)
 {
     for(int x = 0; x < s.size(); x++)
     {
@@ -187,13 +187,48 @@ int chk_redir(string s)
             int y = x;
             if(y++ < s.size() && s.at(x) == '>')
             {
+                for(int i = y; i < s.size(); i++)
+                {
+                    file_name.push_back(s.at(i));
+                    s.at(i) = ' ';
+                    if(s.at(x) != ' ' && x < s.size())
+                    {
+                        continue;
+                    }
+                    break;
+                }
                 return 2;
             }
             else
-            {return 1;}
+            {
+                for(int i = y; i < s.size(); i++)
+                {
+                    file_name.push_back(s.at(i));
+                    s.at(i) = ' ';
+                    if(s.at(x) != ' ' && x < s.size())
+                    {
+                        continue;
+                    }
+                    break;
+                }
+                return 1;
+            }
         }
     }
     return 0;
+}
+string final_file_name;
+string fix_file_name(string s)
+{
+    int sz = s.size();
+    for(int x = 0; x < sz; x++)
+    {
+        if(s.at(x) != ' ')
+        {
+            final_file_name.push_back(s.at(x));
+        }
+    }
+    return final_file_name;
 }
 
 int main(int argc, char **argv)
@@ -236,11 +271,19 @@ int main(int argc, char **argv)
         //string converter; //converts all bits of string into one piece
         
         string to_be_tokenized;
-        
-        
+    
+    
         getline(cin, to_be_tokenized);
         int to_redir;           //certain number corresponds to what redirection it is
         to_redir = chk_redir(to_be_tokenized);//checks if there is redirection sign in command
+        //output the file passed in
+        cout << "see if the files are the same name: " << file_name << endl;
+        
+        final_file_name = fix_file_name(file_name);
+        cout << "output fixed filename: " << final_file_name << endl;
+        
+        
+        
         for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
         {
             prompt_holder[x] = to_be_tokenized.at(x);
@@ -274,7 +317,7 @@ int main(int argc, char **argv)
                 sequence = 0;
                 comd_arr_cnt = 0;
                 //cout << "does it output second iteration " << endl;
-                exec_result = execute(comd_arr[0], comd_arr, connect_check, to_redir);
+                exec_result = execute(comd_arr[0], comd_arr, connect_check, to_redir, final_file_name);
                 //cout << "output exec_status: " << exec_status << endl;
                 //cout << "output exec_result tho: " << exec_result << endl;
                 //cout << "connect_check: " << connect_check << endl;
@@ -306,7 +349,7 @@ int main(int argc, char **argv)
             {
             cout << "guess this executeisw ith this " << endl;
             comd_arr[comd_arr_cnt] = '\0';
-            execute(comd_arr[0], comd_arr, connect_check, to_redir);
+            execute(comd_arr[0], comd_arr, connect_check, to_redir, final_file_name);
             }
         }
     }
