@@ -62,7 +62,7 @@ void fixing_spacing_command(char *org_prompt, int check_redir)
             check_redir = 1;        //redir 1 means one output bracket
             fin_prompt[i] = ';';
             fin_prompt[++i] = ' '; 
-            fin_prompt[++i] = '>';
+            fin_prompt[++i] = ' ';
             fin_prompt[++i] = ' ';
             ++x;
         } 
@@ -76,9 +76,9 @@ void fixing_spacing_command(char *org_prompt, int check_redir)
 }
 int exec_status;
 bool str_continue = true;
-bool execute(char* command, char* command_list[], int conect_type)
+bool execute(char* command, char* command_list[], int conect_type, bool redir)
 {
-    //cout << "beginning of execution: " << endl;
+    cout << "conect:type: " << conect_type << endl;
     int status;
     int process_ID = fork();
     if(process_ID <= -1)
@@ -88,30 +88,43 @@ bool execute(char* command, char* command_list[], int conect_type)
     }
     else if(process_ID == 0) //child process
     {
-        int fd;
-        if((fd = open("outfile", O_RDWR | O_CREAT | O_TRUNC, 0744)) == -1)
-        {
-            perror("open");
+        if(redir)
+        {	
+            cout << "did this output" << endl;
+            int fd;
+            if((fd = open("outfile", O_RDWR | O_CREAT | O_TRUNC, 0744)) == -1)
+            {
+                perror("open");
+            }
+            if(close(1) == -1)
+            {
+                perror("close");
+            }
+            if(dup(fd) == -1)
+            {
+                perror("dup");
+            }
+            exec_status = (execvp(command, command_list));
+            //cout << "output exec status: " << exec_status << endl;
+            if(exec_status == -1)
+            {
+                perror("error with passed in argument list");
+                return exec_status;
+                exit(1);
+            }
         }
-        if(close(1) == -1)
+        else
         {
-            perror("close");
+            cout << "this is wrong" << endl;
+            exec_status = (execvp(command, command_list));
+            //cout << "output exec status: " << exec_status << endl;
+            if(exec_status == -1)
+            {
+                perror("error with passed in argument list");
+                return exec_status;
+                exit(1);
+            }
         }
-        if(dup(fd) == -1)
-        {
-            perror("dup");
-        }
-            
-      
-        exec_status = (execvp(command, command_list));
-        //cout << "output exec status: " << exec_status << endl;
-        if(exec_status == -1)
-        {
-            perror("error with passed in argument list");
-            return exec_status;
-            exit(1);
-        }
-        
     }
     else if(process_ID > 0) //parent process
     {
@@ -137,6 +150,19 @@ void check_exit(char *str)
         exit(0);
     }
 }
+
+bool chk_redir(string s)
+{
+    for(int x = 0; x < s.size(); x++)
+    {
+        if(s.at(x) == '>')
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 int main(int argc, char **argv)
 {
     int check_redir = 0;
@@ -175,8 +201,13 @@ int main(int argc, char **argv)
         unsigned int comd_arr_cnt = 0;
         str_continue = true;
         //string converter; //converts all bits of string into one piece
+        
         string to_be_tokenized;
+        
+        
         getline(cin, to_be_tokenized);
+        bool to_redir;
+        to_redir = chk_redir(to_be_tokenized);//checks if there is redirection sign in command
         for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
         {
             prompt_holder[x] = to_be_tokenized.at(x);
@@ -184,6 +215,7 @@ int main(int argc, char **argv)
         fixing_spacing_command(prompt_holder, check_redir);
         int connect_check; //indicates which connection is in token
         token = strtok(prompt_holder, "\t ");
+        //cout << "output token: " << token << endl;
         exec_result = true;
         while(token != NULL && exec_result && str_continue)
         {
@@ -209,7 +241,7 @@ int main(int argc, char **argv)
                 sequence = 0;
                 comd_arr_cnt = 0;
                 //cout << "does it output second iteration " << endl;
-                exec_result = execute(comd_arr[0], comd_arr, connect_check);
+                exec_result = execute(comd_arr[0], comd_arr, connect_check, to_redir);
                 //cout << "output exec_status: " << exec_status << endl;
                 //cout << "output exec_result tho: " << exec_result << endl;
                 //cout << "connect_check: " << connect_check << endl;
@@ -239,9 +271,9 @@ int main(int argc, char **argv)
             token = strtok(NULL, "\t ");
             if(connect_check == -1 && token == NULL && exec_result && str_continue)
             {
-            //cout << "guess this executeisw ith this " << endl;
+            cout << "guess this executeisw ith this " << endl;
             comd_arr[comd_arr_cnt] = '\0';
-            execute(comd_arr[0], comd_arr, connect_check);
+            execute(comd_arr[0], comd_arr, connect_check, to_redir);
             }
         }
     }
