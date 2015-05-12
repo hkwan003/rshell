@@ -360,10 +360,4 @@ notsucceed &&
 ls -a
 [ls] [-a]
 exekcvp([ls],[[ls],[-a]])
-char* argumentList[50000];
-char executable[50000];
-argumentList[0] = executable;
-unsigned int size = 0;
-ls -a \0
-execvp(argumentList[0], argumentList);
 */
