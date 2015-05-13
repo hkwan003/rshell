@@ -17,6 +17,7 @@
  
   
 using namespace std;
+vector<int> mult_redir_G;
 void fixing_spacing_command(char *org_prompt, int check_redir)
 {
     char *fin_prompt = (char*)malloc(50000);
@@ -78,7 +79,7 @@ int exec_status;
 bool str_continue = true;
 bool execute(char* command, char* command_list[], int conect_type, int redir, string path_name)
 {
-    cout << "conect:type: " << conect_type << endl;
+    //cout << "conect:type: " << conect_type << endl;
     int status;
     int process_ID = fork();
     if(process_ID <= -1)
@@ -90,7 +91,7 @@ bool execute(char* command, char* command_list[], int conect_type, int redir, st
     {
         if(redir == 1)
         {	
-            cout << "did this output" << endl;
+            //cout << "did this output" << endl;
             int fd;
             if((fd = open(path_name.c_str(), O_RDWR | O_CREAT | O_TRUNC, 0744)) == -1)
             {
@@ -115,7 +116,7 @@ bool execute(char* command, char* command_list[], int conect_type, int redir, st
         }
         if(redir == 2)
         {
-            cout << "yay this should output now" << endl;
+            //cout << "yay this should output now" << endl;
             int fd;
             if((fd = open(path_name.c_str(), O_RDWR | O_CREAT | O_APPEND, 0744)) == -1)
             {
@@ -138,9 +139,35 @@ bool execute(char* command, char* command_list[], int conect_type, int redir, st
                 exit(1);
             }
         }
+        if(redir == 3)
+        {
+            int fd;
+            if((fd = open(path_name.c_str(), O_RDONLY)) == -1)
+            {
+                perror("open");
+            }
+            if(close(0) == -1)
+            {
+                perror("close");
+            }
+            if(dup(fd) == -1)
+            {
+                perror("dup");
+            }
+            exec_status = (execvp(command, command_list));
+            if(exec_status == -1)
+            {
+                perror("error with input redirection argument list");
+                return exec_status;
+                exit(1);
+            }
+            
+            int yd = 
+        }
+            
         else
         {
-            cout << "this is wrong" << endl;
+            //cout << "this is wrong" << endl;
             exec_status = (execvp(command, command_list));
             //cout << "output exec status: " << exec_status << endl;
             if(exec_status == -1)
@@ -214,6 +241,24 @@ int chk_redir(string &s)
                 return 1;
             }
         }
+        else if(s.at(x) == '<')
+        {
+            int g = x;
+            if(g++ < s.size() && s.at(x) == '>')
+            {
+                for(int i = g; i < s.size(); i++)
+                {
+                    file_name.push_back(s.at(i));
+                    s.at(i) = ' ';
+                    if(s.at(x) != ' ' && x < s.size())
+                    {
+                        continue;
+                    }
+                    break;
+                }
+                return 3;
+            }
+        }
     }
     return 0;
 }
@@ -231,8 +276,24 @@ string fix_file_name(string s)
     return final_file_name;
 }
 
+void chk_mult_redir(string s)
+{
+    for(int g = 0; g < s.size(); g++)
+    {
+        if(s.at(g) == '>')
+        {
+            mult_redir_G.push_back(1);
+        }
+        else if(s.at(g) == '<')
+        {
+            mult_redir_G.push_back(2);
+        }
+    }
+}
+
 int main(int argc, char **argv)
 {
+    int multi_redir_chk = 0;
     int check_redir = 0;
     ///////////////////////////////////////////////
     int sequence = 0; //sequence of which is executable and flags
@@ -274,13 +335,20 @@ int main(int argc, char **argv)
     
     
         getline(cin, to_be_tokenized);
+        chk_mult_redir(to_be_tokenized);
         int to_redir;           //certain number corresponds to what redirection it is
         to_redir = chk_redir(to_be_tokenized);//checks if there is redirection sign in command
         //output the file passed in
-        cout << "see if the files are the same name: " << file_name << endl;
+        //cout << "see if the files are the same name: " << file_name << endl;
         
         final_file_name = fix_file_name(file_name);
-        cout << "output fixed filename: " << final_file_name << endl;
+        //cout << "output fixed filename: " << final_file_name << endl;
+        
+        if(mult_redir_G.size() == 2)
+        {
+            multi_redir_chk = mult_redir_G.at(mult_redir_G.size() - 1);
+        }
+        cout << "multiple redir: " << multi_redir_chk << endl;
         
         
         
@@ -347,7 +415,7 @@ int main(int argc, char **argv)
             token = strtok(NULL, "\t ");
             if(connect_check == -1 && token == NULL && exec_result && str_continue)
             {
-            cout << "guess this executeisw ith this " << endl;
+            //cout << "guess this executeisw ith this " << endl;
             comd_arr[comd_arr_cnt] = '\0';
             execute(comd_arr[0], comd_arr, connect_check, to_redir, final_file_name);
             }
