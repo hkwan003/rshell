@@ -17,7 +17,6 @@
  
   
 using namespace std;
-vector<int> mult_redir_G;
 void fixing_spacing_command(char *org_prompt, int check_redir)
 {
     char *fin_prompt = (char*)malloc(50000);
@@ -162,7 +161,7 @@ bool execute(char* command, char* command_list[], int conect_type, int redir, st
                 exit(1);
             }
             
-            int yd = 
+            //int yd = 
         }
             
         else
@@ -202,8 +201,9 @@ void check_exit(char *str)
         exit(0);
     }
 }
+int to_redir;
 string file_name;   //holds file name of file passed in
-int chk_redir(string &s)
+void chk_redir(string &s)
 {
     for(int x = 0; x < s.size(); x++)
     {
@@ -224,7 +224,7 @@ int chk_redir(string &s)
                     }
                     break;
                 }
-                return 2;
+                to_redir = 2;
             }
             else
             {
@@ -238,7 +238,7 @@ int chk_redir(string &s)
                     }
                     break;
                 }
-                return 1;
+                to_redir = 1;
             }
         }
         else if(s.at(x) == '<')
@@ -256,11 +256,10 @@ int chk_redir(string &s)
                     }
                     break;
                 }
-                return 3;
+                to_redir = 3;
             }
         }
     }
-    return 0;
 }
 string final_file_name;
 string fix_file_name(string s)
@@ -275,21 +274,60 @@ string fix_file_name(string s)
     }
     return final_file_name;
 }
-
+bool out_flag = false;
+bool in_flag = false;
+string infile;
+string outfile;
 void chk_mult_redir(string s)
 {
+    cout << "is this goign in there" << endl;
     for(int g = 0; g < s.size(); g++)
     {
+        if(s.at(g) == '<')
+        {
+            in_flag = true;
+    
+        }
         if(s.at(g) == '>')
         {
-            mult_redir_G.push_back(1);
-        }
-        else if(s.at(g) == '<')
-        {
-            mult_redir_G.push_back(2);
+            out_flag = true;
         }
     }
 }
+
+void grab_mult_redir(string &s)
+{
+    for(int x = 0; x < s.size(); x++)
+    {
+        if(s.at(x) == '<')
+        {
+            int g = x;
+            if(g++ < s.size() && s.at(x) == '<')
+            {
+                for(int v = g; s.at(v) != '>'; v++)
+                {
+                    cout << s.at(v) << endl;
+                    infile.push_back(s.at(v));
+                    s.at(v) = ' ';
+                }
+            }
+        }
+        if(s.at(x) == '>')
+        {
+            int g = x;
+            if(g++ < s.size())
+            {
+                for(int v = g; v < s.size(); v++)
+                {
+                    cout << s.at(v) << endl;
+                    outfile.push_back(s.at(v));
+                    s.at(v) = ' ';
+                }
+            }
+        }
+    }
+}
+        
 
 int main(int argc, char **argv)
 {
@@ -318,6 +356,9 @@ int main(int argc, char **argv)
     //outputs the userinfo with login and host
     while(prompter)
     {
+        to_redir = 0;
+        out_flag = false;
+        in_flag = false;
         cout << userinfo << "@" << host << " $ ";
         //////////////////////////////////////////////login part done, next is all shell commands
         char prompt_holder[50000];//orginal array to hold prompt
@@ -330,25 +371,26 @@ int main(int argc, char **argv)
         unsigned int comd_arr_cnt = 0;
         str_continue = true;
         //string converter; //converts all bits of string into one piece
-        
         string to_be_tokenized;
-    
-    
         getline(cin, to_be_tokenized);
         chk_mult_redir(to_be_tokenized);
-        int to_redir;           //certain number corresponds to what redirection it is
-        to_redir = chk_redir(to_be_tokenized);//checks if there is redirection sign in command
-        //output the file passed in
-        //cout << "see if the files are the same name: " << file_name << endl;
-        
-        final_file_name = fix_file_name(file_name);
-        //cout << "output fixed filename: " << final_file_name << endl;
-        
-        if(mult_redir_G.size() == 2)
+        if(out_flag  == true && in_flag == true)
         {
-            multi_redir_chk = mult_redir_G.at(mult_redir_G.size() - 1);
+            grab_mult_redir(to_be_tokenized);
+            outfile = fix_file_name(outfile);
+            cout << "outfile: " << outfile << endl;
+            final_file_name.clear();
+            infile = fix_file_name(infile);
+            cout << "infile: " << infile << endl;
         }
-        cout << "multiple redir: " << multi_redir_chk << endl;
+        else
+        {
+            cout << "hi there" << endl;
+            chk_redir(to_be_tokenized);//checks if there is redirection sign in command
+            final_file_name = fix_file_name(file_name);
+        }
+        
+      
         
         
         
@@ -422,10 +464,3 @@ int main(int argc, char **argv)
         }
     }
 }
-/* || && ;
-succeeds ||
-notsucceed &&
-ls -a
-[ls] [-a]
-exekcvp([ls],[[ls],[-a]])
-*/
