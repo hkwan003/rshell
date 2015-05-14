@@ -18,7 +18,7 @@
   
 using namespace std;
 
-vector<string> intputs_G;
+vector<string> inputs_G;
 vector<string> outputs_G;
 
 void fixing_spacing_command(char *org_prompt, int check_redir)
@@ -204,20 +204,40 @@ void check_exit(char *str)
         exit(0);
     }
 }
-
-void check_redir(string s)
+string input_hold;
+string out_hold;
+void check_redirection(string &s)
 {
     for(int x = 0; x < s.size(); x++)
     {
-        if(s.at(x) == '<')
+        if(s.at(x) == '<' && x < s.size())
         {
             int g = x;
             if(g++ < s.size())
             {
-                for
+                for(; s.at(g) != '>' && g < s.size(); g++)
+                {
+                    input_hold.push_back(s.at(g));
+                }
+            }
+            inputs_G.push_back(input_hold);
+            input_hold.clear();
+        }
+        if(s.at(x) == '>')
+        {
+            s.at(x) = ' ';
+            int i = x;
+            i++;
+            for(; i < s.size() && s.at(i) != '>'; i++)
+            {
+                out_hold.push_back(s.at(i));
+                s.at(i) = ' ';
+            }
+            outputs_G.push_back(out_hold);
+            out_hold.clear();
+        }
+    }
 }
-
-
 string final_file_name;
 string fix_file_name(string s)
 {
@@ -231,9 +251,6 @@ string fix_file_name(string s)
     }
     return final_file_name;
 }
-
-        
-
 int main(int argc, char **argv)
 {
     int multi_redir_chk = 0;
@@ -261,9 +278,6 @@ int main(int argc, char **argv)
     //outputs the userinfo with login and host
     while(prompter)
     {
-        to_redir = 0;
-        out_flag = false;
-        in_flag = false;
         cout << userinfo << "@" << host << " $ ";
         //////////////////////////////////////////////login part done, next is all shell commands
         char prompt_holder[50000];//orginal array to hold prompt
@@ -278,8 +292,17 @@ int main(int argc, char **argv)
         //string converter; //converts all bits of string into one piece
         string to_be_tokenized;
         getline(cin, to_be_tokenized);
+        check_redirection(to_be_tokenized);
+        for(int x = 0; x < inputs_G.size(); x++)
+        {
+            cout << "inputs: " << inputs_G.at(x) << endl;
+        }
+        for(int x = 0; x < outputs_G.size(); x++)
+        {
+            cout << "outputs: " << outputs_G.at(x) << endl;
+        }
         
-        
+        cout << "after string: " << to_be_tokenized << endl;
       
         
         
@@ -317,7 +340,7 @@ int main(int argc, char **argv)
                 sequence = 0;
                 comd_arr_cnt = 0;
                 //cout << "does it output second iteration " << endl;
-                exec_result = execute(comd_arr[0], comd_arr, connect_check, to_redir, final_file_name);
+                //exec_result = execute(comd_arr[0], comd_arr, connect_check, to_redir, final_file_name);
                 //cout << "output exec_status: " << exec_status << endl;
                 //cout << "output exec_result tho: " << exec_result << endl;
                 //cout << "connect_check: " << connect_check << endl;
@@ -349,7 +372,7 @@ int main(int argc, char **argv)
             {
             //cout << "guess this executeisw ith this " << endl;
             comd_arr[comd_arr_cnt] = '\0';
-            execute(comd_arr[0], comd_arr, connect_check, to_redir, final_file_name);
+            //execute(comd_arr[0], comd_arr, connect_check, to_redir, final_file_name);
             }
         }
     }

@@ -20,7 +20,7 @@ using namespace std;
 
 vector<string> inputs_G;
 vector<string> outputs_G;
-
+vector<string> output_append_G;
 void fixing_spacing_command(char *org_prompt, int check_redir)
 {
     char *fin_prompt = (char*)malloc(50000);
@@ -100,7 +100,6 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                 int fd;
                 for(int x = 0; x < outputs_G.size(); x++)
                 {
-                    //cout << "outputs: " << outputs_G.at(outputs_G.size() -1 - x) << endl;
                     if(fd = (open(outputs_G.at(outputs_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_TRUNC, 0744) == -1))
                     {
                         perror("open");
@@ -115,24 +114,26 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                     perror("dup");
                 }
             }
-            if(2)
+            if(output_append_G.size() > 0)
             {
-                int fd;
-                if((fd = open(path_name.c_str(), O_RDWR | O_CREAT | O_APPEND, 0744)) == -1)
-                {
-                    perror("open");
-                }
+                cout << "does this enteir" << endl;
                 if(close(1) == -1)
                 {
                     perror("close");
                 }
-                if(dup(fd) == -1)
-                {
-                    perror("dup");
+                int fd;
+                for(int x = 0; x < output_append_G.size(); x++)
+                {   
+                    cout << "outupt this stuff: " << output_append_G.at(output_append_G.size() - 1 - x) << endl; 
+                    if(fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_APPEND, 0744) == -1))
+                    {
+                        perror("open");
+                    }
                 }
             }
             if(inputs_G.size() > 0)
             {
+                cout << "does this mess it up" << endl;
                 int fd;
                 for(int x = 0; x < inputs_G.size(); x++)
                 {
@@ -150,20 +151,19 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                     }
                 }
             }
-            else
+            exec_status = (execvp(command, command_list));
+            cout << "output exec status////////////////: " << exec_status << endl;
+            if(exec_status == -1)
             {
-                exec_status = (execvp(command, command_list));
-                //cout << "output exec status: " << exec_status << endl;
-                if(exec_status == -1)
-                {
-                    perror("error with passed in argument list");
-                    return exec_status;
-                    exit(1);
-                }
+                perror("error with passed in argument list");
+                return exec_status;
+                exit(1);
             }
+            
         }
         else 
         {
+            cout << "is this going in there" << endl;
             exec_status = (execvp(command, command_list));
             if(exec_status == -1)
             {
@@ -182,6 +182,8 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
     }
     return(!(status == 0 && conect_type == -1) ||( status > 0 && conect_type == 2));
 }
+
+
 int check_connections(char* check)
 {
     if(!strcmp(check, ";")) return 0;
@@ -199,6 +201,7 @@ void check_exit(char *str)
 }
 string input_hold;
 string out_hold;
+string add_hold;
 void check_redirection(string &s)
 {
     for(int x = 0; x < s.size(); x++)
@@ -218,16 +221,35 @@ void check_redirection(string &s)
         }
         if(s.at(x) == '>')
         {
-            s.at(x) = ' ';
-            int i = x;
-            i++;
-            for(; i < s.size() && s.at(i) != '>'; i++)
+            if(s.at(x + 1) == '>' && x < s.size())
             {
-                out_hold.push_back(s.at(i));
-                s.at(i) = ' ';
+                cout << "is thsi workign t" << endl;
+                s.at(x) = ' ';
+                int i = x;
+                i++;
+                cout << "is this shit working" << endl;
+                for(; i < s.size() && s.at(i) != '>' && s.at(i + 1) != '>'; i++)
+                {
+                    cout << s.at(i) << endl;
+                    add_hold.push_back(s.at(i));
+                    s.at(i) = ' ';
+                }
+                output_append_G.push_back(add_hold);
+                out_hold.clear();
             }
-            outputs_G.push_back(out_hold);
-            out_hold.clear();
+            else
+            {
+                s.at(x) = ' ';
+                int i = x;
+                i++;
+                for(; i < s.size() && s.at(i) != '>'; i++)
+                {
+                    out_hold.push_back(s.at(i));
+                    s.at(i) = ' ';
+                }
+                outputs_G.push_back(out_hold);
+                out_hold.clear();
+            }
         }
     }
 }
@@ -325,6 +347,13 @@ int main(int argc, char **argv)
                 outputs_G.at(x) = s;
                 s.clear();
             }
+            for(int x = 0; x < output_append_G.size(); x++)
+            {
+                string s = fix_file_name(outputs_G.at(x));
+                output_append_G.at(x) = s;
+                s.clear();
+            }
+            
         }
         
         cout << "after string: " << to_be_tokenized << endl;
@@ -334,9 +363,9 @@ int main(int argc, char **argv)
         {
             cout << "first: " << inputs_G.at(x) << endl;
         }
-        for(int x = 0; x < outputs_G.size(); x++)
+        for(int x = 0; x < output_append_G.size(); x++)
         {
-            cout << "second: " << outputs_G.at(x) << endl;
+            cout << "second: " << output_append_G.at(x) << endl;
         }
         
         
