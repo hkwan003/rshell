@@ -16,13 +16,13 @@
 
 
 using namespace std;
-
+char* host = (char*)malloc(500);
+char *fin_prompt = (char*)malloc(50000);
 vector<string> inputs_G;
 vector<string> outputs_G;
 vector<string> output_append_G;
 void fixing_spacing_command(char *org_prompt, int check_redir)
 {
-    char *fin_prompt = (char*)malloc(50000);
     char connect[4];
     connect[0] = ';';
     connect[1] = '&';
@@ -190,6 +190,7 @@ int check_connections(char* check)
     else if(!strcmp(check, ">")) return 3;
     else return -1;
 }
+
 void check_exit(char *str)
 {
     if(!strcmp(str, "exit"))
@@ -299,7 +300,6 @@ int main(int argc, char **argv)
     int check_redir = 0;
     ///////////////////////////////////////////////
     int sequence = 0; //sequence of which is executable and flags
-    char* host = (char*)malloc(500);
     string userinfo;
     bool prompter = true;
     char* token; //will be bit of code strtok cuts off
