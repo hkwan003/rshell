@@ -14,8 +14,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
- 
-  
+
 using namespace std;
 
 vector<string> inputs_G;
@@ -78,6 +77,9 @@ void fixing_spacing_command(char *org_prompt, int check_redir)
     }
       strcpy(org_prompt, fin_prompt);        //copies altered version
 }
+bool in = false;
+bool out = false;
+bool add_out = false;
 int exec_status;
 bool str_continue = true;
 bool execute(char* command, char* command_list[], int conect_type, bool redir, string path_name)
@@ -86,35 +88,14 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
     int process_ID = fork();
     if(process_ID <= -1)
     {
-        perror("Error occured during forking()");
+        perror("Error occured during forking()"); 
         exit(1);
     }
     else if(process_ID == 0) //child process
     {
         if(redir)
         {
-            cout << "does this enter" << endl;
-            if(outputs_G.size() > 0)
-            {	
-                //cout << "is this going in here" << endl;
-                int fd;
-                for(int x = 0; x < outputs_G.size(); x++)
-                {
-                    if(fd = (open(outputs_G.at(outputs_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_TRUNC, 0744) == -1))
-                    {
-                        perror("open");
-                    }
-                }
-                if(close(1) == -1)
-                {
-                    perror("close");
-                }
-                if(dup(fd) == -1)
-                {
-                    perror("dup");
-                }
-            }
-            if(output_append_G.size() > 0)
+            if(output_append_G.size() > 0 && add_out)
             {
                 cout << "does this enteir" << endl;
                 if(close(1) == -1)
@@ -122,17 +103,41 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                     perror("close");
                 }
                 int fd;
+                cout << "show appendation size: " << output_append_G.size() << endl;
                 for(int x = 0; x < output_append_G.size(); x++)
                 {   
                     cout << "outupt this stuff: " << output_append_G.at(output_append_G.size() - 1 - x) << endl; 
-                    if(fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_APPEND, 0744) == -1))
+                    if(fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_APPEND | O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR) == -1))
                     {
                         perror("open");
                     }
                 }
             }
-            if(inputs_G.size() > 0)
+            cout << "does this enter" << endl;
+            if(outputs_G.size() > 0 && out)
+            {	
+                cout << "is this going in here" << endl;
+                if(close(1) == -1)
+                {
+                    perror("close");
+                }
+                cout << "is this going in here" << endl;
+                int fd;
+                for(int x = 0; x < outputs_G.size(); x++)
+                {
+                    if(fd = (open(outputs_G.at(outputs_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR) == -1))
+                    {
+                        perror("open");
+                    }
+                }
+            }
+            if(inputs_G.size() > 0 && in)
             {
+                cout << "does this enter here" << endl;
+                if(close(0) == -1)
+                {
+                    perror("close");
+                }
                 cout << "does this mess it up" << endl;
                 int fd;
                 for(int x = 0; x < inputs_G.size(); x++)
@@ -141,16 +146,9 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                     {
                         perror("open");
                     }
-                    if(close(0) == -1)
-                    {
-                        perror("close");
-                    }
-                    if(dup(fd) == -1)
-                    {
-                        perror("dup");
-                    }
                 }
             }
+            cout << "output right before exec " << endl;
             exec_status = (execvp(command, command_list));
             cout << "output exec status////////////////: " << exec_status << endl;
             if(exec_status == -1)
@@ -204,41 +202,54 @@ string out_hold;
 string add_hold;
 void check_redirection(string &s)
 {
+    input_hold.clear();
+    out_hold.clear();
+    add_hold.clear();
     for(int x = 0; x < s.size(); x++)
     {
         if(s.at(x) == '<' && x < s.size())
         {
+            s.at(x) = ' ';
             int g = x;
             if(g++ < s.size())
             {
-                for(; s.at(g) != '>' && g < s.size(); g++)
+                for(; g < s.size() && s.at(g) != '>'; g++)
                 {
                     input_hold.push_back(s.at(g));
                 }
             }
+            in = true;
             inputs_G.push_back(input_hold);
-            input_hold.clear();
         }
         if(s.at(x) == '>')
         {
-            if(s.at(x + 1) == '>' && x < s.size())
+            if(s.at(x + 1) == '>' && x +1 < s.size())
             {
                 cout << "is thsi workign t" << endl;
                 s.at(x) = ' ';
+                s.at(x + 1) = ' ';
+                x+=2;
                 int i = x;
                 i++;
                 cout << "is this shit working" << endl;
-                for(; i < s.size() && s.at(i) != '>' && s.at(i + 1) != '>'; i++)
+                cout << "s.at(i): " << s.at(i) << endl;
+                for(; i < s.size() && s.at(i) != '>'; i++)
                 {
                     cout << s.at(i) << endl;
                     add_hold.push_back(s.at(i));
                     s.at(i) = ' ';
                 }
+                cout << "add_hold: " << add_hold << endl;
                 output_append_G.push_back(add_hold);
-                out_hold.clear();
+                cout << "first vecto space: " << output_append_G.at(0) << endl;
+                add_hold.clear();
+                add_out = true;
             }
-            else
+            else if(s.at(x + 1) != '>')
             {
+                cout << "string shows: " << s.at(x + 1) << endl;
+                cout << "strings: " << s << endl;
+                cout << "why are u mesing with me" << endl;
                 s.at(x) = ' ';
                 int i = x;
                 i++;
@@ -249,6 +260,8 @@ void check_redirection(string &s)
                 }
                 outputs_G.push_back(out_hold);
                 out_hold.clear();
+                out = true;
+                cout << "check boolean: " << out << endl;
             }
         }
     }
@@ -307,16 +320,11 @@ int main(int argc, char **argv)
     //outputs the userinfo with login and host
     while(prompter)
     {
+        in = false;
+        out = false;
+        add_out = false;
         inputs_G.clear();
         outputs_G.clear();
-        //~ for(int x = 0; x < inputs_G.size(); x++)
-        //~ {
-            //~ inputs_G.at(x) = "";
-        //~ }
-        //~ for(int x = 0; x < outputs_G.size(); x++)
-        //~ {
-            //~ outputs_G.at(x) = "";
-        //~ }
         cout << userinfo << "@" << host << " $ ";
         //////////////////////////////////////////////login part done, next is all shell commands
         char prompt_holder[50000];//orginal array to hold prompt
@@ -333,6 +341,8 @@ int main(int argc, char **argv)
         getline(cin, to_be_tokenized);
         bool redir_checker = redir_exist(to_be_tokenized);
         check_redirection(to_be_tokenized);
+        cout << "checkfasdfasdfboolean: " << add_out << endl;
+        cout << "checkfasdfasdfboolean: " << out << endl;
         if(redir_checker)
         {
             for(int x = 0; x < inputs_G.size(); x++)
@@ -347,11 +357,11 @@ int main(int argc, char **argv)
                 outputs_G.at(x) = s;
                 s.clear();
             }
+            cout << "outputssize: " << output_append_G.size() << endl;
             for(int x = 0; x < output_append_G.size(); x++)
             {
-                string s = fix_file_name(outputs_G.at(x));
+                string s = fix_file_name(output_append_G.at(x));
                 output_append_G.at(x) = s;
-                s.clear();
             }
             
         }
@@ -365,7 +375,7 @@ int main(int argc, char **argv)
         }
         for(int x = 0; x < output_append_G.size(); x++)
         {
-            cout << "second: " << output_append_G.at(x) << endl;
+            cout << "output_append: " << output_append_G.at(x) << endl;
         }
         
         
@@ -408,12 +418,7 @@ int main(int argc, char **argv)
                 comd_arr[comd_arr_cnt] = '\0' ;
                 sequence = 0;
                 comd_arr_cnt = 0;
-                //cout << "does it output second iteration " << endl;
                 exec_result = execute(comd_arr[0], comd_arr, connect_check, redir_checker,final_file_name);
-                //cout << "output exec_status: " << exec_status << endl;
-                //cout << "output exec_result tho: " << exec_result << endl;
-                //cout << "connect_check: " << connect_check << endl;
-                //cout << "str_continue: " << str_continue << endl;
                 if(exec_status == 0)
                 {
                     if(connect_check == 2)
