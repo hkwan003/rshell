@@ -104,7 +104,7 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                 }
                 int fd;
                 cout << "show appendation size: " << output_append_G.size() << endl;
-                for(int x = 0; x < output_append_G.size(); x++)
+                for(unsigned int x = 0; x < output_append_G.size(); x++)
                 {   
                     cout << "outupt this stuff: " << output_append_G.at(output_append_G.size() - 1 - x) << endl; 
                     if(fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_APPEND | O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR) == -1))
@@ -157,7 +157,6 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                 return exec_status;
                 exit(1);
             }
-            
         }
         else 
         {
@@ -292,8 +291,29 @@ bool redir_exist(string s)
         }
     }
 }
+
+int i;
+bool chk_pipes(string s)
+{
+    for(int x = 0; x < s.size(); x++)
+    {
+        if(s.at(x) == '|')
+        {
+            i++;
+        }
+    }
+    if(i > 1)
+    {
+        return false;
+    }
+    return true;
+}
+
+
 int main(int argc, char **argv)
 {
+    bool checks_pipes = false;
+            //boolean to hold if I have pipes in getline()
     outputs_G.clear();
     inputs_G.clear();
     int multi_redir_chk = 0;
@@ -320,6 +340,9 @@ int main(int argc, char **argv)
     //outputs the userinfo with login and host
     while(prompter)
     {
+        i = 0;
+            //reset counter for increment for pipe checker
+        checks_pipes = false;
         in = false;
         out = false;
         add_out = false;
@@ -339,6 +362,15 @@ int main(int argc, char **argv)
         //string converter; //converts all bits of string into one piece
         string to_be_tokenized;
         getline(cin, to_be_tokenized);
+        //gets user input
+        checks_pipes = chk_pipes(to_be_tokenized);
+        if(checks_pipes)
+        {
+            //implement captureing files and commands
+            cout << "yay found the correct piipes" << endl;
+        }
+        
+        
         bool redir_checker = redir_exist(to_be_tokenized);
         check_redirection(to_be_tokenized);
         cout << "checkfasdfasdfboolean: " << add_out << endl;
