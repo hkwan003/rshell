@@ -13,6 +13,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 
 using namespace std;
@@ -21,6 +22,9 @@ char *fin_prompt = (char*)malloc(50000);
 vector<string> inputs_G;
 vector<string> outputs_G;
 vector<string> output_append_G;
+vector<string> piping_str;
+bool checks_pipes = false;
+char *piparr[100];
 void fixing_spacing_command(char *org_prompt, int check_redir)
 {
     char connect[4];
@@ -266,6 +270,55 @@ void check_redirection(string &s)
         }
     }
 }
+
+void execute_piping()
+{
+    int x = 0;
+    int fd[2];
+    pid_t pid1, pid2;
+    char *argv[100];
+    pipe(fd);
+    
+    pid1 = fork();
+    if(pid1 < 0)
+    {
+        perror("first forking failed");
+        exit(1);
+    }
+    if(pid1 == 0)
+    {
+        close(1);
+        dup(fd[1]);
+        close(fd[0]);
+        close(fd[1]);
+        execvp(piparr[0],piparr);
+        perror("first execvp failed");
+        exit(1);
+    }
+    
+    pid2 = fork();
+    if(pid2 < 0)
+    {
+        perror("second fork failed");
+        exit(1);
+    }
+    if(pid2 == 0)
+    {
+        close(1);
+        dup(fd[1]);
+        close(fd[0]);
+        close(fd[1]);
+        execvp(piparr[2],piparr);
+        perror("first execvp failed");
+        exit(1);
+    }
+    close(fd[0]);
+    close(fd[1]);
+    waitpid(pid1, NULL,0);
+    waitpid(pid2, NULL,0);
+    cout << "finished piping only one pipe" << endl;
+    
+}
 string final_file_name;
 string fix_file_name(string s)
 {
@@ -309,11 +362,41 @@ bool chk_pipes(string s)
     return true;
 }
 
+void push_piping_string(string s)
+{
+    string t;
+    for(int x = 0; x < s.size(); x++)
+    {
+        cout << "X: " << x << " " << s.at(x) <<endl;
+        
+        if(s.at(x) != '|' && x < s.size())
+        {
+            t.push_back(s.at(x));
+        }
+        if(s.at(x) == '|' || x == s.size() - 1)
+        {
+            cout << "does it actually push back" << endl;
+            piping_str.push_back(" ");
+            if(x < s.size()- 1)
+            {
+                t.clear();
+                t.push_back(s.at(x));
+                piping_str.push_back(t);
+                t.clear();
+            }
+        }
+    }
+    int r = 0;
+    for(r; r < piping_str.size(); r++)
+    {
+        piparr[r] = const_cast<char*> (piping_str.at(r).c_str());
+    }
+    
+}
+
 
 int main(int argc, char **argv)
 {
-    bool checks_pipes = false;
-            //boolean to hold if I have pipes in getline()
     outputs_G.clear();
     inputs_G.clear();
     int multi_redir_chk = 0;
@@ -367,120 +450,128 @@ int main(int argc, char **argv)
         if(checks_pipes)
         {
             //implement captureing files and commands
-            cout << "yay found the correct piipes" << endl;
+            cout << "checking pipes correctly" << endl;
+            push_piping_string(to_be_tokenized);
+            for(int i = 0; i < piping_str.size(); i++)
+            {
+                cout << "plz work " << piping_str.at(i) << " ";
+            }
+            
+            execute_piping();
         }
-        
-        
-        bool redir_checker = redir_exist(to_be_tokenized);
-        check_redirection(to_be_tokenized);
-        cout << "checkfasdfasdfboolean: " << add_out << endl;
-        cout << "checkfasdfasdfboolean: " << out << endl;
-        if(redir_checker)
+        else
         {
+            bool redir_checker = redir_exist(to_be_tokenized);
+            check_redirection(to_be_tokenized);
+            //~ cout << "checkfasdfasdfboolean: " << add_out << endl;
+            //~ cout << "checkfasdfasdfboolean: " << out << endl;
+            if(redir_checker)
+            {
+                for(int x = 0; x < inputs_G.size(); x++)
+                {
+                    string s = fix_file_name(inputs_G.at(x));
+                    inputs_G.at(x) = s;
+                    s.clear();
+                }
+                for(int x = 0; x < outputs_G.size(); x++)
+                {
+                    string s = fix_file_name(outputs_G.at(x));
+                    outputs_G.at(x) = s;
+                    s.clear();
+                }
+                cout << "outputssize: " << output_append_G.size() << endl;
+                for(int x = 0; x < output_append_G.size(); x++)
+                {
+                    string s = fix_file_name(output_append_G.at(x));
+                    output_append_G.at(x) = s;
+                }
+                
+            }
+            
+            cout << "after string: " << to_be_tokenized << endl;
+          
+            
             for(int x = 0; x < inputs_G.size(); x++)
             {
-                string s = fix_file_name(inputs_G.at(x));
-                inputs_G.at(x) = s;
-                s.clear();
+                cout << "first: " << inputs_G.at(x) << endl;
             }
-            for(int x = 0; x < outputs_G.size(); x++)
-            {
-                string s = fix_file_name(outputs_G.at(x));
-                outputs_G.at(x) = s;
-                s.clear();
-            }
-            cout << "outputssize: " << output_append_G.size() << endl;
             for(int x = 0; x < output_append_G.size(); x++)
             {
-                string s = fix_file_name(output_append_G.at(x));
-                output_append_G.at(x) = s;
+                cout << "output_append: " << output_append_G.at(x) << endl;
+            }
+            
+            
+            
+        
+            //cout << "after string: " << to_be_tokenized << endl;
+          
+            
+            
+            
+            for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+            {
+                prompt_holder[x] = to_be_tokenized.at(x);
+            }   
+            fixing_spacing_command(prompt_holder, check_redir);
+            int connect_check; //indicates which connection is in token
+            token = strtok(prompt_holder, "\t ");
+            //cout << "output token: " << token << endl;
+            exec_result = true;
+            while(token != NULL && exec_result && str_continue)
+            {
+                connect_check = check_connections(token);
+                check_exit(token);
+                if(connect_check == -1 && sequence < 1 && str_continue)
+                {
+                    //cout << "does this come out on top" << endl;
+                    check_exit(token);
+                    comd_arr[comd_arr_cnt] = token;
+                    comd_arr_cnt++;
+                    sequence++; //increment only once to see which is executable
+                }
+                else if(sequence > 0 && connect_check == -1 && str_continue)
+                {
+                    comd_arr[comd_arr_cnt] = token;
+                    comd_arr_cnt++;
+                }
+                else if(connect_check != -1)
+                {
+                    check_exit(token);
+                    comd_arr[comd_arr_cnt] = '\0' ;
+                    sequence = 0;
+                    comd_arr_cnt = 0;
+                    exec_result = execute(comd_arr[0], comd_arr, connect_check, redir_checker,final_file_name);
+                    if(exec_status == 0)
+                    {
+                        if(connect_check == 2)
+                        {
+                            str_continue = false;
+                            //cout << "str_continue: " << str_continue << endl;
+                        }
+                        if(connect_check == 1)
+                        {
+                            str_continue = false;
+                        }
+                    }
+                    if(exec_result == 1)
+                    {
+                        if(connect_check == 2)
+                        {
+                            str_continue = true;
+                        }
+                    }
+                    
+                        
+                }
+                token = strtok(NULL, "\t ");
+                if(connect_check == -1 && token == NULL && exec_result && str_continue)
+                {
+                //cout << "guess this executeisw ith this " << endl;
+                comd_arr[comd_arr_cnt] = '\0';
+                execute(comd_arr[0], comd_arr, connect_check, redir_checker,final_file_name);
+                }
             }
             
         }
-        
-        cout << "after string: " << to_be_tokenized << endl;
-      
-        
-        for(int x = 0; x < inputs_G.size(); x++)
-        {
-            cout << "first: " << inputs_G.at(x) << endl;
-        }
-        for(int x = 0; x < output_append_G.size(); x++)
-        {
-            cout << "output_append: " << output_append_G.at(x) << endl;
-        }
-        
-        
-        
-    
-        //cout << "after string: " << to_be_tokenized << endl;
-      
-        
-        
-        
-        for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
-        {
-            prompt_holder[x] = to_be_tokenized.at(x);
-        }   
-        fixing_spacing_command(prompt_holder, check_redir);
-        int connect_check; //indicates which connection is in token
-        token = strtok(prompt_holder, "\t ");
-        //cout << "output token: " << token << endl;
-        exec_result = true;
-        while(token != NULL && exec_result && str_continue)
-        {
-            connect_check = check_connections(token);
-            check_exit(token);
-            if(connect_check == -1 && sequence < 1 && str_continue)
-            {
-                //cout << "does this come out on top" << endl;
-                check_exit(token);
-                comd_arr[comd_arr_cnt] = token;
-                comd_arr_cnt++;
-                sequence++; //increment only once to see which is executable
-            }
-            else if(sequence > 0 && connect_check == -1 && str_continue)
-            {
-                comd_arr[comd_arr_cnt] = token;
-                comd_arr_cnt++;
-            }
-            else if(connect_check != -1)
-            {
-                check_exit(token);
-                comd_arr[comd_arr_cnt] = '\0' ;
-                sequence = 0;
-                comd_arr_cnt = 0;
-                exec_result = execute(comd_arr[0], comd_arr, connect_check, redir_checker,final_file_name);
-                if(exec_status == 0)
-                {
-                    if(connect_check == 2)
-                    {
-                        str_continue = false;
-                        //cout << "str_continue: " << str_continue << endl;
-                    }
-                    if(connect_check == 1)
-                    {
-                        str_continue = false;
-                    }
-                }
-                if(exec_result == 1)
-                {
-                    if(connect_check == 2)
-                    {
-                        str_continue = true;
-                    }
-                }
-                
-                    
-            }
-            token = strtok(NULL, "\t ");
-            if(connect_check == -1 && token == NULL && exec_result && str_continue)
-            {
-            //cout << "guess this executeisw ith this " << endl;
-            comd_arr[comd_arr_cnt] = '\0';
-            execute(comd_arr[0], comd_arr, connect_check, redir_checker,final_file_name);
-            }
-        }
-        
     }
 }
