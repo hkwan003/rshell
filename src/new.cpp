@@ -513,11 +513,17 @@ int main(int argc, char **argv)
             char *token;
             string first_half;
             string second_half;
+            char first[50000];
+            char second[50000];
             for(int x = 0; x < to_be_tokenized.size(); x++)
             {
                 if(to_be_tokenized.at(x) != '|')
                 {
-                    first_half.push_back(to_be_tokenized.at(x);
+                    first_half.push_back(to_be_tokenized.at(x));
+                }
+                if(to_be_tokenized.at(x) == '|')
+                {
+                    break;
                 }
             }
                 
@@ -525,25 +531,77 @@ int main(int argc, char **argv)
             {
                 if(to_be_tokenized.at(x) == '|')
                 {
+                    x++;
                     for(x; x < to_be_tokenized.size(); x++)
                     {
-                        second_half.push_back(to_be_tokenized.at(x);
+                        second_half.push_back(to_be_tokenized.at(x));
                     }
                 }
             }
-            for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+            for(unsigned int x = 0; x < first_half.size(); x++)
             {
-                prompt_holder[x] = to_be_tokenized.at(x);
+                first[x] = first_half.at(x);
             } 
             
-            token = strtok(prompt_holder, "\t ");
+            for(unsigned int x = 0; x < second_half.size(); x++)
+            {
+                second[x] = second_half.at(x);
+            }
+
+            token = strtok(first, "\t ");
             while(token != NULL)
             {
-                cout << token << endl;
+                cout<< "first: "  << token << endl;
                 argument1[array1] = token;
                 array1++;
                 token = strtok(NULL, "\t ");
             }
+            
+            argument1[array1 + 1] = '\0'; 
+
+            token = strtok(second, "\t ");
+            while(token != NULL)
+            {
+                cout << "Second: "  << token << endl;
+                argument2[array2] = token;
+                array2++;
+                token = strtok(NULL, "\t ");
+            }
+
+            argument2[array2 + 1] = '\0';
+
+
+            int fd[2];
+            pid_t pid1, pid2;
+
+            pipe(fd);
+            pid1 = fork();
+            if(pid1 < 0)
+            {
+                perror("first fork failed()");
+                exit(1);
+            }
+            if(pid1 == 0)
+            {
+                close(1);
+                dup(fd[1]);
+                close(fd[0]);
+                close(fd[1]);
+                exec_status = execvp(argument1[0], argument1);
+                if(exec_status == -1)
+                {
+                    perror("error with passed in argument");
+                    exit(1);
+                } 
+            }
+            else if(process_ID > 0)
+            {
+                if(waitpid(process_ID, &status, 0) == -1)
+                {
+                    perror("error with waidpid()");
+                }
+            }
+
                 
             //~ for(int x = 0; x < to_be_tokenized.size(); x++)
             //~ {
