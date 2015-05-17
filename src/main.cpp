@@ -162,7 +162,7 @@ int main(int argc, char **argv)
             else if(connect_check != -1)
             {
                 check_exit(token);
-                comd_arr[comd_arr_cnt] = '\0' ;
+                comd_arr[comd_arr_cnt] = 'NULL';
                 sequence = 0;
                 comd_arr_cnt = 0;
                 //cout << "does it output second iteration " << endl;
@@ -195,7 +195,7 @@ int main(int argc, char **argv)
             if(connect_check == -1 && token == NULL && exec_result && str_continue)
             {
             //cout << "guess this executeisw ith this " << endl;
-            comd_arr[comd_arr_cnt] = '\0';
+            comd_arr[comd_arr_cnt] = 'NULL';
             execute(comd_arr[0], comd_arr, connect_check);
         }
     }
