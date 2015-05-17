@@ -120,7 +120,7 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                 for(unsigned int x = 0; x < output_append_G.size(); x++)
                 {   
                     cout << "outupt this stuff: " << output_append_G.at(output_append_G.size() - 1 - x) << endl; 
-                    if(fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_APPEND | O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR) == -1))
+                    if((fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_APPEND | O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR)) == -1))
                     {
                         perror("open");
                     }
@@ -136,9 +136,9 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                 }
                 cout << "is this going in here" << endl;
                 int fd;
-                for(int x = 0; x < outputs_G.size(); x++)
+                for(unsigned int x = 0; x < outputs_G.size(); x++)
                 {
-                    if(fd = (open(outputs_G.at(outputs_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR) == -1))
+                    if((fd = (open(outputs_G.at(outputs_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR)) == -1))
                     {
                         perror("open");
                     }
@@ -153,7 +153,7 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                 }
                 cout << "does this mess it up" << endl;
                 int fd;
-                for(int x = 0; x < inputs_G.size(); x++)
+                for(unsigned int x = 0; x < inputs_G.size(); x++)
                 {
                     if((fd = open(inputs_G.at(inputs_G.size() -1 - x).c_str(), O_RDONLY)) == -1)
                     {
@@ -173,7 +173,7 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
         }
         else 
         {
-            cout << "is this going in there" << endl;
+            //cout << "is this going in there" << endl;
             exec_status = (execvp(command, command_list));
             if(exec_status == -1)
             {
@@ -214,18 +214,19 @@ string input_hold;
 string out_hold;
 string add_hold;
 bool files_descriptor_change = false;       //true if there is need to change file descriptor
-int return_file_descrption;     //file descriptor of what file descriptor to change it to
+int return_file_descrption = 0;     //file descriptor of what file descriptor to change it to
 void check_redirection(string &s)
 {
+     cout << "output within redirection" << endl;
     input_hold.clear();
     out_hold.clear();
     add_hold.clear();
-    for(int x = 0; x < s.size(); x++)
+    for(unsigned int x = 0; x < s.size(); x++)
     {
         if(s.at(x) == '<' && x < s.size())
         {
             s.at(x) = ' ';
-            int g = x;
+            unsigned int g = x;
             if(g++ < s.size())
             {
                 for(; g < s.size() && s.at(g) != '>'; g++)
@@ -243,7 +244,7 @@ void check_redirection(string &s)
                 s.at(x) = ' ';
                 s.at(x + 1) = ' ';
                 x+=2;
-                int i = x;
+                unsigned int i = x;
                 i++;
                 cout << "s.at(i): " << s.at(i) << endl;
                 for(; i < s.size() && s.at(i) != '>'; i++)
@@ -264,7 +265,7 @@ void check_redirection(string &s)
                 cout << "strings: " << s << endl;
                 cout << "why are u mesing with me" << endl;
                 s.at(x) = ' ';
-                int i = x;
+                unsigned int i = x;
                 i++;
                 for(; i < s.size() && s.at(i) != '>'; i++)
                 {
@@ -279,11 +280,12 @@ void check_redirection(string &s)
         }
         if(s.at(x) == '0' || s.at(x) == '1' || s.at(x) == '2')
         {
+            cout << "please entier inside file descriptor" << endl;
             files_descriptor_change = true;
             if(s.at(x) == '<' && x < s.size())
             {
                 s.at(x) = ' ';
-                int g = x;
+                unsigned int g = x;
                 if(g++ < s.size())
                 {
                     for(; g < s.size() && s.at(g) != '>'; g++)
@@ -296,15 +298,39 @@ void check_redirection(string &s)
             }
             if(s.at(x) == '>')
             {
+                
                 if(s.at(x - 1) == '0')
                 {
-                    
+                    return_file_descrption = 0;         //0 equals stdin trunc
+                }
+                if(s.at(x - 1) == '1')
+                {
+                    return_file_descrption = 1;         //1 equals stdout trunc
+                }
+                if(s.at(x - 1) == '2')
+                {
+                    return_file_descrption = 2;         //2 equals stderr trunc
+                }
+                cout << "return file descriptroin: " << return_file_descrption << endl;
                 if(s.at(x + 1) == '>' && x +1 < s.size())
                 {
+                    if(s.at(x - 1) == '0')
+                    {
+                        return_file_descrption = 3;      //3 equals stdin append   
+                    }
+                    if(s.at(x - 1) == '1')
+                    {
+                        return_file_descrption = 4;     //4 equals stdout append 
+                    }
+                    if(s.at(x - 1) == '2')
+                    {
+                        return_file_descrption = 5;     //5 equals stderr append 
+                    }
+                     cout << "return file descriptroin: " << return_file_descrption << endl;
                     s.at(x) = ' ';
                     s.at(x + 1) = ' ';
                     x+=2;
-                    int i = x;
+                    unsigned int i = x;
                     i++;
                     cout << "s.at(i): " << s.at(i) << endl;
                     for(; i < s.size() && s.at(i) != '>'; i++)
@@ -321,11 +347,12 @@ void check_redirection(string &s)
                 }
                 else if(s.at(x + 1) != '>')
                 {
+                    
                     cout << "string shows: " << s.at(x + 1) << endl;
                     cout << "strings: " << s << endl;
                     cout << "why are u mesing with me" << endl;
                     s.at(x) = ' ';
-                    int i = x;
+                    unsigned int i = x;
                     i++;
                     for(; i < s.size() && s.at(i) != '>'; i++)
                     {
@@ -394,7 +421,7 @@ string fix_file_name(string s)
 
 bool redir_exist(string s)
 {
-    for(int x = 0; x < s.size(); x++)
+    for(unsigned int x = 0; x < s.size(); x++)
     {
         if(s.at(x) == '>' || s.at(x) == '<')
         {
@@ -403,10 +430,10 @@ bool redir_exist(string s)
     }
 }
 
-int i;
+unsigned int i;
 bool chk_pipes(string s)
 {
-    for(int x = 0; x < s.size(); x++)
+    for(unsigned int x = 0; x < s.size(); x++)
     {
         //cout << "is this actually checking rn" << endl;
         if(s.at(x) == '|')
@@ -424,7 +451,7 @@ bool chk_pipes(string s)
 void push_piping_string(string s)
 {
     string t;
-    for(int x = 0; x < s.size(); x++)
+    for(unsigned int x = 0; x < s.size(); x++)
     {
         //cout << "X: " << x << " " << s.at(x) <<endl;
         
@@ -446,23 +473,23 @@ void push_piping_string(string s)
         }
     }
     
-    for(int x = 0; x < piping_str.size(); x++)
+    for(unsigned int x = 0; x < piping_str.size(); x++)
     {
         string s = piping_str.at(x);
         
     }
-    int r = 0;
-    for(r; r < piping_str.size(); r++)
-    {
-        piparr[r] = const_cast<char*> (piping_str.at(r).c_str());
-    }
+    //unsigned int r = 0;
+    //~ for(r; r < piping_str.size(); r++)
+    //~ {
+        //~ piparr[r] = const_cast<char*> (piping_str.at(r).c_str());
+    //~ }
     
 }
 void fix_pipe_argument(string& s)
 {
     bool word_start = false;
     string fixed;
-    for(int x = 0; x < s.size(); x++)
+    for(unsigned int x = 0; x < s.size(); x++)
     {
         //cout << "words: " << s.at(x) << endl;
         if(s.at(x) == ' ' && word_start == false)
@@ -493,7 +520,7 @@ void fix_pipe_argument(string& s)
     }
     s.clear();
     //cout << "output s with in function: " << fixed << endl;
-    for(int x = 0; x < fixed.size(); x++)
+    for(unsigned int x = 0; x < fixed.size(); x++)
     {
         s.push_back(fixed.at(x));
     }
@@ -552,7 +579,7 @@ int main(int argc, char **argv)
         //gets user input
         checks_pipes = chk_pipes(to_be_tokenized);
         bool three_bracket = false;
-        for(int x = 0; x < to_be_tokenized.size(); x++)
+        for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
         {
             if(to_be_tokenized.at(x) == '<' && to_be_tokenized.at(x + 1) == '<' && to_be_tokenized.at(x + 2) == '<')
             {
@@ -587,7 +614,7 @@ int main(int argc, char **argv)
              //clearing arrays all arrays
             if(three_bracket)
             {
-                for(int x = 0; x < to_be_tokenized.size(); x++)
+                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
                 {
                     if(to_be_tokenized.at(x) != '<')
                     {
@@ -599,15 +626,14 @@ int main(int argc, char **argv)
                     }
                 }
                 first_half+= "echo ";
-                bool first_paran = true;
-                for(int x = 0; x < to_be_tokenized.size(); x++)
+                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
                 {
                     if(to_be_tokenized.at(x) == '<')
                     {
                         if(x + 3 < to_be_tokenized.size())
                         {
                             x+= 3;
-                            for(x; x < to_be_tokenized.size(); x++)
+                            for(; x < to_be_tokenized.size(); x++)
                             {
                                 if(to_be_tokenized.at(x) == '"')
                                 {
@@ -700,9 +726,7 @@ int main(int argc, char **argv)
         
             else
             {
-                
-        
-                for(int x = 0; x < to_be_tokenized.size(); x++)
+                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
                 {
                     if(to_be_tokenized.at(x) != '|')
                     {
@@ -714,12 +738,12 @@ int main(int argc, char **argv)
                     }
                 }
                     
-                for(int x = 0; x < to_be_tokenized.size(); x++)
+                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
                 {
                     if(to_be_tokenized.at(x) == '|')
                     {
                         x++;
-                        for(x; x < to_be_tokenized.size(); x++)
+                        for(; x < to_be_tokenized.size(); x++)
                         {
                             second_half.push_back(to_be_tokenized.at(x));
                         }
@@ -816,20 +840,20 @@ int main(int argc, char **argv)
             //~ cout << "checkfasdfasdfboolean: " << out << endl;
             if(redir_checker)
             {
-                for(int x = 0; x < inputs_G.size(); x++)
+                for(unsigned int x = 0; x < inputs_G.size(); x++)
                 {
                     string s = fix_file_name(inputs_G.at(x));
                     inputs_G.at(x) = s;
                     s.clear();
                 }
-                for(int x = 0; x < outputs_G.size(); x++)
+                for(unsigned int x = 0; x < outputs_G.size(); x++)
                 {
                     string s = fix_file_name(outputs_G.at(x));
                     outputs_G.at(x) = s;
                     s.clear();
                 }
                 //cout << "outputssize: " << output_append_G.size() << endl;
-                for(int x = 0; x < output_append_G.size(); x++)
+                for(unsigned int x = 0; x < output_append_G.size(); x++)
                 {
                     string s = fix_file_name(output_append_G.at(x));
                     output_append_G.at(x) = s;
@@ -837,16 +861,16 @@ int main(int argc, char **argv)
                 
             }
             
-            cout << "after string: " << to_be_tokenized << endl;
+            //cout << "after string: " << to_be_tokenized << endl;
           
             
             for(int x = 0; x < inputs_G.size(); x++)
             {
-                cout << "first: " << inputs_G.at(x) << endl;
+                //cout << "first: " << inputs_G.at(x) << endl;
             }
             for(int x = 0; x < output_append_G.size(); x++)
             {
-                cout << "output_append: " << output_append_G.at(x) << endl;
+                //cout << "output_append: " << output_append_G.at(x) << endl;
             }
         
           
