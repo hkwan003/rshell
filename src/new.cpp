@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
+
 using namespace std;
 
 
@@ -348,7 +349,7 @@ bool chk_pipes(string s)
         if(s.at(x) == '|')
         {
             i++;
-            cout << "output I: " << i << endl;
+            //cout << "output I: " << i << endl;
         }
     }
     if(i > 1)
@@ -370,7 +371,7 @@ void push_piping_string(string s)
         }
         if(s.at(x) == '|' || x == s.size() - 1)
         {
-            cout << "does it actually push back" << endl;
+            //cout << "does it actually push back" << endl;
             piping_str.push_back(t);
             if(x < s.size()- 1)
             {
@@ -487,25 +488,24 @@ int main(int argc, char **argv)
         getline(cin, to_be_tokenized);
         //gets user input
         checks_pipes = chk_pipes(to_be_tokenized);
-        cout << "checking pipes: " << checks_pipes << endl;
+        bool three_bracket = false;
+        for(int x = 0; x < to_be_tokenized.size(); x++)
+        {
+            if(to_be_tokenized.at(x) == '<' && to_be_tokenized.at(x + 1) == '<' && to_be_tokenized.at(x + 2) == '<')
+            {
+                checks_pipes = true;
+                three_bracket = true;
+            }
+        }
+        //cout << "checking pipes: " << checks_pipes << endl;
         if(checks_pipes)
         {
             string tmp_str;         //holds 
             bool words_begin = false;    //when it senses words, it will become true
-            //implement captureing files and commands
-            //~ cout << "checking pipes correctly" << endl;
-            //~ push_piping_string(to_be_tokenized);
-            //~ cout << "output size of vector: " << piping_str.size() << endl;
-            //~ for(int x = 0; x < 3; x++)
-            //~ {
-                //~ cout << "output contents: " << piping_str.at(x) << " " << endl;
-            //~ }
-            //~ execute_piping();
-            cout << "old prompt: " << to_be_tokenized << endl;
             fix_pipe_argument(to_be_tokenized);
             int array1 = 0;      //counter for array argument1
             int array2 = 0;      //counter for array argument2
-            cout << "new prompt: " << to_be_tokenized << endl;
+            //cout << "new prompt: " << to_be_tokenized << endl;
             int tmp_pos = 0;        //checks if there is more than one space
             char *argument1[50000];
             char *argument2[50000];
@@ -514,166 +514,237 @@ int main(int argc, char **argv)
             string second_half;
             char first[50000];
             char second[50000];
-            for(int x = 0; x < to_be_tokenized.size(); x++)
+            for(int x = 0; x < 50000; x++)
             {
-                if(to_be_tokenized.at(x) != '|')
-                {
-                    first_half.push_back(to_be_tokenized.at(x));
-                }
-                if(to_be_tokenized.at(x) == '|')
-                {
-                    break;
-                }
+                argument1[x] = '\0';
+                argument2[x] = '\0';
+                first[x] = '\0';
+                second[x] = '\0';
             }
-                
-            for(int x = 0; x < to_be_tokenized.size(); x++)
+             //clearing arrays all arrays
+            if(three_bracket)
             {
-                if(to_be_tokenized.at(x) == '|')
+                for(int x = 0; x < to_be_tokenized.size(); x++)
                 {
-                    x++;
-                    for(x; x < to_be_tokenized.size(); x++)
+                    if(to_be_tokenized.at(x) != '<')
                     {
                         second_half.push_back(to_be_tokenized.at(x));
                     }
+                    if(to_be_tokenized.at(x) == '<')
+                    {
+                        break;
+                    }
                 }
-            }
-            for(unsigned int x = 0; x < first_half.size(); x++)
-            {
-                first[x] = first_half.at(x);
-            } 
-            
-            for(unsigned int x = 0; x < second_half.size(); x++)
-            {
-                second[x] = second_half.at(x);
-            }
+                first_half+= "echo ";
+                bool first_paran = true;
+                for(int x = 0; x < to_be_tokenized.size(); x++)
+                {
+                    if(to_be_tokenized.at(x) == '<')
+                    {
+                        if(x + 3 < to_be_tokenized.size())
+                        {
+                            x+= 3;
+                            for(x; x < to_be_tokenized.size(); x++)
+                            {
+                                if(to_be_tokenized.at(x) == '"')
+                                {
+                                    to_be_tokenized.at(x) = ' ';
+                                }
+                                first_half.push_back(to_be_tokenized.at(x));
+                            }
+                        }
+                    }
+                }
+                for(unsigned int x = 0; x < first_half.size(); x++)
+                {
+                    first[x] = first_half.at(x);
+                } 
+                
+                for(unsigned int x = 0; x < second_half.size(); x++)
+                {
+                    second[x] = second_half.at(x);
+                }
+                      token = strtok(first, "\t ");
+                while(token != NULL)
+                {
+                    //cout<< "first: "  << token << endl;
+                    argument1[array1] = token;
+                    array1++;
+                    token = strtok(NULL, "\t ");
+                }
+                
+                argument1[array1 + 1] = '\0'; 
 
-            token = strtok(first, "\t ");
-            while(token != NULL)
-            {
-                cout<< "first: "  << token << endl;
-                argument1[array1] = token;
-                array1++;
-                token = strtok(NULL, "\t ");
-            }
-            
-            argument1[array1 + 1] = '\0'; 
+                token = strtok(second, "\t ");
+                while(token != NULL)
+                {
+                    //cout << "Second: "  << token << endl;
+                    argument2[array2] = token;
+                    array2++;
+                    token = strtok(NULL, "\t ");
+                }
 
-            token = strtok(second, "\t ");
-            while(token != NULL)
-            {
-                cout << "Second: "  << token << endl;
-                argument2[array2] = token;
-                array2++;
-                token = strtok(NULL, "\t ");
-            }
+                argument2[array2 + 1] = '\0';
+                int fd[2];
+                pid_t pid1, pid2;
 
-            argument2[array2 + 1] = '\0';
-
-
-            int fd[2];
-            pid_t pid1, pid2;
-
-            pipe(fd);
-            pid1 = fork();
-            if(pid1 < 0)
-            {
-                perror("first fork failed()");
-                exit(1);
-            }
-            if(pid1 == 0)
-            {
-                close(1);
-                dup(fd[1]);
+                pipe(fd);
+                pid1 = fork();
+                if(pid1 < 0)
+                {
+                    perror("first fork failed()");
+                    exit(1);
+                }
+                if(pid1 == 0)
+                {
+                    close(1);
+                    dup(fd[1]);
+                    close(fd[0]);
+                    close(fd[1]);
+                    exec_status = execvp(argument1[0], argument1);
+                    if(exec_status == -1)
+                    {
+                        perror("error with passed in argument");
+                        exit(1);
+                    } 
+                }
+                
+                pid2 = fork();
+                if(pid2 < 0)
+                {
+                    perror("second fork() failed");
+                    exit(1);
+                }
+                if(pid2 == 0)
+                {
+                    close(0);
+                    dup(fd[0]);
+                    close(fd[0]);
+                    close(fd[1]);
+                    exec_status = execvp(argument2[0], argument2);
+                    if(exec_status == -1)
+                    {
+                        perror("error with passed in argument");
+                        exit(1);
+                    } 
+                }
                 close(fd[0]);
                 close(fd[1]);
-                exec_status = execvp(argument1[0], argument1);
-                if(exec_status == -1)
-                {
-                    perror("error with passed in argument");
-                    exit(1);
-                } 
-            }
-            else if(process_ID > 0)
-            {
-                if(waitpid(process_ID, &status, 0) == -1)
-                {
-                    perror("error with waidpid()");
-                }
-            }
-
+                waitpid(pid1, NULL, 0);
+                waitpid(pid1, NULL, 0);
                 
-            //~ for(int x = 0; x < to_be_tokenized.size(); x++)
-            //~ {
-                //~ if(to_be_tokenized.at(x) != ' ' && to_be_tokenized.at(x) != '|')
-                //~ {
-                    //~ tmp_str.push_back(to_be_tokenized.at(x));
-                    //~ cout << "temp string: " << tmp_str << endl;
-                    //~ words_begin = true;
-                //~ }
-                //~ if(to_be_tokenized.at(x) == ' ' && words_begin)
-                //~ {
-                    //~ cout << "output first string: " << tmp_str << " size: " << tmp_str.size() << " index: " << array1 <<endl;
-                    //~ argument1[array1] = const_cast<char*> (tmp_str.c_str());
-                    //~ //cout << "first argument: " << argument1[array1] << endl;
-                    //~ array1++;
-                    //~ tmp_str.clear();
-                    //~ words_begin = false;
-                    //~ if(x + 1 < to_be_tokenized.size())
-                    //~ {
-                        //~ if(to_be_tokenized.at(x + 1) == '|')
-                        //~ {
-//~ 
-                            //~ cout << "pipe found " << endl;
-                        //~ }
-                    //~ }
-                //~ }
-        //~ 
-                //~ if(to_be_tokenized.at(x) == '|')
-                //~ {
-                    //~ cout << "first argument: " << argument1[0] << endl;
-                    //~ argument1[array1 + 1] = '\0';
-                    //~ tmp_str.clear();
-                    //~ cout << "string size: " << to_be_tokenized.size() << endl;
-                    //~ tmp_pos = 0;
-                    //~ for(x; x < to_be_tokenized.size(); x++)
-                    //~ {
-                        //~ if(to_be_tokenized.at(x) != ' ' && to_be_tokenized.at(x) != '|')
-                        //~ {
-                            //~ tmp_str.push_back(to_be_tokenized.at(x));
-                            //~ words_begin = true;
-                        //~ }
-                        //~ if(to_be_tokenized.at(x) == ' ' && words_begin)
-                        //~ {
-                            //~ cout << "output second string: " << tmp_str << " size: " << tmp_str.size() << " index: " << array2 <<endl;
-                            //~ cout << "does it fail after this" << endl;
-                            //~ argument2[array2] = const_cast<char*> (tmp_str.c_str());
-                            //~ cout << "inside array: " << argument2[array2] << endl;
-                            //~ array2++;
-                            //~ tmp_str.clear();
-                            //~ words_begin = false;
-                        //~ }
-                        //~ if(x <= to_be_tokenized.size())
-                        //~ {
-                            //~ cout << "output second string: " << tmp_str << " size: " << tmp_str.size() << " index: " << array2 <<endl;
-                            //~ argument2[array2] = const_cast<char*> (tmp_str.c_str());
-                            //~ cout << "inside array: " << argument2[array2] << endl;
-                        //~ }
-                    //~ }
-                    //~ cout << "inside argument1: " << argument1[0] << endl;
-                    //~ argument2[array2+ 2] = '\0';
-                //~ }
-               //~ 
-            //~ }
-          //~ 
-            //~ execute_piping();
-        }
-          
-                
-            
-            
-            
-            
+            }
         
+            else
+            {
+                
+        
+                for(int x = 0; x < to_be_tokenized.size(); x++)
+                {
+                    if(to_be_tokenized.at(x) != '|')
+                    {
+                        first_half.push_back(to_be_tokenized.at(x));
+                    }
+                    if(to_be_tokenized.at(x) == '|')
+                    {
+                        break;
+                    }
+                }
+                    
+                for(int x = 0; x < to_be_tokenized.size(); x++)
+                {
+                    if(to_be_tokenized.at(x) == '|')
+                    {
+                        x++;
+                        for(x; x < to_be_tokenized.size(); x++)
+                        {
+                            second_half.push_back(to_be_tokenized.at(x));
+                        }
+                    }
+                }
+                for(unsigned int x = 0; x < first_half.size(); x++)
+                {
+                    first[x] = first_half.at(x);
+                } 
+                
+                for(unsigned int x = 0; x < second_half.size(); x++)
+                {
+                    second[x] = second_half.at(x);
+                }
+
+                token = strtok(first, "\t ");
+                while(token != NULL)
+                {
+                    //cout<< "first: "  << token << endl;
+                    argument1[array1] = token;
+                    array1++;
+                    token = strtok(NULL, "\t ");
+                }
+                
+                argument1[array1 + 1] = '\0'; 
+
+                token = strtok(second, "\t ");
+                while(token != NULL)
+                {
+                    //cout << "Second: "  << token << endl;
+                    argument2[array2] = token;
+                    array2++;
+                    token = strtok(NULL, "\t ");
+                }
+
+                argument2[array2 + 1] = '\0';
+
+
+                int fd[2];
+                pid_t pid1, pid2;
+
+                pipe(fd);
+                pid1 = fork();
+                if(pid1 < 0)
+                {
+                    perror("first fork failed()");
+                    exit(1);
+                }
+                if(pid1 == 0)
+                {
+                    close(1);
+                    dup(fd[1]);
+                    close(fd[0]);
+                    close(fd[1]);
+                    exec_status = execvp(argument1[0], argument1);
+                    if(exec_status == -1)
+                    {
+                        perror("error with passed in argument");
+                        exit(1);
+                    } 
+                }
+                
+                pid2 = fork();
+                if(pid2 < 0)
+                {
+                    perror("second fork() failed");
+                    exit(1);
+                }
+                if(pid2 == 0)
+                {
+                    close(0);
+                    dup(fd[0]);
+                    close(fd[0]);
+                    close(fd[1]);
+                    exec_status = execvp(argument2[0], argument2);
+                    if(exec_status == -1)
+                    {
+                        perror("error with passed in argument");
+                        exit(1);
+                    } 
+                }
+                close(fd[0]);
+                close(fd[1]);
+                waitpid(pid1, NULL, 0);
+                waitpid(pid1, NULL, 0);
+            }
+            
+        }
         else
         {
             bool redir_checker = redir_exist(to_be_tokenized);
@@ -694,7 +765,7 @@ int main(int argc, char **argv)
                     outputs_G.at(x) = s;
                     s.clear();
                 }
-                cout << "outputssize: " << output_append_G.size() << endl;
+                //cout << "outputssize: " << output_append_G.size() << endl;
                 for(int x = 0; x < output_append_G.size(); x++)
                 {
                     string s = fix_file_name(output_append_G.at(x));
