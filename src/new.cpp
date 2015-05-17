@@ -17,6 +17,8 @@
 
 
 using namespace std;
+
+
 char* host = (char*)malloc(500);
 char *fin_prompt = (char*)malloc(50000);
 vector<string> inputs_G;
@@ -73,6 +75,13 @@ void fixing_spacing_command(char *org_prompt, int check_redir)
             fin_prompt[++i] = ' ';
             ++x;
         } 
+        else if(org_prompt[x] == connect[3])
+        {
+            fin_prompt[i] = ' ';
+            fin_prompt[++i] = '|';
+            fin_prompt[++i] = ' ';
+            ++x;
+        }
         else
         {
             fin_prompt[i] = org_prompt[x];
@@ -273,50 +282,36 @@ void check_redirection(string &s)
 
 void execute_piping()
 {
-    int x = 0;
-    int fd[2];
-    pid_t pid1, pid2;
-    char *argv[100];
-    pipe(fd);
+    int status;
     
-    pid1 = fork();
-    if(pid1 < 0)
+    int process_ID = fork();
+    cout << "process: " << process_ID << endl;
+    if(process_ID <= -1)
     {
-        perror("first forking failed");
+        perror("Error occured during forking()");
         exit(1);
     }
-    if(pid1 == 0)
+    if(process_ID == 0) //child process
     {
-        close(1);
-        dup(fd[1]);
-        close(fd[0]);
-        close(fd[1]);
-        execvp(piparr[0],piparr);
-        perror("first execvp failed");
-        exit(1);
+        
+        //cout << "arguments1: " << argument1[0] << endl;
+        //exec_status = (execvp(argument1[0], argument1));
+        cout << "output exec status: " << exec_status << endl;
+        if(exec_status == -1)
+        {
+            perror("error with passed in argument list");
+            exit(1);
+        }
+    }
+    if(process_ID > 0) //parent process
+    {
+        if(waitpid(process_ID, &status,0) == -1)
+        {
+            perror("error with waitpid()");
+        }
     }
     
-    pid2 = fork();
-    if(pid2 < 0)
-    {
-        perror("second fork failed");
-        exit(1);
-    }
-    if(pid2 == 0)
-    {
-        close(1);
-        dup(fd[1]);
-        close(fd[0]);
-        close(fd[1]);
-        execvp(piparr[2],piparr);
-        perror("first execvp failed");
-        exit(1);
-    }
-    close(fd[0]);
-    close(fd[1]);
-    waitpid(pid1, NULL,0);
-    waitpid(pid2, NULL,0);
-    cout << "finished piping only one pipe" << endl;
+    //execvp(argument1[0], argument1);
     
 }
 string final_file_name;
@@ -350,16 +345,17 @@ bool chk_pipes(string s)
 {
     for(int x = 0; x < s.size(); x++)
     {
+        //cout << "is this actually checking rn" << endl;
         if(s.at(x) == '|')
         {
             i++;
+            cout << "output I: " << i << endl;
         }
     }
     if(i > 1)
     {
         return false;
     }
-    return true;
 }
 
 void push_piping_string(string s)
@@ -367,7 +363,7 @@ void push_piping_string(string s)
     string t;
     for(int x = 0; x < s.size(); x++)
     {
-        cout << "X: " << x << " " << s.at(x) <<endl;
+        //cout << "X: " << x << " " << s.at(x) <<endl;
         
         if(s.at(x) != '|' && x < s.size())
         {
@@ -376,15 +372,21 @@ void push_piping_string(string s)
         if(s.at(x) == '|' || x == s.size() - 1)
         {
             cout << "does it actually push back" << endl;
-            piping_str.push_back(" ");
+            piping_str.push_back(t);
             if(x < s.size()- 1)
             {
                 t.clear();
-                t.push_back(s.at(x));
+                t.push_back(' ');
                 piping_str.push_back(t);
                 t.clear();
             }
         }
+    }
+    
+    for(int x = 0; x < piping_str.size(); x++)
+    {
+        string s = piping_str.at(x);
+        
     }
     int r = 0;
     for(r; r < piping_str.size(); r++)
@@ -393,7 +395,46 @@ void push_piping_string(string s)
     }
     
 }
-
+void fix_pipe_argument(string& s)
+{
+    bool word_start = false;
+    string fixed;
+    for(int x = 0; x < s.size(); x++)
+    {
+        //cout << "words: " << s.at(x) << endl;
+        if(s.at(x) == ' ' && word_start == false)
+        {
+            //cout << "1" << endl;
+            continue;
+        }
+        if(s.at(x) == ' ' && word_start == true)
+        {
+            //cout << "2" << endl;
+            fixed.push_back(s.at(x));
+        }
+        if(s.at(x) != ' ' && word_start == true)
+        {
+            fixed.push_back(s.at(x));
+        }
+        if(s.at(x) != ' ' && word_start == false)
+        {
+            //cout << "3" << endl;
+            fixed.push_back(s.at(x));
+            word_start = true;
+        }
+        if(s.at(x) == '|')
+        {
+            //cout << "4" << endl;
+            word_start = false;
+        }
+    }
+    s.clear();
+    //cout << "output s with in function: " << fixed << endl;
+    for(int x = 0; x < fixed.size(); x++)
+    {
+        s.push_back(fixed.at(x));
+    }
+}
 
 int main(int argc, char **argv)
 {
@@ -425,7 +466,7 @@ int main(int argc, char **argv)
     {
         i = 0;
             //reset counter for increment for pipe checker
-        checks_pipes = false;
+        checks_pipes = true;
         in = false;
         out = false;
         add_out = false;
@@ -447,18 +488,135 @@ int main(int argc, char **argv)
         getline(cin, to_be_tokenized);
         //gets user input
         checks_pipes = chk_pipes(to_be_tokenized);
+        cout << "checking pipes: " << checks_pipes << endl;
         if(checks_pipes)
         {
+            string tmp_str;         //holds 
+            bool words_begin = false;    //when it senses words, it will become true
             //implement captureing files and commands
-            cout << "checking pipes correctly" << endl;
-            push_piping_string(to_be_tokenized);
-            for(int i = 0; i < piping_str.size(); i++)
+            //~ cout << "checking pipes correctly" << endl;
+            //~ push_piping_string(to_be_tokenized);
+            //~ cout << "output size of vector: " << piping_str.size() << endl;
+            //~ for(int x = 0; x < 3; x++)
+            //~ {
+                //~ cout << "output contents: " << piping_str.at(x) << " " << endl;
+            //~ }
+            //~ execute_piping();
+            cout << "old prompt: " << to_be_tokenized << endl;
+            fix_pipe_argument(to_be_tokenized);
+            int array1 = 0;      //counter for array argument1
+            int array2 = 0;      //counter for array argument2
+            cout << "new prompt: " << to_be_tokenized << endl;
+            int tmp_pos = 0;        //checks if there is more than one space
+            char *argument1[50000];
+            char *argument2[50000];
+            char *token;
+            string first_half;
+            string second_half;
+            for(int x = 0; x < to_be_tokenized.size(); x++)
             {
-                cout << "plz work " << piping_str.at(i) << " ";
+                if(to_be_tokenized.at(x) != '|')
+                {
+                    first_half.push_back(to_be_tokenized.at(x);
+                }
             }
+                
+            for(int x = 0; x < to_be_tokenized.size(); x++)
+            {
+                if(to_be_tokenized.at(x) == '|')
+                {
+                    for(x; x < to_be_tokenized.size(); x++)
+                    {
+                        second_half.push_back(to_be_tokenized.at(x);
+                    }
+                }
+            }
+            for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+            {
+                prompt_holder[x] = to_be_tokenized.at(x);
+            } 
             
-            execute_piping();
+            token = strtok(prompt_holder, "\t ");
+            while(token != NULL)
+            {
+                cout << token << endl;
+                argument1[array1] = token;
+                array1++;
+                token = strtok(NULL, "\t ");
+            }
+                
+            //~ for(int x = 0; x < to_be_tokenized.size(); x++)
+            //~ {
+                //~ if(to_be_tokenized.at(x) != ' ' && to_be_tokenized.at(x) != '|')
+                //~ {
+                    //~ tmp_str.push_back(to_be_tokenized.at(x));
+                    //~ cout << "temp string: " << tmp_str << endl;
+                    //~ words_begin = true;
+                //~ }
+                //~ if(to_be_tokenized.at(x) == ' ' && words_begin)
+                //~ {
+                    //~ cout << "output first string: " << tmp_str << " size: " << tmp_str.size() << " index: " << array1 <<endl;
+                    //~ argument1[array1] = const_cast<char*> (tmp_str.c_str());
+                    //~ //cout << "first argument: " << argument1[array1] << endl;
+                    //~ array1++;
+                    //~ tmp_str.clear();
+                    //~ words_begin = false;
+                    //~ if(x + 1 < to_be_tokenized.size())
+                    //~ {
+                        //~ if(to_be_tokenized.at(x + 1) == '|')
+                        //~ {
+//~ 
+                            //~ cout << "pipe found " << endl;
+                        //~ }
+                    //~ }
+                //~ }
+        //~ 
+                //~ if(to_be_tokenized.at(x) == '|')
+                //~ {
+                    //~ cout << "first argument: " << argument1[0] << endl;
+                    //~ argument1[array1 + 1] = '\0';
+                    //~ tmp_str.clear();
+                    //~ cout << "string size: " << to_be_tokenized.size() << endl;
+                    //~ tmp_pos = 0;
+                    //~ for(x; x < to_be_tokenized.size(); x++)
+                    //~ {
+                        //~ if(to_be_tokenized.at(x) != ' ' && to_be_tokenized.at(x) != '|')
+                        //~ {
+                            //~ tmp_str.push_back(to_be_tokenized.at(x));
+                            //~ words_begin = true;
+                        //~ }
+                        //~ if(to_be_tokenized.at(x) == ' ' && words_begin)
+                        //~ {
+                            //~ cout << "output second string: " << tmp_str << " size: " << tmp_str.size() << " index: " << array2 <<endl;
+                            //~ cout << "does it fail after this" << endl;
+                            //~ argument2[array2] = const_cast<char*> (tmp_str.c_str());
+                            //~ cout << "inside array: " << argument2[array2] << endl;
+                            //~ array2++;
+                            //~ tmp_str.clear();
+                            //~ words_begin = false;
+                        //~ }
+                        //~ if(x <= to_be_tokenized.size())
+                        //~ {
+                            //~ cout << "output second string: " << tmp_str << " size: " << tmp_str.size() << " index: " << array2 <<endl;
+                            //~ argument2[array2] = const_cast<char*> (tmp_str.c_str());
+                            //~ cout << "inside array: " << argument2[array2] << endl;
+                        //~ }
+                    //~ }
+                    //~ cout << "inside argument1: " << argument1[0] << endl;
+                    //~ argument2[array2+ 2] = '\0';
+                //~ }
+               //~ 
+            //~ }
+          //~ 
+            //~ execute_piping();
         }
+          
+                
+            
+            
+            
+            
+        
         else
         {
             bool redir_checker = redir_exist(to_be_tokenized);
@@ -499,11 +657,7 @@ int main(int argc, char **argv)
             {
                 cout << "output_append: " << output_append_G.at(x) << endl;
             }
-            
-            
-            
         
-            //cout << "after string: " << to_be_tokenized << endl;
           
             
             
@@ -519,6 +673,7 @@ int main(int argc, char **argv)
             exec_result = true;
             while(token != NULL && exec_result && str_continue)
             {
+                cout << "tokens: " << *token << endl;
                 connect_check = check_connections(token);
                 check_exit(token);
                 if(connect_check == -1 && sequence < 1 && str_continue)
