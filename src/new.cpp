@@ -213,6 +213,8 @@ void check_exit(char *str)
 string input_hold;
 string out_hold;
 string add_hold;
+bool files_descriptor_change = false;       //true if there is need to change file descriptor
+int return_file_descrption;     //file descriptor of what file descriptor to change it to
 void check_redirection(string &s)
 {
     input_hold.clear();
@@ -238,13 +240,11 @@ void check_redirection(string &s)
         {
             if(s.at(x + 1) == '>' && x +1 < s.size())
             {
-                cout << "is thsi workign t" << endl;
                 s.at(x) = ' ';
                 s.at(x + 1) = ' ';
                 x+=2;
                 int i = x;
                 i++;
-                cout << "is this shit working" << endl;
                 cout << "s.at(i): " << s.at(i) << endl;
                 for(; i < s.size() && s.at(i) != '>'; i++)
                 {
@@ -277,6 +277,69 @@ void check_redirection(string &s)
                 cout << "check boolean: " << out << endl;
             }
         }
+        if(s.at(x) == '0' || s.at(x) == '1' || s.at(x) == '2')
+        {
+            files_descriptor_change = true;
+            if(s.at(x) == '<' && x < s.size())
+            {
+                s.at(x) = ' ';
+                int g = x;
+                if(g++ < s.size())
+                {
+                    for(; g < s.size() && s.at(g) != '>'; g++)
+                    {
+                        input_hold.push_back(s.at(g));
+                    }
+                }
+                in = true;
+                inputs_G.push_back(input_hold);
+            }
+            if(s.at(x) == '>')
+            {
+                if(s.at(x - 1) == '0')
+                {
+                    
+                if(s.at(x + 1) == '>' && x +1 < s.size())
+                {
+                    s.at(x) = ' ';
+                    s.at(x + 1) = ' ';
+                    x+=2;
+                    int i = x;
+                    i++;
+                    cout << "s.at(i): " << s.at(i) << endl;
+                    for(; i < s.size() && s.at(i) != '>'; i++)
+                    {
+                        cout << s.at(i) << endl;
+                        add_hold.push_back(s.at(i));
+                        s.at(i) = ' ';
+                    }
+                    cout << "add_hold: " << add_hold << endl;
+                    output_append_G.push_back(add_hold);
+                    cout << "first vecto space: " << output_append_G.at(0) << endl;
+                    add_hold.clear();
+                    add_out = true;
+                }
+                else if(s.at(x + 1) != '>')
+                {
+                    cout << "string shows: " << s.at(x + 1) << endl;
+                    cout << "strings: " << s << endl;
+                    cout << "why are u mesing with me" << endl;
+                    s.at(x) = ' ';
+                    int i = x;
+                    i++;
+                    for(; i < s.size() && s.at(i) != '>'; i++)
+                    {
+                        out_hold.push_back(s.at(i));
+                        s.at(i) = ' ';
+                    }
+                    outputs_G.push_back(out_hold);
+                    out_hold.clear();
+                    out = true;
+                    cout << "check boolean: " << out << endl;
+                }
+            }
+        }
+            
     }
 }
 
