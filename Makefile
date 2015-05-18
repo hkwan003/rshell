@@ -3,7 +3,7 @@ CFGLAGS = -Wall -Werror -ansi -pedantic
 FILEPATH = ./src/new.cpp
 CPPATH = ./src/cp.cpp
 RMPATH = ./src/rm.cpp
-OUTPATH = ./bin/rshell
+OUTPATH = ./bin/redirect
 
 all: 
 		mkdir -p ./bin

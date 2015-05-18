@@ -1,0 +1,291 @@
+Script started on Sun 17 May 2015 09:22:53 PM PDT
+~
+hkwan003@hammer $ cd[Ks100
+[0;91m
+===============================================================================
+|                                                                             |
+| You have enabled settings specific for cs100.  Everything you do is being   |
+| recorded to measure your progress in the class.                             |
+|                                                                             |
+| Important commands for the class:                                           |
+|   * calcgrade.sh          displays a detailed breakdown of your grade       |
+|   * checksyscalls.sh      is your cpp file doing proper error checking?     |
+|   * typespeed             practice typing unix commands                     |
+|                                                                             |
+| Important commands for general C++ programming:                             |
+|   * make                  don't call g++ manually; let make do the work!    |
+|   * gdb                   the GNU debugger                                  |
+|   * valgrind              get rid of your memory leaks                      |
+|   * cppcheck              static analysis tool                              |
+|   * man                   find help about any syscall / terminal command    |
+|                                                                             |
+===============================================================================
+[0m
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m ls
+61 FOLDEER  CS100    cs12   CS61     Documents	gitlearn  Pictures  quiz    rshell-1   tester_files  WINDOWS
+calvin	    cs100#1  CS-14  Desktop  Downloads	Music	  Public    rshell  Templates  Videos
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd rshell
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m ls
+LICENSE  Makefile  README.md  src  tests
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m make clean
+rm -rf ./bin
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m make 
+mkdir -p ./bin
+g++  ./src/new.cpp -o ./bin/redirect
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m 
+Message from syslogd@hammer at May 17 21:24:49 ...
+ kernel:[Hardware Error]: MC4 Error (node 3): DRAM ECC error detected on the NB.
+
+Message from syslogd@hammer at May 17 21:24:49 ...
+ kernel:[Hardware Error]: MC4 Error (node 3): DRAM ECC error detected on the NB.
+
+Message from syslogd@hammer at May 17 21:24:49 ...
+ kernel:[Hardware Error]: Error Status: Corrected error, no action required.
+
+Message from syslogd@hammer at May 17 21:24:49 ...
+ kernel:[Hardware Error]: Error Status: Corrected error, no action required.
+
+Message from syslogd@hammer at May 17 21:24:49 ...
+ kernel:[Hardware Error]: CPU:18 (10:9:1) MC4_STATUS[Over|CE|MiscV|-|AddrV|CECC]: 0xdc5c410004080a13
+
+Message from syslogd@hammer at May 17 21:24:49 ...
+ kernel:[Hardware Error]: CPU:18 (10:9:1) MC4_STATUS[Over|CE|MiscV|-|AddrV|CECC]: 0xdc5c410004080a13
+
+Message from syslogd@hammer at May 17 21:24:49 ...
+ kernel:[Hardware Error]: MC4_ADDR: 0x0000001891a88210
+
+Message from syslogd@hammer at May 17 21:24:49 ...
+ kernel:[Hardware Error]: MC4_ADDR: 0x0000001891a88210
+
+Message from syslogd@hammer at May 17 21:24:49 ...
+ kernel:[Hardware Error]: cache level: L3/GEN, mem/io: MEM, mem-tx: RD, part-proc: RES (no timeout)
+
+Message from syslogd@hammer at May 17 21:24:49 ...
+ kernel:[Hardware Error]: cache level: L3/GEN, mem/io: MEM, mem-tx: RD, part-proc: RES (no timeout)
+ls
+bin  LICENSE  Makefile	README.md  src	tests
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m bin/redirect
+hkwan003@hammer.cs.ucr.edu $ ^C
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m make clean
+rm -rf ./bin
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m make
+mkdir -p ./bin
+g++  ./src/new.cpp -o ./bin/redirect
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m l[Kbin/redirect
+hkwan003@hammer.cs.ucr.edu $ ls > file
+hkwan003@hammer.cs.ucr.edu $ ls  cat file
+bin
+file
+LICENSE
+Makefile
+README.md
+src
+tests
+hkwan003@hammer.cs.ucr.edu $ ls -a >  > file
+hkwan003@hammer.cs.ucr.edu $ cat file
+bin
+file
+LICENSE
+Makefile
+README.md
+src
+tests
+.
+..
+bin
+.DS_Store
+file
+.git
+.gitignore
+LICENSE
+Makefile
+README.md
+src
+tests
+hkwan003@hammer.cs.ucr.edu $ wc < file > file 1
+hkwan003@hammer.cs.ucr.edu $ cat file
+bin
+file
+LICENSE
+Makefile
+README.md
+src
+tests
+.
+..
+bin
+.DS_Store
+file
+.git
+.gitignore
+LICENSE
+Makefile
+README.md
+src
+tests
+hkwan003@hammer.cs.ucr.edu $ cat file 1  1
+ 19  19 123 file
+hkwan003@hammer.cs.ucr.edu $ cat file        cat 		file   | grep a
+Makefile
+Makefile
+hkwan003@hammer.cs.ucr.edu $ #piping works but with only one pipe
+hkwan003@hammer.cs.ucr.edu $ cat file    < file | tee 1-  a-z > new_file
+cat: <: No such file or directory
+hkwan003@hammer.cs.ucr.edu $ bin
+file
+LICENSE
+Makefile
+README.md
+src
+tests
+.
+..
+bin
+.DS_Store
+file
+.git
+.gitignore
+LICENSE
+Makefile
+README.md
+src
+tests
+l
+error with passed in argument list: No such file or directory
+hkwan003@hammer.cs.ucr.edu $ ls
+>  a-z	bin  file  file1  LICENSE  Makefile  new_file  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ cat << "  < "outputs this string right here"
+outputs this string right here
+hkwan003@hammer.cs.ucr.edu $ wc <<"   < 			"does not just work with cat"
+      1       6      28
+hkwan003@hammer.cs.ucr.edu $ cat << "			all kinda   s of spaces"
+open: No such file or directory
+open: No such file or directory
+cat: ": No such file or directory
+cat: all: No such file or directory
+cat: kinds: No such file or directory
+cat: of: No such file or directory
+cat: spaces": No such file or directory
+hkwan003@hammer.cs.ucr.edu $ cat < 		 << 			"space tabs space"
+space tabs space
+hkwan003@hammer.cs.ucr.edu $ ls
+>  a-z	bin  file  file1  LICENSE  Makefile  new_file  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ g++ bin 2> new
+hkwan003@hammer.cs.ucr.edu $ cat new
+bin: file not recognized: Is a directory
+collect2: error: ld returned 1 exit status
+hkwan003@hammer.cs.ucr.edu $ g++ new_file 2>> new
+hkwan003@hammer.cs.ucr.edu $ cat new
+bin: file not recognized: Is a directory
+collect2: error: ld returned 1 exit status
+/opt/rh/devtoolset-2/root/usr/libexec/gcc/x86_64-redhat-linux/4.8.2/ld:new_file: file format not recognized; treating as linker script
+/opt/rh/devtoolset-2/root/usr/libexec/gcc/x86_64-redhat-linux/4.8.2/ld:new_file:2: syntax error
+collect2: error: ld returned 1 exit status
+hkwan003@hammer.cs.ucr.edu $ ls -a >> new
+hkwan003@hammer.cs.ucr.edu $ cat en    new
+bin: file not recognized: Is a directory
+collect2: error: ld returned 1 exit status
+/opt/rh/devtoolset-2/root/usr/libexec/gcc/x86_64-redhat-linux/4.8.2/ld:new_file: file format not recognized; treating as linker script
+/opt/rh/devtoolset-2/root/usr/libexec/gcc/x86_64-redhat-linux/4.8.2/ld:new_file:2: syntax error
+collect2: error: ld returned 1 exit status
+>
+.
+..
+a-z
+bin
+.DS_Store
+file
+file1
+.git
+.gitignore
+LICENSE
+Makefile
+new
+new_file
+README.md
+src
+tests
+hkwan003@hammer.cs.ucr.edu $ ls -a >   1> new_test
+hkwan003@hammer.cs.ucr.edu $ cat new_test
+>
+.
+..
+a-z
+bin
+.DS_Store
+file
+file1
+.git
+.gitignore
+LICENSE
+Makefile
+new
+new_file
+new_test
+README.md
+src
+tests
+hkwan003@hammer.cs.ucr.edu $ ls -l > 1>> new_test
+hkwan003@hammer.cs.ucr.edu $ cat new_test
+>
+.
+..
+a-z
+bin
+.DS_Store
+file
+file1
+.git
+.gitignore
+LICENSE
+Makefile
+new
+new_file
+new_test
+README.md
+src
+tests
+total 48
+-rw------- 1 hkwan003 csmajs  123 May 17 21:23 >
+-rw------- 1 hkwan003 csmajs  123 May 17 21:23 a-z
+drwx------ 2 hkwan003 csmajs 4096 May 17 21:21 bin
+-rw------- 1 hkwan003 csmajs  123 May 17 21:21 file
+-rw------- 1 hkwan003 csmajs   17 May 17 21:21 file1
+-rw------- 1 hkwan003 csmajs 1079 May 17 20:14 LICENSE
+-rw------- 1 hkwan003 csmajs  446 May 17 20:40 Makefile
+-rw------- 1 hkwan003 csmajs  460 May 17 21:25 new
+-rw------- 1 hkwan003 csmajs  123 May 17 21:23 new_file
+-rw------- 1 hkwan003 csmajs  111 May 17 21:28 new_test
+-rw------- 1 hkwan003 csmajs  891 May 17 20:14 README.md
+drwx------ 2 hkwan003 csmajs 4096 May 17 20:43 src
+drwx------ 2 hkwan003 csmajs 4096 May 17 21:16 tests
+hkwan003@hammer.cs.ucr.edu $ 		ls -- a s  		-s l		> new_test
+hkwan003@hammer.cs.ucr.edu $ cat new_test            		ca	t		_ new_test
+total 44
+-rw------- 1 hkwan003 csmajs  123 May 17 21:23 >
+-rw------- 1 hkwan003 csmajs  123 May 17 21:23 a-z
+drwx------ 2 hkwan003 csmajs 4096 May 17 21:21 bin
+-rw------- 1 hkwan003 csmajs  123 May 17 21:21 file
+-rw------- 1 hkwan003 csmajs   17 May 17 21:21 file1
+-rw------- 1 hkwan003 csmajs 1079 May 17 20:14 LICENSE
+-rw------- 1 hkwan003 csmajs  446 May 17 20:40 Makefile
+-rw------- 1 hkwan003 csmajs  460 May 17 21:25 new
+-rw------- 1 hkwan003 csmajs  123 May 17 21:23 new_file
+-rw------- 1 hkwan003 csmajs    0 May 17 21:28 new_test
+-rw------- 1 hkwan003 csmajs  891 May 17 20:14 README.md
+drwx------ 2 hkwan003 csmajs 4096 May 17 20:43 src
+drwx------ 2 hkwan003 csmajs 4096 May 17 21:16 tests
+hkwan003@hammer.cs.ucr.edu $ g++ file1 2>> new_test | greb p a
+g++: error: 2>>: No such file or directory
+hkwan003@hammer.cs.ucr.edu $ ls
+>  a-z	bin  file  file1  LICENSE  Makefile  new  new_file  new_test  README.md  src  tests
+hkwan003@hammer.cs.ucr.edu $ exit
+hkwan003@hammer.cs.ucr.edu $ exit
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m exit
+exit
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+~
+hkwan003@hammer $ exit
+exit
+
+Script done on Sun 17 May 2015 09:36:39 PM PDT

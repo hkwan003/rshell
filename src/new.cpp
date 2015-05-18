@@ -471,6 +471,7 @@ bool redir_exist(string s)
             return true;
         }
     }
+    return false;
 }
 
 unsigned int i;
@@ -485,10 +486,12 @@ bool chk_pipes(string s)
             //cout << "output I: " << i << endl;
         }
     }
-    if(i > 1)
+    if(i == 1)
     {
-        return false;
+        return true;
     }
+    return false;
+	
 }
 
 void push_piping_string(string s)
@@ -573,7 +576,6 @@ int main(int argc, char **argv)
 {
     outputs_G.clear();
     inputs_G.clear();
-    int multi_redir_chk = 0;
     int check_redir = 0;
     ///////////////////////////////////////////////
     int sequence = 0; //sequence of which is executable and flags
@@ -634,12 +636,10 @@ int main(int argc, char **argv)
         if(checks_pipes)
         {
             string tmp_str;         //holds 
-            bool words_begin = false;    //when it senses words, it will become true
             fix_pipe_argument(to_be_tokenized);
             int array1 = 0;      //counter for array argument1
             int array2 = 0;      //counter for array argument2
             //cout << "new prompt: " << to_be_tokenized << endl;
-            int tmp_pos = 0;        //checks if there is more than one space
             char *argument1[50000];
             char *argument2[50000];
             char *token;
@@ -903,21 +903,7 @@ int main(int argc, char **argv)
                 }
                 
             }
-          
-            
-            for(int x = 0; x < inputs_G.size(); x++)
-            {
-                //cout << "first: " << inputs_G.at(x) << endl;
-            }
-            for(int x = 0; x < output_append_G.size(); x++)
-            {
-                //cout << "output_append: " << output_append_G.at(x) << endl;
-            }
-        
-          
-            
-            
-            
+      
             for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
             {
                 prompt_holder[x] = to_be_tokenized.at(x);
