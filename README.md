@@ -11,17 +11,32 @@ Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It o
 * User login recognition
 * Comment recognition
 
-## How to use Ls
+## How to use piping 
 
 * First compile the program by typing ``make``
-* After compiling, type in ``bin/ls``
-* Special flags like -a, -l, and -R could be appended after typing in ``bin/ls``
-* The program can also handle directories with the flags that can be appended behind it
-``bin/ls -a src -R. -l``
+* After compiling, type in ``bin/redirect``
+* Type in ``make clean`` to clear out the old bin
+* Input redirection < input redirection into a program like wc ``Word Count``
+* Output redirection >, >>, > truncates orginal file, >> appends onto what was already in folder
+* Ls | cat, redirects the output of ls into input end of cat
+* input and output redirection can be combined ``wc < file > file 1 >> file2``
+
+## Bugs
+
+* Multiple piping does not work
+* piping only works when it is provide with two arguments
+* the ``<<<`` will only work by itself, will not work with any other command
+* The ``1>, 1>>, 2>, 2>>`` will also only work by itself.
+* The only commands that can be combined together is input and output redirection
+* 
+
 
 ##Limitations
 * Commands has a limit of 50,000 characters
 * host have a name character limit of 500 characters
-* cd does not work in this shell
-* Any argument passed into shell acts as ls -a
-* not matter what is passed in, nothing else works but ls -a
+* every command in the piping assignment other than input and output redirection can only be used by itself
+* piping can only take in two arguments
+* <<< command only works by itself
+* file descriptor change to stderr only works when used by itself
+* `` cat < existingInputFile | tr A-Z a-z | tee newOutputfile1 | tr a-z A-Z > newOutputFile2`` this does not work
+
