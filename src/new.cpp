@@ -95,6 +95,7 @@ bool out = false;
 bool add_out = false;
 int exec_status;
 bool str_continue = true;
+int return_file_descrption = 0;     //file descriptor of what file descriptor to change it to
 bool execute(char* command, char* command_list[], int conect_type, bool redir, string path_name)
 {
     int status;
@@ -108,33 +109,74 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
     {
         if(redir)
         {
+            //cout << "add_out: " << add_out << endl;
             if(output_append_G.size() > 0 && add_out)
             {
-                cout << "does this enteir" << endl;
-                if(close(1) == -1)
+                //~ cout << "double carrot signs" << endl;
+                //~ cout << "return_file descript: " << return_file_descrption << endl;
+                if(return_file_descrption == 0)
                 {
-                    perror("close");
+                    if(close(1) == -1)
+                    {
+                        perror("close");
+                    }
                 }
                 int fd;
-                cout << "show appendation size: " << output_append_G.size() << endl;
+                if(return_file_descrption == 4)
+                {
+                    if(close(1) == -1)
+                    {
+                        perror("close(1)");
+                    }
+                }
+                if(return_file_descrption == 5)
+                {
+                    if(close(2) == -1)
+                    {
+                        perror("close(2)");
+                    }
+                }
+                //cout << "show appendation size: " << output_append_G.size() << endl;
                 for(unsigned int x = 0; x < output_append_G.size(); x++)
                 {   
-                    cout << "outupt this stuff: " << output_append_G.at(output_append_G.size() - 1 - x) << endl; 
+                    //cout << "outupt this stuff: " << output_append_G.at(output_append_G.size() - 1 - x) << endl; 
                     if((fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_APPEND | O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR)) == -1))
                     {
                         perror("open");
                     }
                 }
             }
-            cout << "does this enter" << endl;
             if(outputs_G.size() > 0 && out)
             {	
-                cout << "is this going in here" << endl;
-                if(close(1) == -1)
+                //cout << "is this being outputted" << endl;
+                if(return_file_descrption == 0)
                 {
-                    perror("close");
+                    if(close(1) == -1)
+                    {
+                        perror("close");
+                    }
                 }
-                cout << "is this going in here" << endl;
+                if(return_file_descrption == 6)
+                {
+                    if(close(0) == -1)
+                    {
+                        perror("close(1)");
+                    }
+                }
+                if(return_file_descrption == 1)
+                {
+                    if(close(1) == -1)
+                    {
+                        perror("close(1)");
+                    }
+                }
+                if(return_file_descrption == 2)
+                {
+                    if(close(2) == -1)
+                    {
+                        perror("close(2)");
+                    }
+                }
                 int fd;
                 for(unsigned int x = 0; x < outputs_G.size(); x++)
                 {
@@ -146,12 +188,12 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
             }
             if(inputs_G.size() > 0 && in)
             {
-                cout << "does this enter here" << endl;
+                //cout << "does this enter here" << endl;
                 if(close(0) == -1)
                 {
                     perror("close");
                 }
-                cout << "does this mess it up" << endl;
+                //cout << "does this mess it up" << endl;
                 int fd;
                 for(unsigned int x = 0; x < inputs_G.size(); x++)
                 {
@@ -161,9 +203,9 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                     }
                 }
             }
-            cout << "output right before exec " << endl;
+            //cout << "output right before exec " << endl;
             exec_status = (execvp(command, command_list));
-            cout << "output exec status////////////////: " << exec_status << endl;
+            //cout << "output exec status////////////////: " << exec_status << endl;
             if(exec_status == -1)
             {
                 perror("error with passed in argument list");
@@ -214,10 +256,9 @@ string input_hold;
 string out_hold;
 string add_hold;
 bool files_descriptor_change = false;       //true if there is need to change file descriptor
-int return_file_descrption = 0;     //file descriptor of what file descriptor to change it to
 void check_redirection(string &s)
 {
-     cout << "output within redirection" << endl;
+    return_file_descrption = 0;
     input_hold.clear();
     out_hold.clear();
     add_hold.clear();
@@ -246,24 +287,24 @@ void check_redirection(string &s)
                 x+=2;
                 unsigned int i = x;
                 i++;
-                cout << "s.at(i): " << s.at(i) << endl;
+                //cout << "s.at(i): " << s.at(i) << endl;
                 for(; i < s.size() && s.at(i) != '>'; i++)
                 {
-                    cout << s.at(i) << endl;
+                    //cout << s.at(i) << endl;
                     add_hold.push_back(s.at(i));
                     s.at(i) = ' ';
                 }
-                cout << "add_hold: " << add_hold << endl;
+                //cout << "add_hold: " << add_hold << endl;
                 output_append_G.push_back(add_hold);
-                cout << "first vecto space: " << output_append_G.at(0) << endl;
+                //cout << "first vecto space: " << output_append_G.at(0) << endl;
                 add_hold.clear();
                 add_out = true;
             }
             else if(s.at(x + 1) != '>')
             {
-                cout << "string shows: " << s.at(x + 1) << endl;
-                cout << "strings: " << s << endl;
-                cout << "why are u mesing with me" << endl;
+                //cout << "string shows: " << s.at(x + 1) << endl;
+                //cout << "strings: " << s << endl;
+                //cout << "why are u mesing with me" << endl;
                 s.at(x) = ' ';
                 unsigned int i = x;
                 i++;
@@ -275,94 +316,96 @@ void check_redirection(string &s)
                 outputs_G.push_back(out_hold);
                 out_hold.clear();
                 out = true;
-                cout << "check boolean: " << out << endl;
+                //cout << "check boolean: " << out << endl;
             }
         }
         if(s.at(x) == '0' || s.at(x) == '1' || s.at(x) == '2')
         {
-            cout << "please entier inside file descriptor" << endl;
-            files_descriptor_change = true;
-            if(s.at(x) == '<' && x < s.size())
+            for(; x < s.size(); x++)
             {
-                s.at(x) = ' ';
-                unsigned int g = x;
-                if(g++ < s.size())
+                files_descriptor_change = true;
+                if(s.at(x) == '<' && x < s.size())
                 {
-                    for(; g < s.size() && s.at(g) != '>'; g++)
-                    {
-                        input_hold.push_back(s.at(g));
-                    }
-                }
-                in = true;
-                inputs_G.push_back(input_hold);
-            }
-            if(s.at(x) == '>')
-            {
-                
-                if(s.at(x - 1) == '0')
-                {
-                    return_file_descrption = 0;         //0 equals stdin trunc
-                }
-                if(s.at(x - 1) == '1')
-                {
-                    return_file_descrption = 1;         //1 equals stdout trunc
-                }
-                if(s.at(x - 1) == '2')
-                {
-                    return_file_descrption = 2;         //2 equals stderr trunc
-                }
-                cout << "return file descriptroin: " << return_file_descrption << endl;
-                if(s.at(x + 1) == '>' && x +1 < s.size())
-                {
-                    if(s.at(x - 1) == '0')
-                    {
-                        return_file_descrption = 3;      //3 equals stdin append   
-                    }
-                    if(s.at(x - 1) == '1')
-                    {
-                        return_file_descrption = 4;     //4 equals stdout append 
-                    }
-                    if(s.at(x - 1) == '2')
-                    {
-                        return_file_descrption = 5;     //5 equals stderr append 
-                    }
-                     cout << "return file descriptroin: " << return_file_descrption << endl;
                     s.at(x) = ' ';
-                    s.at(x + 1) = ' ';
-                    x+=2;
-                    unsigned int i = x;
-                    i++;
-                    cout << "s.at(i): " << s.at(i) << endl;
-                    for(; i < s.size() && s.at(i) != '>'; i++)
+                    unsigned int g = x;
+                    if(g++ < s.size())
                     {
-                        cout << s.at(i) << endl;
-                        add_hold.push_back(s.at(i));
-                        s.at(i) = ' ';
+                        for(; g < s.size() && s.at(g) != '>'; g++)
+                        {
+                            input_hold.push_back(s.at(g));
+                        }
                     }
-                    cout << "add_hold: " << add_hold << endl;
-                    output_append_G.push_back(add_hold);
-                    cout << "first vecto space: " << output_append_G.at(0) << endl;
-                    add_hold.clear();
-                    add_out = true;
+                    in = true;
+                    inputs_G.push_back(input_hold);
                 }
-                else if(s.at(x + 1) != '>')
+                if(x + 1 < s.size())
                 {
-                    
-                    cout << "string shows: " << s.at(x + 1) << endl;
-                    cout << "strings: " << s << endl;
-                    cout << "why are u mesing with me" << endl;
-                    s.at(x) = ' ';
-                    unsigned int i = x;
-                    i++;
-                    for(; i < s.size() && s.at(i) != '>'; i++)
+                    x++;
+                }
+                if(s.at(x) == '>')
+                {
+                    if(s.at(x + 1) == '>' && x +1 < s.size())
                     {
-                        out_hold.push_back(s.at(i));
-                        s.at(i) = ' ';
+                        if(s.at(x - 1) == '0')
+                        {
+                            return_file_descrption = 7;      //3 equals stdin append   
+                        }
+                        if(s.at(x - 1) == '1')
+                        {
+                            s.at(x - 1) = ' ';
+                            return_file_descrption = 4;     //4 equals stdout append 
+                        }
+                        if(s.at(x - 1) == '2')
+                        {
+                            s.at(x - 1) = ' ';
+                            return_file_descrption = 5;     //5 equals stderr append 
+                        }
+                        s.at(x) = ' ';
+                        s.at(x + 1) = ' ';
+                        x+=2;
+                        unsigned int i = x;
+                        i++;
+                        //cout << "s.at(i): " << s.at(i) << endl;
+                        for(; i < s.size() && s.at(i) != '>'; i++)
+                        {
+                            //cout << s.at(i) << endl;
+                            add_hold.push_back(s.at(i));
+                            s.at(i) = ' ';
+                        }
+                        //cout << "add_hold: " << add_hold << endl;
+                        output_append_G.push_back(add_hold);
+                        //cout << "first vecto space: " << output_append_G.at(0) << endl;
+                        add_hold.clear();
+                        add_out = true;
                     }
-                    outputs_G.push_back(out_hold);
-                    out_hold.clear();
-                    out = true;
-                    cout << "check boolean: " << out << endl;
+                    else if(s.at(x + 1) != '>')
+                    {
+                        if(s.at(x - 1) == '0')
+                        {
+                            return_file_descrption = 6;         //0 equals stdin trunc
+                        }
+                        if(s.at(x - 1) == '1')
+                        {
+                            s.at(x - 1) = ' ';
+                            return_file_descrption = 1;         //1 equals stdout trunc
+                        }
+                        if(s.at(x - 1) == '2')
+                        {
+                            s.at(x - 1) = ' ';
+                            return_file_descrption = 2;         //2 equals stderr trunc
+                        }
+                        s.at(x) = ' ';
+                        unsigned int i = x;
+                        i++;
+                        for(; i < s.size() && s.at(i) != '>'; i++)
+                        {
+                            out_hold.push_back(s.at(i));
+                            s.at(i) = ' ';
+                        }
+                        outputs_G.push_back(out_hold);
+                        out_hold.clear();
+                        out = true;
+                    }
                 }
             }
         }
@@ -860,8 +903,6 @@ int main(int argc, char **argv)
                 }
                 
             }
-            
-            //cout << "after string: " << to_be_tokenized << endl;
           
             
             for(int x = 0; x < inputs_G.size(); x++)
@@ -888,7 +929,7 @@ int main(int argc, char **argv)
             exec_result = true;
             while(token != NULL && exec_result && str_continue)
             {
-                cout << "tokens: " << *token << endl;
+                //cout << "tokens: " << *token << endl;
                 connect_check = check_connections(token);
                 check_exit(token);
                 if(connect_check == -1 && sequence < 1 && str_continue)
