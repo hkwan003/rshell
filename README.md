@@ -17,7 +17,7 @@ Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It o
 * After compiling, type in ``bin/redirect``
 * Type in ``make clean`` to clear out the old bin
 * Input redirection < input redirection into a program like wc ``Word Count``
-* Output redirection >, >>, > truncates orginal file, >> appends onto what was already in folder
+* Output redirection >, >>,`` >`` truncates orginal file, ``>>`` appends onto what was already in folder
 * Ls | cat, redirects the output of ls into input end of cat
 * input and output redirection can be combined ``wc < file > file 1 >> file2``
 
