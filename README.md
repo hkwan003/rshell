@@ -42,4 +42,4 @@ Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It o
 * Make file is not attached to other functions like rm, cp, or ls. Will fix in future so make file and deal with other functionality
 
 ##Sidenote
-* I have two script files for piping assignment. One is long while the second one is short, I did it just to test one of the extra credit more. Please take a look
+* I have two script files for piping assignment. One is long while the second one is short, I did it just to test one of the extra credit more. Please take a look.
