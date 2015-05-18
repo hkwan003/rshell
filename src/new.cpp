@@ -518,7 +518,6 @@ void push_piping_string(string s)
             }
         }
     }
-    
     for(unsigned int x = 0; x < piping_str.size(); x++)
     {
         string s = piping_str.at(x);
