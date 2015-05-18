@@ -95,6 +95,7 @@ bool out = false;
 bool add_out = false;
 int exec_status;
 bool str_continue = true;
+int return_file_descrption = 0;     //file descriptor of what file descriptor to change it to
 bool execute(char* command, char* command_list[], int conect_type, bool redir, string path_name)
 {
     int status;
@@ -108,37 +109,78 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
     {
         if(redir)
         {
+            //cout << "add_out: " << add_out << endl;
             if(output_append_G.size() > 0 && add_out)
             {
-                cout << "does this enteir" << endl;
-                if(close(1) == -1)
+                //~ cout << "double carrot signs" << endl;
+                //~ cout << "return_file descript: " << return_file_descrption << endl;
+                if(return_file_descrption == 0)
                 {
-                    perror("close");
+                    if(close(1) == -1)
+                    {
+                        perror("close");
+                    }
                 }
                 int fd;
-                cout << "show appendation size: " << output_append_G.size() << endl;
+                if(return_file_descrption == 4)
+                {
+                    if(close(1) == -1)
+                    {
+                        perror("close(1)");
+                    }
+                }
+                if(return_file_descrption == 5)
+                {
+                    if(close(2) == -1)
+                    {
+                        perror("close(2)");
+                    }
+                }
+                //cout << "show appendation size: " << output_append_G.size() << endl;
                 for(unsigned int x = 0; x < output_append_G.size(); x++)
                 {   
-                    cout << "outupt this stuff: " << output_append_G.at(output_append_G.size() - 1 - x) << endl; 
-                    if(fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_APPEND | O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR) == -1))
+                    //cout << "outupt this stuff: " << output_append_G.at(output_append_G.size() - 1 - x) << endl; 
+                    if((fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_APPEND | O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR)) == -1))
                     {
                         perror("open");
                     }
                 }
             }
-            cout << "does this enter" << endl;
             if(outputs_G.size() > 0 && out)
             {	
-                cout << "is this going in here" << endl;
-                if(close(1) == -1)
+                //cout << "is this being outputted" << endl;
+                if(return_file_descrption == 0)
                 {
-                    perror("close");
+                    if(close(1) == -1)
+                    {
+                        perror("close");
+                    }
                 }
-                cout << "is this going in here" << endl;
-                int fd;
-                for(int x = 0; x < outputs_G.size(); x++)
+                if(return_file_descrption == 6)
                 {
-                    if(fd = (open(outputs_G.at(outputs_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR) == -1))
+                    if(close(0) == -1)
+                    {
+                        perror("close(1)");
+                    }
+                }
+                if(return_file_descrption == 1)
+                {
+                    if(close(1) == -1)
+                    {
+                        perror("close(1)");
+                    }
+                }
+                if(return_file_descrption == 2)
+                {
+                    if(close(2) == -1)
+                    {
+                        perror("close(2)");
+                    }
+                }
+                int fd;
+                for(unsigned int x = 0; x < outputs_G.size(); x++)
+                {
+                    if((fd = (open(outputs_G.at(outputs_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR)) == -1))
                     {
                         perror("open");
                     }
@@ -146,14 +188,14 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
             }
             if(inputs_G.size() > 0 && in)
             {
-                cout << "does this enter here" << endl;
+                //cout << "does this enter here" << endl;
                 if(close(0) == -1)
                 {
                     perror("close");
                 }
-                cout << "does this mess it up" << endl;
+                //cout << "does this mess it up" << endl;
                 int fd;
-                for(int x = 0; x < inputs_G.size(); x++)
+                for(unsigned int x = 0; x < inputs_G.size(); x++)
                 {
                     if((fd = open(inputs_G.at(inputs_G.size() -1 - x).c_str(), O_RDONLY)) == -1)
                     {
@@ -161,9 +203,9 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                     }
                 }
             }
-            cout << "output right before exec " << endl;
+            //cout << "output right before exec " << endl;
             exec_status = (execvp(command, command_list));
-            cout << "output exec status////////////////: " << exec_status << endl;
+            //cout << "output exec status////////////////: " << exec_status << endl;
             if(exec_status == -1)
             {
                 perror("error with passed in argument list");
@@ -173,7 +215,7 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
         }
         else 
         {
-            cout << "is this going in there" << endl;
+            //cout << "is this going in there" << endl;
             exec_status = (execvp(command, command_list));
             if(exec_status == -1)
             {
@@ -213,17 +255,19 @@ void check_exit(char *str)
 string input_hold;
 string out_hold;
 string add_hold;
+bool files_descriptor_change = false;       //true if there is need to change file descriptor
 void check_redirection(string &s)
 {
+    return_file_descrption = 0;
     input_hold.clear();
     out_hold.clear();
     add_hold.clear();
-    for(int x = 0; x < s.size(); x++)
+    for(unsigned int x = 0; x < s.size(); x++)
     {
         if(s.at(x) == '<' && x < s.size())
         {
             s.at(x) = ' ';
-            int g = x;
+            unsigned int g = x;
             if(g++ < s.size())
             {
                 for(; g < s.size() && s.at(g) != '>'; g++)
@@ -238,33 +282,31 @@ void check_redirection(string &s)
         {
             if(s.at(x + 1) == '>' && x +1 < s.size())
             {
-                cout << "is thsi workign t" << endl;
                 s.at(x) = ' ';
                 s.at(x + 1) = ' ';
                 x+=2;
-                int i = x;
+                unsigned int i = x;
                 i++;
-                cout << "is this shit working" << endl;
-                cout << "s.at(i): " << s.at(i) << endl;
+                //cout << "s.at(i): " << s.at(i) << endl;
                 for(; i < s.size() && s.at(i) != '>'; i++)
                 {
-                    cout << s.at(i) << endl;
+                    //cout << s.at(i) << endl;
                     add_hold.push_back(s.at(i));
                     s.at(i) = ' ';
                 }
-                cout << "add_hold: " << add_hold << endl;
+                //cout << "add_hold: " << add_hold << endl;
                 output_append_G.push_back(add_hold);
-                cout << "first vecto space: " << output_append_G.at(0) << endl;
+                //cout << "first vecto space: " << output_append_G.at(0) << endl;
                 add_hold.clear();
                 add_out = true;
             }
             else if(s.at(x + 1) != '>')
             {
-                cout << "string shows: " << s.at(x + 1) << endl;
-                cout << "strings: " << s << endl;
-                cout << "why are u mesing with me" << endl;
+                //cout << "string shows: " << s.at(x + 1) << endl;
+                //cout << "strings: " << s << endl;
+                //cout << "why are u mesing with me" << endl;
                 s.at(x) = ' ';
-                int i = x;
+                unsigned int i = x;
                 i++;
                 for(; i < s.size() && s.at(i) != '>'; i++)
                 {
@@ -274,9 +316,100 @@ void check_redirection(string &s)
                 outputs_G.push_back(out_hold);
                 out_hold.clear();
                 out = true;
-                cout << "check boolean: " << out << endl;
+                //cout << "check boolean: " << out << endl;
             }
         }
+        if(s.at(x) == '0' || s.at(x) == '1' || s.at(x) == '2')
+        {
+            for(; x < s.size(); x++)
+            {
+                files_descriptor_change = true;
+                if(s.at(x) == '<' && x < s.size())
+                {
+                    s.at(x) = ' ';
+                    unsigned int g = x;
+                    if(g++ < s.size())
+                    {
+                        for(; g < s.size() && s.at(g) != '>'; g++)
+                        {
+                            input_hold.push_back(s.at(g));
+                        }
+                    }
+                    in = true;
+                    inputs_G.push_back(input_hold);
+                }
+                if(x + 1 < s.size())
+                {
+                    x++;
+                }
+                if(s.at(x) == '>')
+                {
+                    if(s.at(x + 1) == '>' && x +1 < s.size())
+                    {
+                        if(s.at(x - 1) == '0')
+                        {
+                            return_file_descrption = 7;      //3 equals stdin append   
+                        }
+                        if(s.at(x - 1) == '1')
+                        {
+                            s.at(x - 1) = ' ';
+                            return_file_descrption = 4;     //4 equals stdout append 
+                        }
+                        if(s.at(x - 1) == '2')
+                        {
+                            s.at(x - 1) = ' ';
+                            return_file_descrption = 5;     //5 equals stderr append 
+                        }
+                        s.at(x) = ' ';
+                        s.at(x + 1) = ' ';
+                        x+=2;
+                        unsigned int i = x;
+                        i++;
+                        //cout << "s.at(i): " << s.at(i) << endl;
+                        for(; i < s.size() && s.at(i) != '>'; i++)
+                        {
+                            //cout << s.at(i) << endl;
+                            add_hold.push_back(s.at(i));
+                            s.at(i) = ' ';
+                        }
+                        //cout << "add_hold: " << add_hold << endl;
+                        output_append_G.push_back(add_hold);
+                        //cout << "first vecto space: " << output_append_G.at(0) << endl;
+                        add_hold.clear();
+                        add_out = true;
+                    }
+                    else if(s.at(x + 1) != '>')
+                    {
+                        if(s.at(x - 1) == '0')
+                        {
+                            return_file_descrption = 6;         //0 equals stdin trunc
+                        }
+                        if(s.at(x - 1) == '1')
+                        {
+                            s.at(x - 1) = ' ';
+                            return_file_descrption = 1;         //1 equals stdout trunc
+                        }
+                        if(s.at(x - 1) == '2')
+                        {
+                            s.at(x - 1) = ' ';
+                            return_file_descrption = 2;         //2 equals stderr trunc
+                        }
+                        s.at(x) = ' ';
+                        unsigned int i = x;
+                        i++;
+                        for(; i < s.size() && s.at(i) != '>'; i++)
+                        {
+                            out_hold.push_back(s.at(i));
+                            s.at(i) = ' ';
+                        }
+                        outputs_G.push_back(out_hold);
+                        out_hold.clear();
+                        out = true;
+                    }
+                }
+            }
+        }
+            
     }
 }
 
@@ -331,19 +464,20 @@ string fix_file_name(string s)
 
 bool redir_exist(string s)
 {
-    for(int x = 0; x < s.size(); x++)
+    for(unsigned int x = 0; x < s.size(); x++)
     {
         if(s.at(x) == '>' || s.at(x) == '<')
         {
             return true;
         }
     }
+    return false;
 }
 
-int i;
+unsigned int i;
 bool chk_pipes(string s)
 {
-    for(int x = 0; x < s.size(); x++)
+    for(unsigned int x = 0; x < s.size(); x++)
     {
         //cout << "is this actually checking rn" << endl;
         if(s.at(x) == '|')
@@ -352,16 +486,18 @@ bool chk_pipes(string s)
             //cout << "output I: " << i << endl;
         }
     }
-    if(i > 1)
+    if(i == 1)
     {
-        return false;
+        return true;
     }
+    return false;
+	
 }
 
 void push_piping_string(string s)
 {
     string t;
-    for(int x = 0; x < s.size(); x++)
+    for(unsigned int x = 0; x < s.size(); x++)
     {
         //cout << "X: " << x << " " << s.at(x) <<endl;
         
@@ -382,24 +518,23 @@ void push_piping_string(string s)
             }
         }
     }
-    
-    for(int x = 0; x < piping_str.size(); x++)
+    for(unsigned int x = 0; x < piping_str.size(); x++)
     {
         string s = piping_str.at(x);
         
     }
-    int r = 0;
-    for(r; r < piping_str.size(); r++)
-    {
-        piparr[r] = const_cast<char*> (piping_str.at(r).c_str());
-    }
+    //unsigned int r = 0;
+    //~ for(r; r < piping_str.size(); r++)
+    //~ {
+        //~ piparr[r] = const_cast<char*> (piping_str.at(r).c_str());
+    //~ }
     
 }
 void fix_pipe_argument(string& s)
 {
     bool word_start = false;
     string fixed;
-    for(int x = 0; x < s.size(); x++)
+    for(unsigned int x = 0; x < s.size(); x++)
     {
         //cout << "words: " << s.at(x) << endl;
         if(s.at(x) == ' ' && word_start == false)
@@ -430,7 +565,7 @@ void fix_pipe_argument(string& s)
     }
     s.clear();
     //cout << "output s with in function: " << fixed << endl;
-    for(int x = 0; x < fixed.size(); x++)
+    for(unsigned int x = 0; x < fixed.size(); x++)
     {
         s.push_back(fixed.at(x));
     }
@@ -440,7 +575,6 @@ int main(int argc, char **argv)
 {
     outputs_G.clear();
     inputs_G.clear();
-    int multi_redir_chk = 0;
     int check_redir = 0;
     ///////////////////////////////////////////////
     int sequence = 0; //sequence of which is executable and flags
@@ -488,16 +622,23 @@ int main(int argc, char **argv)
         getline(cin, to_be_tokenized);
         //gets user input
         checks_pipes = chk_pipes(to_be_tokenized);
+        bool three_bracket = false;
+        for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+        {
+            if(to_be_tokenized.at(x) == '<' && to_be_tokenized.at(x + 1) == '<' && to_be_tokenized.at(x + 2) == '<')
+            {
+                checks_pipes = true;
+                three_bracket = true;
+            }
+        }
         //cout << "checking pipes: " << checks_pipes << endl;
         if(checks_pipes)
         {
             string tmp_str;         //holds 
-            bool words_begin = false;    //when it senses words, it will become true
             fix_pipe_argument(to_be_tokenized);
             int array1 = 0;      //counter for array argument1
             int array2 = 0;      //counter for array argument2
             //cout << "new prompt: " << to_be_tokenized << endl;
-            int tmp_pos = 0;        //checks if there is more than one space
             char *argument1[50000];
             char *argument2[50000];
             char *token;
@@ -512,110 +653,225 @@ int main(int argc, char **argv)
                 first[x] = '\0';
                 second[x] = '\0';
             }
-            //clearing arrays all arrays
-            for(int x = 0; x < to_be_tokenized.size(); x++)
+             //clearing arrays all arrays
+            if(three_bracket)
             {
-                if(to_be_tokenized.at(x) != '|')
+                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
                 {
-                    first_half.push_back(to_be_tokenized.at(x));
-                }
-                if(to_be_tokenized.at(x) == '|')
-                {
-                    break;
-                }
-            }
-                
-            for(int x = 0; x < to_be_tokenized.size(); x++)
-            {
-                if(to_be_tokenized.at(x) == '|')
-                {
-                    x++;
-                    for(x; x < to_be_tokenized.size(); x++)
+                    if(to_be_tokenized.at(x) != '<')
                     {
                         second_half.push_back(to_be_tokenized.at(x));
                     }
+                    if(to_be_tokenized.at(x) == '<')
+                    {
+                        break;
+                    }
                 }
-            }
-            for(unsigned int x = 0; x < first_half.size(); x++)
-            {
-                first[x] = first_half.at(x);
-            } 
-            
-            for(unsigned int x = 0; x < second_half.size(); x++)
-            {
-                second[x] = second_half.at(x);
-            }
+                first_half+= "echo ";
+                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+                {
+                    if(to_be_tokenized.at(x) == '<')
+                    {
+                        if(x + 3 < to_be_tokenized.size())
+                        {
+                            x+= 3;
+                            for(; x < to_be_tokenized.size(); x++)
+                            {
+                                if(to_be_tokenized.at(x) == '"')
+                                {
+                                    to_be_tokenized.at(x) = ' ';
+                                }
+                                first_half.push_back(to_be_tokenized.at(x));
+                            }
+                        }
+                    }
+                }
+                for(unsigned int x = 0; x < first_half.size(); x++)
+                {
+                    first[x] = first_half.at(x);
+                } 
+                
+                for(unsigned int x = 0; x < second_half.size(); x++)
+                {
+                    second[x] = second_half.at(x);
+                }
+                      token = strtok(first, "\t ");
+                while(token != NULL)
+                {
+                    //cout<< "first: "  << token << endl;
+                    argument1[array1] = token;
+                    array1++;
+                    token = strtok(NULL, "\t ");
+                }
+                
+                argument1[array1 + 1] = '\0'; 
 
-            token = strtok(first, "\t ");
-            while(token != NULL)
-            {
-                //cout<< "first: "  << token << endl;
-                argument1[array1] = token;
-                array1++;
-                token = strtok(NULL, "\t ");
-            }
-            
-            argument1[array1 + 1] = '\0'; 
+                token = strtok(second, "\t ");
+                while(token != NULL)
+                {
+                    //cout << "Second: "  << token << endl;
+                    argument2[array2] = token;
+                    array2++;
+                    token = strtok(NULL, "\t ");
+                }
 
-            token = strtok(second, "\t ");
-            while(token != NULL)
-            {
-                //cout << "Second: "  << token << endl;
-                argument2[array2] = token;
-                array2++;
-                token = strtok(NULL, "\t ");
-            }
+                argument2[array2 + 1] = '\0';
+                int fd[2];
+                pid_t pid1, pid2;
 
-            argument2[array2 + 1] = '\0';
-
-
-            int fd[2];
-            pid_t pid1, pid2;
-
-            pipe(fd);
-            pid1 = fork();
-            if(pid1 < 0)
-            {
-                perror("first fork failed()");
-                exit(1);
-            }
-            if(pid1 == 0)
-            {
-                close(1);
-                dup(fd[1]);
+                pipe(fd);
+                pid1 = fork();
+                if(pid1 < 0)
+                {
+                    perror("first fork failed()");
+                    exit(1);
+                }
+                if(pid1 == 0)
+                {
+                    close(1);
+                    dup(fd[1]);
+                    close(fd[0]);
+                    close(fd[1]);
+                    exec_status = execvp(argument1[0], argument1);
+                    if(exec_status == -1)
+                    {
+                        perror("error with passed in argument");
+                        exit(1);
+                    } 
+                }
+                
+                pid2 = fork();
+                if(pid2 < 0)
+                {
+                    perror("second fork() failed");
+                    exit(1);
+                }
+                if(pid2 == 0)
+                {
+                    close(0);
+                    dup(fd[0]);
+                    close(fd[0]);
+                    close(fd[1]);
+                    exec_status = execvp(argument2[0], argument2);
+                    if(exec_status == -1)
+                    {
+                        perror("error with passed in argument");
+                        exit(1);
+                    } 
+                }
                 close(fd[0]);
                 close(fd[1]);
-                exec_status = execvp(argument1[0], argument1);
-                if(exec_status == -1)
+                waitpid(pid1, NULL, 0);
+                waitpid(pid1, NULL, 0);
+                
+            }
+        
+            else
+            {
+                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
                 {
-                    perror("error with passed in argument");
-                    exit(1);
+                    if(to_be_tokenized.at(x) != '|')
+                    {
+                        first_half.push_back(to_be_tokenized.at(x));
+                    }
+                    if(to_be_tokenized.at(x) == '|')
+                    {
+                        break;
+                    }
+                }
+                    
+                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+                {
+                    if(to_be_tokenized.at(x) == '|')
+                    {
+                        x++;
+                        for(; x < to_be_tokenized.size(); x++)
+                        {
+                            second_half.push_back(to_be_tokenized.at(x));
+                        }
+                    }
+                }
+                for(unsigned int x = 0; x < first_half.size(); x++)
+                {
+                    first[x] = first_half.at(x);
                 } 
-            }
-            
-            pid2 = fork();
-            if(pid2 < 0)
-            {
-                perror("second fork() failed");
-                exit(1);
-            }
-            if(pid2 == 0)
-            {
-                close(0);
-                dup(fd[0]);
+                
+                for(unsigned int x = 0; x < second_half.size(); x++)
+                {
+                    second[x] = second_half.at(x);
+                }
+
+                token = strtok(first, "\t ");
+                while(token != NULL)
+                {
+                    //cout<< "first: "  << token << endl;
+                    argument1[array1] = token;
+                    array1++;
+                    token = strtok(NULL, "\t ");
+                }
+                
+                argument1[array1 + 1] = '\0'; 
+
+                token = strtok(second, "\t ");
+                while(token != NULL)
+                {
+                    //cout << "Second: "  << token << endl;
+                    argument2[array2] = token;
+                    array2++;
+                    token = strtok(NULL, "\t ");
+                }
+
+                argument2[array2 + 1] = '\0';
+
+
+                int fd[2];
+                pid_t pid1, pid2;
+
+                pipe(fd);
+                pid1 = fork();
+                if(pid1 < 0)
+                {
+                    perror("first fork failed()");
+                    exit(1);
+                }
+                if(pid1 == 0)
+                {
+                    close(1);
+                    dup(fd[1]);
+                    close(fd[0]);
+                    close(fd[1]);
+                    exec_status = execvp(argument1[0], argument1);
+                    if(exec_status == -1)
+                    {
+                        perror("error with passed in argument");
+                        exit(1);
+                    } 
+                }
+                
+                pid2 = fork();
+                if(pid2 < 0)
+                {
+                    perror("second fork() failed");
+                    exit(1);
+                }
+                if(pid2 == 0)
+                {
+                    close(0);
+                    dup(fd[0]);
+                    close(fd[0]);
+                    close(fd[1]);
+                    exec_status = execvp(argument2[0], argument2);
+                    if(exec_status == -1)
+                    {
+                        perror("error with passed in argument");
+                        exit(1);
+                    } 
+                }
                 close(fd[0]);
                 close(fd[1]);
-                exec_status = execvp(argument2[0], argument2);
-                if(exec_status == -1)
-                {
-                    perror("error with passed in argument");
-                    exit(1);
-                } 
+                waitpid(pid1, NULL, 0);
+                waitpid(pid1, NULL, 0);
             }
-            close(fd[0]);
-            close(fd[1]);
-            waitpid(pid1, NULL, 0);
-            waitpid(pid1, NULL, 0);
             
         }
         else
@@ -626,43 +882,27 @@ int main(int argc, char **argv)
             //~ cout << "checkfasdfasdfboolean: " << out << endl;
             if(redir_checker)
             {
-                for(int x = 0; x < inputs_G.size(); x++)
+                for(unsigned int x = 0; x < inputs_G.size(); x++)
                 {
                     string s = fix_file_name(inputs_G.at(x));
                     inputs_G.at(x) = s;
                     s.clear();
                 }
-                for(int x = 0; x < outputs_G.size(); x++)
+                for(unsigned int x = 0; x < outputs_G.size(); x++)
                 {
                     string s = fix_file_name(outputs_G.at(x));
                     outputs_G.at(x) = s;
                     s.clear();
                 }
                 //cout << "outputssize: " << output_append_G.size() << endl;
-                for(int x = 0; x < output_append_G.size(); x++)
+                for(unsigned int x = 0; x < output_append_G.size(); x++)
                 {
                     string s = fix_file_name(output_append_G.at(x));
                     output_append_G.at(x) = s;
                 }
                 
             }
-            
-            cout << "after string: " << to_be_tokenized << endl;
-          
-            
-            for(int x = 0; x < inputs_G.size(); x++)
-            {
-                cout << "first: " << inputs_G.at(x) << endl;
-            }
-            for(int x = 0; x < output_append_G.size(); x++)
-            {
-                cout << "output_append: " << output_append_G.at(x) << endl;
-            }
-        
-          
-            
-            
-            
+      
             for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
             {
                 prompt_holder[x] = to_be_tokenized.at(x);
@@ -674,7 +914,7 @@ int main(int argc, char **argv)
             exec_result = true;
             while(token != NULL && exec_result && str_continue)
             {
-                cout << "tokens: " << *token << endl;
+                //cout << "tokens: " << *token << endl;
                 connect_check = check_connections(token);
                 check_exit(token);
                 if(connect_check == -1 && sequence < 1 && str_continue)
