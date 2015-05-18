@@ -1,6 +1,6 @@
-# Linux ls command
+# Rshell Linux command
 
-## Ls functionality
+## Rshell functionality
 
 Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It only has basic functionalties for now but more will be added onto it later.
 
@@ -28,7 +28,7 @@ Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It o
 * the ``<<<`` will only work by itself, will not work with any other command
 * The ``1>, 1>>, 2>, 2>>`` will also only work by itself.
 * The only commands that can be combined together is input and output redirection
-* 
+
 
 
 ##Limitations
@@ -39,4 +39,4 @@ Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It o
 * <<< command only works by itself
 * file descriptor change to stderr only works when used by itself
 * `` cat < existingInputFile | tr A-Z a-z | tee newOutputfile1 | tr a-z A-Z > newOutputFile2`` this does not work
-
+* Make file is not attached to other functions like rm, cp, or ls. Will fix in future so make file and deal with other functionality
