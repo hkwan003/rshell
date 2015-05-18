@@ -588,7 +588,8 @@ int main(int argc, char **argv)
         userinfo = getlogin();
     }
     else
-    {
+    {   
+        perror("error getting user info");
         perror("error getting user info");
     }
     if(gethostname(host, 500) == -1)
@@ -719,7 +720,10 @@ int main(int argc, char **argv)
                 int fd[2];
                 pid_t pid1, pid2;
 
-                pipe(fd);
+                if(pipe(fd) == -1)
+                {
+                    perror("failed to call pipe");
+                }
                 pid1 = fork();
                 if(pid1 < 0)
                 {
@@ -728,10 +732,22 @@ int main(int argc, char **argv)
                 }
                 if(pid1 == 0)
                 {
-                    close(1);
-                    dup(fd[1]);
-                    close(fd[0]);
-                    close(fd[1]);
+                    if(close(1) == -1)
+                    {
+                        perror("error occured with close(1)");
+                    }
+                    if(dup(fd[1]) == -1)
+                    {
+                        perror("error occured with dup");
+                    }
+                    if(close(fd[0]) == -1)
+                    {
+                        perror("error occured with close");
+                    }
+                    if(close(fd[1]) == -1)
+                    {
+                        perror("error occured with close");
+                    }
                     exec_status = execvp(argument1[0], argument1);
                     if(exec_status == -1)
                     {
@@ -748,10 +764,22 @@ int main(int argc, char **argv)
                 }
                 if(pid2 == 0)
                 {
-                    close(0);
-                    dup(fd[0]);
-                    close(fd[0]);
-                    close(fd[1]);
+                    if(close(0) == -1)
+                    {
+                        perror("close");
+                    }
+                    if(dup(fd[0]) == -1)
+                    {
+                        perror("dup");
+                    }
+                    if(close(fd[0]) == -1)
+                    {
+                        perror("close");
+                    }
+                    if(close(fd[1]) == -1)
+                    {
+                        perror("close");
+                    }
                     exec_status = execvp(argument2[0], argument2);
                     if(exec_status == -1)
                     {
@@ -759,10 +787,22 @@ int main(int argc, char **argv)
                         exit(1);
                     } 
                 }
-                close(fd[0]);
-                close(fd[1]);
-                waitpid(pid1, NULL, 0);
-                waitpid(pid1, NULL, 0);
+                if(close(fd[0]) == -1)
+                {
+                    perror("close");
+                }
+                if(close(fd[1]) == -1)
+                {
+                    perror("close");
+                }
+                if(waitpid(pid1, NULL, 0) == -1)
+                {
+                    perror("waitpid");
+                }
+                if(waitpid(pid1, NULL, 0) == -1)
+                {
+                    perror("waitpid");
+                }
                 
             }
         
@@ -836,10 +876,22 @@ int main(int argc, char **argv)
                 }
                 if(pid1 == 0)
                 {
-                    close(1);
-                    dup(fd[1]);
-                    close(fd[0]);
-                    close(fd[1]);
+                    if(close(1) == -1)
+                    {
+                        perror("error occured with close(1)");
+                    }
+                    if(dup(fd[1]) == -1)
+                    {
+                        perror("error occured with dup");
+                    }
+                    if(close(fd[0]) == -1)
+                    {
+                        perror("error occured with close");
+                    }
+                    if(close(fd[1]) == -1)
+                    {
+                        perror("error occured with close");
+                    }
                     exec_status = execvp(argument1[0], argument1);
                     if(exec_status == -1)
                     {
@@ -856,10 +908,22 @@ int main(int argc, char **argv)
                 }
                 if(pid2 == 0)
                 {
-                    close(0);
-                    dup(fd[0]);
-                    close(fd[0]);
-                    close(fd[1]);
+                    if(close(0) == -1)
+                    {
+                        perror("close");
+                    }
+                    if(dup(fd[0]) == -1)
+                    {
+                        perror("dup");
+                    }
+                    if(close(fd[0]) == -1)
+                    {
+                        perror("close");
+                    }
+                    if(close(fd[1]) == -1)
+                    {
+                        perror("close");
+                    }
                     exec_status = execvp(argument2[0], argument2);
                     if(exec_status == -1)
                     {
@@ -867,10 +931,22 @@ int main(int argc, char **argv)
                         exit(1);
                     } 
                 }
-                close(fd[0]);
-                close(fd[1]);
-                waitpid(pid1, NULL, 0);
-                waitpid(pid1, NULL, 0);
+                if(close(fd[0]) == -1)
+                {
+                    perror("close");
+                }
+                if(close(fd[1]) == -1)
+                {
+                    perror("close");
+                }
+                if(waitpid(pid1, NULL, 0) == -1)
+                {
+                    perror("waitpid");
+                }
+                if(waitpid(pid1, NULL, 0) == -1)
+                {
+                    perror("waitpid");
+                }
             }
             
         }
