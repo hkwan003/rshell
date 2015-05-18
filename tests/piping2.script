@@ -1,0 +1,49 @@
+Script started on Sun 17 May 2015 09:46:16 PM PDT
+~
+hkwan003@hammer $ cs100
+[0;91m
+===============================================================================
+|                                                                             |
+| You have enabled settings specific for cs100.  Everything you do is being   |
+| recorded to measure your progress in the class.                             |
+|                                                                             |
+| Important commands for the class:                                           |
+|   * calcgrade.sh          displays a detailed breakdown of your grade       |
+|   * checksyscalls.sh      is your cpp file doing proper error checking?     |
+|   * typespeed             practice typing unix commands                     |
+|                                                                             |
+| Important commands for general C++ programming:                             |
+|   * make                  don't call g++ manually; let make do the work!    |
+|   * gdb                   the GNU debugger                                  |
+|   * valgrind              get rid of your memory leaks                      |
+|   * cppcheck              static analysis tool                              |
+|   * man                   find help about any syscall / terminal command    |
+|                                                                             |
+===============================================================================
+[0m
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m make clean
+mmake: *** No rule to make target `clean'.  Stop.
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m make
+make: *** No targets specified and no makefile found.  Stop.
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m ls
+61 FOLDEER  CS100    cs12   CS61     Documents	gitlearn  Pictures  quiz    rshell-1   tester_files  WINDOWS
+calvin	    cs100#1  CS-14  Desktop  Downloads	Music	  Public    rshell  Templates  Videos
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd rshell
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m ls
+LICENSE  Makefile  README.md  src  tests
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m make
+mkdir -p ./bin
+g++  ./src/new.cpp -o ./bin/redirect
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m bin/redirect
+hkwan003@hammer.cs.ucr.edu $ cat <<< " 		"hi output this string"
+hi output this string
+hkwan003@hammer.cs.ucr.edu $ cout      		<<<   cat 		<< '  < "a yay thi so   s outputted"
+yay this outputted
+hkwan003@hammer.cs.ucr.edu $ exit
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (redirect) [0;36m$[0m exit
+exit
+~
+hkwan003@hammer $ exit
+exit
+
+Script done on Sun 17 May 2015 09:47:02 PM PDT

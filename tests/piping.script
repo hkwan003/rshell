@@ -154,10 +154,10 @@ l
 error with passed in argument list: No such file or directory
 hkwan003@hammer.cs.ucr.edu $ ls
 >  a-z	bin  file  file1  LICENSE  Makefile  new_file  README.md  src  tests
-hkwan003@hammer.cs.ucr.edu $ cat << "  < "outputs this string right here"
+hkwan003@hammer.cs.ucr.edu $ cat <<< "outputs this string right here"
 outputs this string right here
-hkwan003@hammer.cs.ucr.edu $ wc <<"   < 			"does not just work with cat"
-      1       6      28
+hkwan003@hammer.cs.ucr.edu $ wc <<< 			"does not just work with cat"
+  1       6      28
 hkwan003@hammer.cs.ucr.edu $ cat << "			all kinda   s of spaces"
 open: No such file or directory
 open: No such file or directory
