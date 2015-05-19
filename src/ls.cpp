@@ -28,11 +28,11 @@ string convert_to_string(char *Data)
 
 bool Alphabetical(string c1, string c2)
 {
-    for(int i = 0; i < c1.size(); i++)
+    for(unsigned int i = 0; i < c1.size(); i++)
     {
         c1.at(i) = tolower(c1.at(i));
     }
-    for(int i = 0; i < c2.size(); i++)
+    for(unsigned int i = 0; i < c2.size(); i++)
     {
         c2.at(i) = tolower(c2.at(i));
     }
@@ -47,7 +47,7 @@ string converted_string;
 
 void type_of_flag(string s)
 {
-    for(int x = 0; x < s.size(); x++)           // 0 = "-" dash
+    for(unsigned int x = 0; x < s.size(); x++)           // 0 = "-" dash
     {                                           // 1 = "a"
         if(s.at(x) == '-')                      // 2 = "l"
         {                                       // 3 = "R"
@@ -75,7 +75,7 @@ void type_of_flag(string s)
 
 void print_files(vector<string> V)
 {
-    for(int x = 0; x < V.size(); x++)
+    for(unsigned int x = 0; x < V.size(); x++)
     {
         cout << V.at(x) << " ";
     }
@@ -96,6 +96,7 @@ void execute(int arg, char ** agv)
     {
         file_store.push_back(filespecs->d_name);
     }
+    perror("readdir failed");
     sort(file_store.begin(), file_store.end(), Alphabetical);
     print_files(file_store); 
 
@@ -110,9 +111,8 @@ void execute(int arg, char ** agv)
 
 int main(int argc, char ** argv)
 {
-    bool A_check;
-    bool L_check;
-    bool R_check;
+    bool A_check = false;
+    bool L_check = false;
     string flags;               //holds all flags of user input
     if(argc <= 1)
     {
@@ -137,21 +137,21 @@ int main(int argc, char ** argv)
             converted_string += " ";
         }
         //cout << converted_string;
-        for(int x = 0; x < flags_finder.size(); x++)
+        for(unsigned int x = 0; x < flags_finder.size(); x++)
         {
             converted_string += convert_to_string(flags_finder.at(x));
-            for(int i = 0; i < converted_string.size(); i++)
+            for(unsigned int i = 0; i < converted_string.size(); i++)
             {
                 if(converted_string.at(i) == '-')
                 {
-                    for(int v = 1; v < converted_string.size(); v++)
+                    for(unsigned int v = 1; v < converted_string.size(); v++)
                     {
                         flags += converted_string.at(x);
                     }
                 }
             }
         }
-        for(int i = 0; i < flags.size(); i++)
+        for(unsigned int i = 0; i < flags.size(); i++)
         {   
             if(flags.at(i) == 'a')
             {
@@ -161,18 +161,16 @@ int main(int argc, char ** argv)
             {
                 L_check = true;
             }
-            else if(flags.at(i) == 'R')
-            {
-                R_check == true;
-            }
 
         }
         if(A_check)
         {
             execute(argc, argv);
         }
-        
-      
+        if(L_check)
+        {
+            execute(argc, argv);
+        }
          
          
 
