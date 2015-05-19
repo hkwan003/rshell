@@ -1,6 +1,5 @@
 
 /* C++ interface for program benchmark timer management. */
-
 #include <stdlib.h>
 #include <sys/time.h>
 #include <sys/resource.h>
