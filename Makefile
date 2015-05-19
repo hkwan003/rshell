@@ -1,9 +1,11 @@
 CXX = g++
 CFGLAGS = -Wall -Werror -ansi -pedantic
-FILEPATH = ./src/new.cpp
+FILEPATH = ./src/main.cpp
 CPPATH = ./src/cp.cpp
 RMPATH = ./src/rm.cpp
-OUTPATH = ./bin/redirect
+LSPATH = ./src/ls.cpp
+MVPATH = ./src/mv.cpp
+OUTPATH = ./bin/rshell
 
 all: 
 		mkdir -p ./bin
@@ -13,10 +15,16 @@ rshell:
 		$(CXX) $(CFLAGS) $(FILEPATH) -o $(OUTPATH)
 cp:		
 		mkdir -p ./bin
-		$(CXX) $(CFLAGS) $(FILEPATH) -o $(OUTPATHS)
+		$(CXX) $(CFLAGS) $(CPPATH) -o $(OUTPATH)
 rm: 		
 		mkdir -p ./bin
-		$(CXX) $(CFLAGS) $(FILEPATH) -o $(OUTPATHS)
+		$(CXX) $(CFLAGS) $(RMPATH) -o $(OUTPATH)
+ls: 	
+		mkdir -p ./bin
+		$(CXX) $(CFLAGS) $(LSPATH) -o $(OUTPATH)
+mv:
+		mkdir -p ./bin
+		$(CXX) $(CFLAGS) $(MVPATH) -o $(OUTPATH)
 
 clean:
 		rm -rf ./bin
