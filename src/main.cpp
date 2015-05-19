@@ -799,7 +799,7 @@ int main(int argc, char **argv)
                 {
                     perror("waitpid");
                 }
-                if(waitpid(pid1, NULL, 0) == -1)
+                if(waitpid(pid2, NULL, 0) == -1)
                 {
                     perror("waitpid");
                 }
