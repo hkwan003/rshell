@@ -14,11 +14,15 @@ Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It o
 ## How to use piping 
 
 * First compile the program by typing ``make``
-* After compiling, type in ``bin/redirect``
+* After compiling, type in ``bin/rshell`
 * Type in ``make clean`` to clear out the old bin
+* ``make cp`` compiles the code for cp
+* ``make rm`` compiles the code for rm
+* ``make ls`` compiles ls for you
+* ``make mv`` compiles mv command
 * Input redirection < input redirection into a program like wc ``Word Count``
 * Output redirection >, >>,`` >`` truncates orginal file, ``>>`` appends onto what was already in folder
-* Ls | cat, redirects the output of ls into input end of cat
+* ls | cat, redirects the output of ls into input end of cat
 * input and output redirection can be combined ``wc < file > file 1 >> file2``
 
 ## Bugs
