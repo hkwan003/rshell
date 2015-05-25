@@ -14,7 +14,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
-
+#include <csignal>
+#include <signal.h>
 
 using namespace std;
 
@@ -90,6 +91,31 @@ void fixing_spacing_command(char *org_prompt, int check_redir)
     }
       strcpy(org_prompt, fin_prompt);        //copies altered version
 }
+
+void signal_handler(int i)
+{
+    cout << endl;
+}
+bool cd_check = true;
+bool check_change_DIR(char* arr[])
+{
+    char* dir = arr[0];
+    char* path = arr[1];
+    if(!strcmp(dir, "cd"))
+    {
+        if(path == '\0')
+        {
+            cout << "please enter in a path" << endl;
+        }
+        else if(chdir(path) == -1)
+        {
+            perror("problem with change directory");
+        }
+        return true;
+    }
+    return false;
+}
+
 bool in = false;
 bool out = false;
 bool add_out = false;
@@ -107,121 +133,126 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
     }
     else if(process_ID == 0) //child process
     {
-        if(redir)
+        cd_check = check_change_DIR(command_list);
+        if(!cd_check)
         {
-            //cout << "add_out: " << add_out << endl;
-            if(output_append_G.size() > 0 && add_out)
+            if(redir)
             {
-                //~ cout << "double carrot signs" << endl;
-                //~ cout << "return_file descript: " << return_file_descrption << endl;
-                if(return_file_descrption == 0)
+                check_change_DIR(command_list);
+                //cout << "add_out: " << add_out << endl;
+                if(output_append_G.size() > 0 && add_out)
                 {
-                    if(close(1) == -1)
+                    //~ cout << "double carrot signs" << endl;
+                    //~ cout << "return_file descript: " << return_file_descrption << endl;
+                    if(return_file_descrption == 0)
                     {
-                        perror("close");
+                        if(close(1) == -1)
+                        {
+                            perror("close");
+                        }
+                    }
+                    int fd;
+                    if(return_file_descrption == 4)
+                    {
+                        if(close(1) == -1)
+                        {
+                            perror("close(1)");
+                        }
+                    }
+                    if(return_file_descrption == 5)
+                    {
+                        if(close(2) == -1)
+                        {
+                            perror("close(2)");
+                        }
+                    }
+                    //cout << "show appendation size: " << output_append_G.size() << endl;
+                    for(unsigned int x = 0; x < output_append_G.size(); x++)
+                    {   
+                        //cout << "outupt this stuff: " << output_append_G.at(output_append_G.size() - 1 - x) << endl; 
+                        if((fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_APPEND | O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR)) == -1))
+                        {
+                            perror("open");
+                        }
                     }
                 }
-                int fd;
-                if(return_file_descrption == 4)
-                {
-                    if(close(1) == -1)
+                if(outputs_G.size() > 0 && out)
+                {	
+                    //cout << "is this being outputted" << endl;
+                    if(return_file_descrption == 0)
                     {
-                        perror("close(1)");
+                        if(close(1) == -1)
+                        {
+                            perror("close");
+                        }
+                    }
+                    if(return_file_descrption == 6)
+                    {
+                        if(close(0) == -1)
+                        {
+                            perror("close(1)");
+                        }
+                    }
+                    if(return_file_descrption == 1)
+                    {
+                        if(close(1) == -1)
+                        {
+                            perror("close(1)");
+                        }
+                    }
+                    if(return_file_descrption == 2)
+                    {
+                        if(close(2) == -1)
+                        {
+                            perror("close(2)");
+                        }
+                    }
+                    int fd;
+                    for(unsigned int x = 0; x < outputs_G.size(); x++)
+                    {
+                        if((fd = (open(outputs_G.at(outputs_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR)) == -1))
+                        {
+                            perror("open");
+                        }
                     }
                 }
-                if(return_file_descrption == 5)
+                if(inputs_G.size() > 0 && in)
                 {
-                    if(close(2) == -1)
-                    {
-                        perror("close(2)");
-                    }
-                }
-                //cout << "show appendation size: " << output_append_G.size() << endl;
-                for(unsigned int x = 0; x < output_append_G.size(); x++)
-                {   
-                    //cout << "outupt this stuff: " << output_append_G.at(output_append_G.size() - 1 - x) << endl; 
-                    if((fd = (open(output_append_G.at(output_append_G.size() -1 - x).c_str(), O_APPEND | O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR)) == -1))
-                    {
-                        perror("open");
-                    }
-                }
-            }
-            if(outputs_G.size() > 0 && out)
-            {	
-                //cout << "is this being outputted" << endl;
-                if(return_file_descrption == 0)
-                {
-                    if(close(1) == -1)
-                    {
-                        perror("close");
-                    }
-                }
-                if(return_file_descrption == 6)
-                {
+                    //cout << "does this enter here" << endl;
                     if(close(0) == -1)
                     {
-                        perror("close(1)");
+                        perror("close");
+                    }
+                    //cout << "does this mess it up" << endl;
+                    int fd;
+                    for(unsigned int x = 0; x < inputs_G.size(); x++)
+                    {
+                        if((fd = open(inputs_G.at(inputs_G.size() -1 - x).c_str(), O_RDONLY)) == -1)
+                        {
+                            perror("open");
+                        }
                     }
                 }
-                if(return_file_descrption == 1)
+                //cout << "output right before exec " << endl;
+                exec_status = (execvp(command, command_list));
+                //cout << "output exec status////////////////: " << exec_status << endl;
+                if(exec_status == -1)
                 {
-                    if(close(1) == -1)
-                    {
-                        perror("close(1)");
-                    }
-                }
-                if(return_file_descrption == 2)
-                {
-                    if(close(2) == -1)
-                    {
-                        perror("close(2)");
-                    }
-                }
-                int fd;
-                for(unsigned int x = 0; x < outputs_G.size(); x++)
-                {
-                    if((fd = (open(outputs_G.at(outputs_G.size() -1 - x).c_str(), O_RDWR | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR)) == -1))
-                    {
-                        perror("open");
-                    }
+                    perror("error with passed in argument list");
+                    return exec_status;
+                    exit(1);
                 }
             }
-            if(inputs_G.size() > 0 && in)
+            else 
             {
-                //cout << "does this enter here" << endl;
-                if(close(0) == -1)
+                //cout << "is this going in there" << endl;
+                exec_status = (execvp(command, command_list));
+                if(exec_status == -1)
                 {
-                    perror("close");
+                    perror("error with passed in argument list");
+                    return exec_status;
+                    exit(1);
                 }
-                //cout << "does this mess it up" << endl;
-                int fd;
-                for(unsigned int x = 0; x < inputs_G.size(); x++)
-                {
-                    if((fd = open(inputs_G.at(inputs_G.size() -1 - x).c_str(), O_RDONLY)) == -1)
-                    {
-                        perror("open");
-                    }
-                }
-            }
-            //cout << "output right before exec " << endl;
-            exec_status = (execvp(command, command_list));
-            //cout << "output exec status////////////////: " << exec_status << endl;
-            if(exec_status == -1)
-            {
-                perror("error with passed in argument list");
-                return exec_status;
-                exit(1);
-            }
-        }
-        else 
-        {
-            //cout << "is this going in there" << endl;
-            exec_status = (execvp(command, command_list));
-            if(exec_status == -1)
-            {
-                perror("error with passed in argument list");
-                return exec_status;
-                exit(1);
             }
         }
     }
@@ -573,6 +604,15 @@ void fix_pipe_argument(string& s)
 
 int main(int argc, char **argv)
 {
+    cd_check = true;
+    if(signal(SIGINT, signal_handler) == SIG_ERR)
+    {
+        perror("problem with the signals");
+        exit(1);
+    }
+ 
+    cout.flush();
+    
     outputs_G.clear();
     inputs_G.clear();
     int check_redir = 0;
@@ -599,6 +639,11 @@ int main(int argc, char **argv)
     //outputs the userinfo with login and host
     while(prompter)
     {
+         if(signal(SIGINT, signal_handler) == SIG_ERR)
+        {
+            perror("problem with the signals");
+            exit(1);
+        }
         i = 0;
             //reset counter for increment for pipe checker
         checks_pipes = true;
