@@ -559,7 +559,6 @@ void push_piping_string(string s)
     //~ {
         //~ piparr[r] = const_cast<char*> (piping_str.at(r).c_str());
     //~ }
-    
 }
 void fix_pipe_argument(string& s)
 {
