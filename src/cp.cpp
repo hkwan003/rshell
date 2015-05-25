@@ -7,7 +7,6 @@
 #include <fcntl.h>
 #include <ctime>
 #include "Timer.h"
-
 using namespace std;
 
 int main( int argc, char *argv[] ){
