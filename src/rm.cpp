@@ -8,11 +8,8 @@
 #include <dirent.h>
 #include <vector>
 #include <string.h>
-
 using namespace std;
-
 string convert(const char * data){return string(data);}
-
 bool containsR(int argc, char * argv[]){
 	string c = "";
 	for(int i = 0; i < argc; i++){c +=convert(argv[i]);}
