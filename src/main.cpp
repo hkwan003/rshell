@@ -651,7 +651,23 @@ int main(int argc, char **argv)
         add_out = false;
         inputs_G.clear();
         outputs_G.clear();
-        cout << userinfo << "@" << host << " $ ";
+        string curr_wrkin_dir(get_current_dir_name());
+        string fixed_dir;
+        int i = 0;
+        for(int x = curr_wrkin_dir.size(); x > 0; x--)
+        {
+            fixed_dir += curr_wrkin_dir[x];
+            if(curr_wrkin_dir[x] == '/')
+            {
+                i++;
+                if(i == 4)
+                {
+                    x = 0;
+                }
+            }
+        }
+        fixed_dir = string(fixed_dir.rbegin(), fixed_dir.rend());
+        cout << userinfo << "@" << host << "; " << fixed_dir << " ";
         //////////////////////////////////////////////login part done, next is all shell commands
         char prompt_holder[50000];//orginal array to hold prompt
         char *comd_arr[50000];
