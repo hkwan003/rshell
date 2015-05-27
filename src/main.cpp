@@ -92,9 +92,28 @@ void fixing_spacing_command(char *org_prompt, int check_redir)
       strcpy(org_prompt, fin_prompt);        //copies altered version
 }
 
-void signal_handler(int i)
+static void signal_handler(int i, siginfo_t *info, void* ptr)
 {
-    cout << endl;
+    if(i == SIGCHLD)
+    {
+        while(waitpid(-1, NULL, WNOHANG) > 0)
+        {
+            exit(1);
+        }
+    }
+    if(i == SIGINT)
+    {
+        wait(0);
+        cout << endl;
+        return;
+    }
+    else if(i == SIGSTOP)
+    {
+        cout << endl;
+        system("bin/rshell");
+        raise(SIGSTOP);
+        return;
+    }
 }
 bool cd_check = true;
 bool check_change_DIR(char* arr[])
@@ -105,7 +124,16 @@ bool check_change_DIR(char* arr[])
     {
         if(path == '\0')
         {
-            cout << "please enter in a path" << endl;
+            if(chdir(getenv("HOME")) == -1)
+            {
+                perror("problem with home directory");
+            }
+        }
+        else if(!strcmp(path, "-"))
+        {
+            char *prev;
+            prev = getcwd(prev, 0);
+            chdir("..");
         }
         else if(chdir(path) == -1)
         {
@@ -122,19 +150,23 @@ bool add_out = false;
 int exec_status;
 bool str_continue = true;
 int return_file_descrption = 0;     //file descriptor of what file descriptor to change it to
+int status;
 bool execute(char* command, char* command_list[], int conect_type, bool redir, string path_name)
 {
-    int status;
-    int process_ID = fork();
-    if(process_ID <= -1)
+    cd_check = check_change_DIR(command_list);
+    char* envir = getenv("PATH");
+    char name[50000];
+    sprintf(name, "PATH=%s", NULL);
+    char *envp[] = {name, NULL};
+    if(!cd_check)
     {
-        perror("Error occured during forking()"); 
-        exit(1);
-    }
-    else if(process_ID == 0) //child process
-    {
-        cd_check = check_change_DIR(command_list);
-        if(!cd_check)
+        int process_ID = fork();
+        if(process_ID <= -1)
+        {
+            perror("Error occured during forking()"); 
+            exit(1);
+        }
+        else if(process_ID == 0) //child process
         {
             if(redir)
             {
@@ -234,7 +266,7 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                     }
                 }
                 //cout << "output right before exec " << endl;
-                exec_status = (execvp(command, command_list));
+                exec_status = execvpe(command, command_list, envp);
                 //cout << "output exec status////////////////: " << exec_status << endl;
                 if(exec_status == -1)
                 {
@@ -246,7 +278,7 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
             else 
             {
                 //cout << "is this going in there" << endl;
-                exec_status = (execvp(command, command_list));
+                exec_status = (execvpe(command, command_list, envp));
                 if(exec_status == -1)
                 {
                     perror("error with passed in argument list");
@@ -255,12 +287,12 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                 }
             }
         }
-    }
-    else if(process_ID > 0) //parent process
-    {
-        if(waitpid(process_ID, &status,0) == -1)
+        else if(process_ID > 0) //parent process
         {
-            perror("error with waitpid()");
+            if(waitpid(process_ID, &status,0) == -1)
+            {
+                perror("error with waitpid()");
+            }
         }
     }
     return(!(status == 0 && conect_type == -1) ||( status > 0 && conect_type == 2));
@@ -604,11 +636,11 @@ void fix_pipe_argument(string& s)
 int main(int argc, char **argv)
 {
     cd_check = true;
-    if(signal(SIGINT, signal_handler) == SIG_ERR)
-    {
-        perror("problem with the signals");
-        exit(1);
-    }
+    //~ if(signal(SIGINT, signal_handler) == SIG_ERR)
+    //~ {
+        //~ perror("problem with the signals");
+        //~ exit(1);
+    //~ }
  
     cout.flush();
     
@@ -638,10 +670,24 @@ int main(int argc, char **argv)
     //outputs the userinfo with login and host
     while(prompter)
     {
-         if(signal(SIGINT, signal_handler) == SIG_ERR)
+        cin.clear();
+        struct sigaction new_one = {0};
+        struct sigaction old_one = {0};
+        sigset_t foo;
+        new_one.sa_mask = foo;
+        new_one.sa_sigaction = signal_handler;
+        
+        if(sigaction(SIGINT, &new_one, &old_one) == -1)
         {
-            perror("problem with the signals");
-            exit(1);
+            perror("problem with SIGINT");
+        }
+        if(sigaction(SIGTSTP, &new_one, &old_one) == -1)
+        {
+            perror("problem with SIGSTP");
+        }
+        if(sigaction(SIGCHLD, &new_one, &old_one) == -1)
+        {
+            perror("problem with SIGCHILD");
         }
         i = 0;
             //reset counter for increment for pipe checker
