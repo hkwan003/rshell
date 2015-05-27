@@ -124,20 +124,63 @@ bool check_change_DIR(char* arr[])
     {
         if(path == '\0')
         {
+            char *newer, *older;
+            if((newer = getenv("HOME")) == NULL)
+            {
+                perror("get enviroment messed up");
+            }
+            if(chdir(newer) == -1)
+            {
+                perror("change directory messed up");
+            }
             if(chdir(getenv("HOME")) == -1)
             {
                 perror("problem with home directory");
             }
+            if(setenv("PWD", newer, 1) == -1)
+            {
+                perror("set envioment messed up");
+            }
         }
         else if(!strcmp(path, "-"))
         {
-            char *prev;
-            prev = getcwd(prev, 0);
-            chdir("..");
+            char *newer, *older;
+            if((newer = getenv("PWD")) == NULL)
+            {
+                perror("dash get enviroment failed");
+            }
+            if((older = getenv("OLDPWD")) == NULL)
+            {
+                perror("old get enviroment failed");
+            }
+            if(chdir(older) == -1)
+            {
+                perror("changed directory failed");
+            }
+            if(setenv("PWD", older, 1) == -1)
+            {
+                perror("failed to set enviroment");
+            }
+            if(setenv("OLDPWD", newer, 1) == -1)
+            {
+                perror("new failed to set enviroment");
+            }
         }
-        else if(chdir(path) == -1)
+        else
         {
-            perror("problem with change directory");
+            char *old;
+            if((old = getenv("PWD")) == NULL)
+            {
+                perror("get enviroment failed");
+            }
+            if(setenv("OLDPWD", old, 1) == -1)
+            {
+                perror("set enviroment failed");
+            }	
+            if(chdir(path) == -1)
+            {
+                perror("change path failed");
+            }
         }
         return true;
     }
@@ -727,426 +770,429 @@ int main(int argc, char **argv)
         //string converter; //converts all bits of string into one piece
         string to_be_tokenized;
         getline(cin, to_be_tokenized);
-        //gets user input
-        checks_pipes = chk_pipes(to_be_tokenized);
-        bool three_bracket = false;
-        for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+        if(to_be_tokenized.size() > 0)
         {
-            if(to_be_tokenized.at(x) == '<' && to_be_tokenized.at(x + 1) == '<' && to_be_tokenized.at(x + 2) == '<')
+            //gets user input
+            checks_pipes = chk_pipes(to_be_tokenized);
+            bool three_bracket = false;
+            for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
             {
-                checks_pipes = true;
-                three_bracket = true;
+                if(to_be_tokenized.at(x) == '<' && to_be_tokenized.at(x + 1) == '<' && to_be_tokenized.at(x + 2) == '<')
+                {
+                    checks_pipes = true;
+                    three_bracket = true;
+                }
             }
-        }
-        //cout << "checking pipes: " << checks_pipes << endl;
-        if(checks_pipes)
-        {
-            string tmp_str;         //holds 
-            fix_pipe_argument(to_be_tokenized);
-            int array1 = 0;      //counter for array argument1
-            int array2 = 0;      //counter for array argument2
-            //cout << "new prompt: " << to_be_tokenized << endl;
-            char *argument1[50000];
-            char *argument2[50000];
-            char *token;
-            string first_half;
-            string second_half;
-            char first[50000];
-            char second[50000];
-            for(int x = 0; x < 50000; x++)
+            //cout << "checking pipes: " << checks_pipes << endl;
+            if(checks_pipes)
             {
-                argument1[x] = '\0';
-                argument2[x] = '\0';
-                first[x] = '\0';
-                second[x] = '\0';
-            }
-             //clearing arrays all arrays
-            if(three_bracket)
-            {
-                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+                string tmp_str;         //holds 
+                fix_pipe_argument(to_be_tokenized);
+                int array1 = 0;      //counter for array argument1
+                int array2 = 0;      //counter for array argument2
+                //cout << "new prompt: " << to_be_tokenized << endl;
+                char *argument1[50000];
+                char *argument2[50000];
+                char *token;
+                string first_half;
+                string second_half;
+                char first[50000];
+                char second[50000];
+                for(int x = 0; x < 50000; x++)
                 {
-                    if(to_be_tokenized.at(x) != '<')
-                    {
-                        second_half.push_back(to_be_tokenized.at(x));
-                    }
-                    if(to_be_tokenized.at(x) == '<')
-                    {
-                        break;
-                    }
+                    argument1[x] = '\0';
+                    argument2[x] = '\0';
+                    first[x] = '\0';
+                    second[x] = '\0';
                 }
-                first_half+= "echo ";
-                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+                 //clearing arrays all arrays
+                if(three_bracket)
                 {
-                    if(to_be_tokenized.at(x) == '<')
+                    for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
                     {
-                        if(x + 3 < to_be_tokenized.size())
-                        {
-                            x+= 3;
-                            for(; x < to_be_tokenized.size(); x++)
-                            {
-                                if(to_be_tokenized.at(x) == '"')
-                                {
-                                    to_be_tokenized.at(x) = ' ';
-                                }
-                                first_half.push_back(to_be_tokenized.at(x));
-                            }
-                        }
-                    }
-                }
-                for(unsigned int x = 0; x < first_half.size(); x++)
-                {
-                    first[x] = first_half.at(x);
-                } 
-                
-                for(unsigned int x = 0; x < second_half.size(); x++)
-                {
-                    second[x] = second_half.at(x);
-                }
-                      token = strtok(first, "\t ");
-                while(token != NULL)
-                {
-                    //cout<< "first: "  << token << endl;
-                    argument1[array1] = token;
-                    array1++;
-                    token = strtok(NULL, "\t ");
-                }
-                
-                argument1[array1 + 1] = '\0'; 
-
-                token = strtok(second, "\t ");
-                while(token != NULL)
-                {
-                    //cout << "Second: "  << token << endl;
-                    argument2[array2] = token;
-                    array2++;
-                    token = strtok(NULL, "\t ");
-                }
-
-                argument2[array2 + 1] = '\0';
-                int fd[2];
-                pid_t pid1, pid2;
-
-                if(pipe(fd) == -1)
-                {
-                    perror("failed to call pipe");
-                }
-                pid1 = fork();
-                if(pid1 < 0)
-                {
-                    perror("first fork failed()");
-                    exit(1);
-                }
-                if(pid1 == 0)
-                {
-                    if(close(1) == -1)
-                    {
-                        perror("error occured with close(1)");
-                    }
-                    if(dup(fd[1]) == -1)
-                    {
-                        perror("error occured with dup");
-                    }
-                    if(close(fd[0]) == -1)
-                    {
-                        perror("error occured with close");
-                    }
-                    if(close(fd[1]) == -1)
-                    {
-                        perror("error occured with close");
-                    }
-                    exec_status = execvp(argument1[0], argument1);
-                    if(exec_status == -1)
-                    {
-                        perror("error with passed in argument");
-                        exit(1);
-                    } 
-                }
-                
-                pid2 = fork();
-                if(pid2 < 0)
-                {
-                    perror("second fork() failed");
-                    exit(1);
-                }
-                if(pid2 == 0)
-                {
-                    if(close(0) == -1)
-                    {
-                        perror("close");
-                    }
-                    if(dup(fd[0]) == -1)
-                    {
-                        perror("dup");
-                    }
-                    if(close(fd[0]) == -1)
-                    {
-                        perror("close");
-                    }
-                    if(close(fd[1]) == -1)
-                    {
-                        perror("close");
-                    }
-                    exec_status = execvp(argument2[0], argument2);
-                    if(exec_status == -1)
-                    {
-                        perror("error with passed in argument");
-                        exit(1);
-                    } 
-                }
-                if(close(fd[0]) == -1)
-                {
-                    perror("close");
-                }
-                if(close(fd[1]) == -1)
-                {
-                    perror("close");
-                }
-                if(waitpid(pid1, NULL, 0) == -1)
-                {
-                    perror("waitpid");
-                }
-                if(waitpid(pid2, NULL, 0) == -1)
-                {
-                    perror("waitpid");
-                }
-                
-            }
-        
-            else
-            {
-                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
-                {
-                    if(to_be_tokenized.at(x) != '|')
-                    {
-                        first_half.push_back(to_be_tokenized.at(x));
-                    }
-                    if(to_be_tokenized.at(x) == '|')
-                    {
-                        break;
-                    }
-                }
-                    
-                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
-                {
-                    if(to_be_tokenized.at(x) == '|')
-                    {
-                        x++;
-                        for(; x < to_be_tokenized.size(); x++)
+                        if(to_be_tokenized.at(x) != '<')
                         {
                             second_half.push_back(to_be_tokenized.at(x));
                         }
+                        if(to_be_tokenized.at(x) == '<')
+                        {
+                            break;
+                        }
                     }
-                }
-                for(unsigned int x = 0; x < first_half.size(); x++)
-                {
-                    first[x] = first_half.at(x);
-                } 
-                
-                for(unsigned int x = 0; x < second_half.size(); x++)
-                {
-                    second[x] = second_half.at(x);
-                }
-
-                token = strtok(first, "\t ");
-                while(token != NULL)
-                {
-                    //cout<< "first: "  << token << endl;
-                    argument1[array1] = token;
-                    array1++;
-                    token = strtok(NULL, "\t ");
-                }
-                
-                argument1[array1 + 1] = '\0'; 
-
-                token = strtok(second, "\t ");
-                while(token != NULL)
-                {
-                    //cout << "Second: "  << token << endl;
-                    argument2[array2] = token;
-                    array2++;
-                    token = strtok(NULL, "\t ");
-                }
-
-                argument2[array2 + 1] = '\0';
-
-
-                int fd[2];
-                pid_t pid1, pid2;
-
-                pipe(fd);
-                pid1 = fork();
-                if(pid1 < 0)
-                {
-                    perror("first fork failed()");
-                    exit(1);
-                }
-                if(pid1 == 0)
-                {
-                    if(close(1) == -1)
+                    first_half+= "echo ";
+                    for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
                     {
-                        perror("error occured with close(1)");
+                        if(to_be_tokenized.at(x) == '<')
+                        {
+                            if(x + 3 < to_be_tokenized.size())
+                            {
+                                x+= 3;
+                                for(; x < to_be_tokenized.size(); x++)
+                                {
+                                    if(to_be_tokenized.at(x) == '"')
+                                    {
+                                        to_be_tokenized.at(x) = ' ';
+                                    }
+                                    first_half.push_back(to_be_tokenized.at(x));
+                                }
+                            }
+                        }
                     }
-                    if(dup(fd[1]) == -1)
+                    for(unsigned int x = 0; x < first_half.size(); x++)
                     {
-                        perror("error occured with dup");
-                    }
-                    if(close(fd[0]) == -1)
-                    {
-                        perror("error occured with close");
-                    }
-                    if(close(fd[1]) == -1)
-                    {
-                        perror("error occured with close");
-                    }
-                    exec_status = execvp(argument1[0], argument1);
-                    if(exec_status == -1)
-                    {
-                        perror("error with passed in argument");
-                        exit(1);
+                        first[x] = first_half.at(x);
                     } 
-                }
-                
-                pid2 = fork();
-                if(pid2 < 0)
-                {
-                    perror("second fork() failed");
-                    exit(1);
-                }
-                if(pid2 == 0)
-                {
-                    if(close(0) == -1)
+                    
+                    for(unsigned int x = 0; x < second_half.size(); x++)
                     {
-                        perror("close");
+                        second[x] = second_half.at(x);
                     }
-                    if(dup(fd[0]) == -1)
+                          token = strtok(first, "\t ");
+                    while(token != NULL)
                     {
-                        perror("dup");
-                    }
-                    if(close(fd[0]) == -1)
-                    {
-                        perror("close");
-                    }
-                    if(close(fd[1]) == -1)
-                    {
-                        perror("close");
-                    }
-                    exec_status = execvp(argument2[0], argument2);
-                    if(exec_status == -1)
-                    {
-                        perror("error with passed in argument");
-                        exit(1);
-                    } 
-                }
-                if(close(fd[0]) == -1)
-                {
-                    perror("close");
-                }
-                if(close(fd[1]) == -1)
-                {
-                    perror("close");
-                }
-                if(waitpid(pid1, NULL, 0) == -1)
-                {
-                    perror("waitpid");
-                }
-                if(waitpid(pid2, NULL, 0) == -1)
-                {
-                    perror("waitpid");
-                }
-            }
-            
-        }
-        else
-        {
-            bool redir_checker = redir_exist(to_be_tokenized);
-            check_redirection(to_be_tokenized);
-            //~ cout << "checkfasdfasdfboolean: " << add_out << endl;
-            //~ cout << "checkfasdfasdfboolean: " << out << endl;
-            if(redir_checker)
-            {
-                for(unsigned int x = 0; x < inputs_G.size(); x++)
-                {
-                    string s = fix_file_name(inputs_G.at(x));
-                    inputs_G.at(x) = s;
-                    s.clear();
-                }
-                for(unsigned int x = 0; x < outputs_G.size(); x++)
-                {
-                    string s = fix_file_name(outputs_G.at(x));
-                    outputs_G.at(x) = s;
-                    s.clear();
-                }
-                //cout << "outputssize: " << output_append_G.size() << endl;
-                for(unsigned int x = 0; x < output_append_G.size(); x++)
-                {
-                    string s = fix_file_name(output_append_G.at(x));
-                    output_append_G.at(x) = s;
-                }
-                
-            }
-      
-            for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
-            {
-                prompt_holder[x] = to_be_tokenized.at(x);
-            }   
-            fixing_spacing_command(prompt_holder, check_redir);
-            int connect_check; //indicates which connection is in token
-            token = strtok(prompt_holder, "\t ");
-            //cout << "output token: " << token << endl;
-            exec_result = true;
-            while(token != NULL && exec_result && str_continue)
-            {
-                //cout << "tokens: " << *token << endl;
-                connect_check = check_connections(token);
-                check_exit(token);
-                if(connect_check == -1 && sequence < 1 && str_continue)
-                {
-                    //cout << "does this come out on top" << endl;
-                    check_exit(token);
-                    comd_arr[comd_arr_cnt] = token;
-                    comd_arr_cnt++;
-                    sequence++; //increment only once to see which is executable
-                }
-                else if(sequence > 0 && connect_check == -1 && str_continue)
-                {
-                    comd_arr[comd_arr_cnt] = token;
-                    comd_arr_cnt++;
-                }
-                else if(connect_check != -1)
-                {
-                    check_exit(token);
-                    comd_arr[comd_arr_cnt] = '\0' ;
-                    sequence = 0;
-                    comd_arr_cnt = 0;
-                    exec_result = execute(comd_arr[0], comd_arr, connect_check, redir_checker,final_file_name);
-                    if(exec_status == 0)
-                    {
-                        if(connect_check == 2)
-                        {
-                            str_continue = false;
-                            //cout << "str_continue: " << str_continue << endl;
-                        }
-                        if(connect_check == 1)
-                        {
-                            str_continue = false;
-                        }
-                    }
-                    if(exec_result == 1)
-                    {
-                        if(connect_check == 2)
-                        {
-                            str_continue = true;
-                        }
+                        //cout<< "first: "  << token << endl;
+                        argument1[array1] = token;
+                        array1++;
+                        token = strtok(NULL, "\t ");
                     }
                     
-                        
+                    argument1[array1 + 1] = '\0'; 
+
+                    token = strtok(second, "\t ");
+                    while(token != NULL)
+                    {
+                        //cout << "Second: "  << token << endl;
+                        argument2[array2] = token;
+                        array2++;
+                        token = strtok(NULL, "\t ");
+                    }
+
+                    argument2[array2 + 1] = '\0';
+                    int fd[2];
+                    pid_t pid1, pid2;
+
+                    if(pipe(fd) == -1)
+                    {
+                        perror("failed to call pipe");
+                    }
+                    pid1 = fork();
+                    if(pid1 < 0)
+                    {
+                        perror("first fork failed()");
+                        exit(1);
+                    }
+                    if(pid1 == 0)
+                    {
+                        if(close(1) == -1)
+                        {
+                            perror("error occured with close(1)");
+                        }
+                        if(dup(fd[1]) == -1)
+                        {
+                            perror("error occured with dup");
+                        }
+                        if(close(fd[0]) == -1)
+                        {
+                            perror("error occured with close");
+                        }
+                        if(close(fd[1]) == -1)
+                        {
+                            perror("error occured with close");
+                        }
+                        exec_status = execvp(argument1[0], argument1);
+                        if(exec_status == -1)
+                        {
+                            perror("error with passed in argument");
+                            exit(1);
+                        } 
+                    }
+                    
+                    pid2 = fork();
+                    if(pid2 < 0)
+                    {
+                        perror("second fork() failed");
+                        exit(1);
+                    }
+                    if(pid2 == 0)
+                    {
+                        if(close(0) == -1)
+                        {
+                            perror("close");
+                        }
+                        if(dup(fd[0]) == -1)
+                        {
+                            perror("dup");
+                        }
+                        if(close(fd[0]) == -1)
+                        {
+                            perror("close");
+                        }
+                        if(close(fd[1]) == -1)
+                        {
+                            perror("close");
+                        }
+                        exec_status = execvp(argument2[0], argument2);
+                        if(exec_status == -1)
+                        {
+                            perror("error with passed in argument");
+                            exit(1);
+                        } 
+                    }
+                    if(close(fd[0]) == -1)
+                    {
+                        perror("close");
+                    }
+                    if(close(fd[1]) == -1)
+                    {
+                        perror("close");
+                    }
+                    if(waitpid(pid1, NULL, 0) == -1)
+                    {
+                        perror("waitpid");
+                    }
+                    if(waitpid(pid2, NULL, 0) == -1)
+                    {
+                        perror("waitpid");
+                    }
+                    
                 }
-                token = strtok(NULL, "\t ");
-                if(connect_check == -1 && token == NULL && exec_result && str_continue)
+            
+                else
                 {
-                //cout << "guess this executeisw ith this " << endl;
-                comd_arr[comd_arr_cnt] = '\0';
-                execute(comd_arr[0], comd_arr, connect_check, redir_checker,final_file_name);
+                    for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+                    {
+                        if(to_be_tokenized.at(x) != '|')
+                        {
+                            first_half.push_back(to_be_tokenized.at(x));
+                        }
+                        if(to_be_tokenized.at(x) == '|')
+                        {
+                            break;
+                        }
+                    }
+                        
+                    for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+                    {
+                        if(to_be_tokenized.at(x) == '|')
+                        {
+                            x++;
+                            for(; x < to_be_tokenized.size(); x++)
+                            {
+                                second_half.push_back(to_be_tokenized.at(x));
+                            }
+                        }
+                    }
+                    for(unsigned int x = 0; x < first_half.size(); x++)
+                    {
+                        first[x] = first_half.at(x);
+                    } 
+                    
+                    for(unsigned int x = 0; x < second_half.size(); x++)
+                    {
+                        second[x] = second_half.at(x);
+                    }
+
+                    token = strtok(first, "\t ");
+                    while(token != NULL)
+                    {
+                        //cout<< "first: "  << token << endl;
+                        argument1[array1] = token;
+                        array1++;
+                        token = strtok(NULL, "\t ");
+                    }
+                    
+                    argument1[array1 + 1] = '\0'; 
+
+                    token = strtok(second, "\t ");
+                    while(token != NULL)
+                    {
+                        //cout << "Second: "  << token << endl;
+                        argument2[array2] = token;
+                        array2++;
+                        token = strtok(NULL, "\t ");
+                    }
+
+                    argument2[array2 + 1] = '\0';
+
+
+                    int fd[2];
+                    pid_t pid1, pid2;
+
+                    pipe(fd);
+                    pid1 = fork();
+                    if(pid1 < 0)
+                    {
+                        perror("first fork failed()");
+                        exit(1);
+                    }
+                    if(pid1 == 0)
+                    {
+                        if(close(1) == -1)
+                        {
+                            perror("error occured with close(1)");
+                        }
+                        if(dup(fd[1]) == -1)
+                        {
+                            perror("error occured with dup");
+                        }
+                        if(close(fd[0]) == -1)
+                        {
+                            perror("error occured with close");
+                        }
+                        if(close(fd[1]) == -1)
+                        {
+                            perror("error occured with close");
+                        }
+                        exec_status = execvp(argument1[0], argument1);
+                        if(exec_status == -1)
+                        {
+                            perror("error with passed in argument");
+                            exit(1);
+                        } 
+                    }
+                    
+                    pid2 = fork();
+                    if(pid2 < 0)
+                    {
+                        perror("second fork() failed");
+                        exit(1);
+                    }
+                    if(pid2 == 0)
+                    {
+                        if(close(0) == -1)
+                        {
+                            perror("close");
+                        }
+                        if(dup(fd[0]) == -1)
+                        {
+                            perror("dup");
+                        }
+                        if(close(fd[0]) == -1)
+                        {
+                            perror("close");
+                        }
+                        if(close(fd[1]) == -1)
+                        {
+                            perror("close");
+                        }
+                        exec_status = execvp(argument2[0], argument2);
+                        if(exec_status == -1)
+                        {
+                            perror("error with passed in argument");
+                            exit(1);
+                        } 
+                    }
+                    if(close(fd[0]) == -1)
+                    {
+                        perror("close");
+                    }
+                    if(close(fd[1]) == -1)
+                    {
+                        perror("close");
+                    }
+                    if(waitpid(pid1, NULL, 0) == -1)
+                    {
+                        perror("waitpid");
+                    }
+                    if(waitpid(pid2, NULL, 0) == -1)
+                    {
+                        perror("waitpid");
+                    }
+                }
+                
+            }
+            else
+            {
+                bool redir_checker = redir_exist(to_be_tokenized);
+                check_redirection(to_be_tokenized);
+                //~ cout << "checkfasdfasdfboolean: " << add_out << endl;
+                //~ cout << "checkfasdfasdfboolean: " << out << endl;
+                if(redir_checker)
+                {
+                    for(unsigned int x = 0; x < inputs_G.size(); x++)
+                    {
+                        string s = fix_file_name(inputs_G.at(x));
+                        inputs_G.at(x) = s;
+                        s.clear();
+                    }
+                    for(unsigned int x = 0; x < outputs_G.size(); x++)
+                    {
+                        string s = fix_file_name(outputs_G.at(x));
+                        outputs_G.at(x) = s;
+                        s.clear();
+                    }
+                    //cout << "outputssize: " << output_append_G.size() << endl;
+                    for(unsigned int x = 0; x < output_append_G.size(); x++)
+                    {
+                        string s = fix_file_name(output_append_G.at(x));
+                        output_append_G.at(x) = s;
+                    }
+                    
+                }
+          
+                for(unsigned int x = 0; x < to_be_tokenized.size(); x++)
+                {
+                    prompt_holder[x] = to_be_tokenized.at(x);
+                }   
+                fixing_spacing_command(prompt_holder, check_redir);
+                int connect_check; //indicates which connection is in token
+                token = strtok(prompt_holder, "\t ");
+                //cout << "output token: " << token << endl;
+                exec_result = true;
+                while(token != NULL && exec_result && str_continue)
+                {
+                    //cout << "tokens: " << *token << endl;
+                    connect_check = check_connections(token);
+                    check_exit(token);
+                    if(connect_check == -1 && sequence < 1 && str_continue)
+                    {
+                        //cout << "does this come out on top" << endl;
+                        check_exit(token);
+                        comd_arr[comd_arr_cnt] = token;
+                        comd_arr_cnt++;
+                        sequence++; //increment only once to see which is executable
+                    }
+                    else if(sequence > 0 && connect_check == -1 && str_continue)
+                    {
+                        comd_arr[comd_arr_cnt] = token;
+                        comd_arr_cnt++;
+                    }
+                    else if(connect_check != -1)
+                    {
+                        check_exit(token);
+                        comd_arr[comd_arr_cnt] = '\0' ;
+                        sequence = 0;
+                        comd_arr_cnt = 0;
+                        exec_result = execute(comd_arr[0], comd_arr, connect_check, redir_checker,final_file_name);
+                        if(exec_status == 0)
+                        {
+                            if(connect_check == 2)
+                            {
+                                str_continue = false;
+                                //cout << "str_continue: " << str_continue << endl;
+                            }
+                            if(connect_check == 1)
+                            {
+                                str_continue = false;
+                            }
+                        }
+                        if(exec_result == 1)
+                        {
+                            if(connect_check == 2)
+                            {
+                                str_continue = true;
+                            }
+                        }
+                        
+                            
+                    }
+                    token = strtok(NULL, "\t ");
+                    if(connect_check == -1 && token == NULL && exec_result && str_continue)
+                    {
+                    //cout << "guess this executeisw ith this " << endl;
+                    comd_arr[comd_arr_cnt] = '\0';
+                    execute(comd_arr[0], comd_arr, connect_check, redir_checker,final_file_name);
+                    }
                 }
             }
             
