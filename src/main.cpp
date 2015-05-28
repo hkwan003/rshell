@@ -120,60 +120,67 @@ bool check_change_DIR(char* arr[])
 {
     char* dir = arr[0];
     char* path = arr[1];
+    char* temp;
     if(!strcmp(dir, "cd"))
     {
         if(path == '\0')
         {
-            char *newer, *older;
-            if((newer = getenv("HOME")) == NULL)
+            char *home, *old;
+            if((home = getenv("HOME")) == NULL)
             {
-                perror("get enviroment messed up");
+                perror("problems with getenv");
             }
-            if(chdir(newer) == -1)
+            if((old = getenv("PWD")) == NULL)
             {
-                perror("change directory messed up");
+                perror("problems with getenv");
             }
-            if(chdir(getenv("HOME")) == -1)
+            if(chdir(home) == -1)
             {
-                perror("problem with home directory");
+                perror("problems changing directories");
             }
-            if(setenv("PWD", newer, 1) == -1)
+            if(setenv("PWD", old, 0) == -1)
             {
-                perror("set envioment messed up");
+                perror("problem setting enviroment");
+            }
+            if(setenv("OLDPWD", home, 0) == -1)
+            {
+                perror("problem setting enviroment");
             }
         }
         else if(!strcmp(path, "-"))
         {
-            char *newer, *older;
-            if((newer = getenv("PWD")) == NULL)
+            char *home, *old;
+            if((old = getenv("OLDPWD")) == NULL)
             {
-                perror("dash get enviroment failed");
+                perror("problems with getenv");
             }
-            if((older = getenv("OLDPWD")) == NULL)
+            cout << getenv("OLDPWD") << endl;
+            if((home = getenv("PWD")) == NULL)
             {
-                perror("old get enviroment failed");
+                perror("problems with getenv");
             }
-            if(chdir(older) == -1)
+            if(chdir(getenv("OLDPWD")) == -1)
             {
-                perror("changed directory failed");
+                perror("problems changing directories");
             }
-            if(setenv("PWD", older, 1) == -1)
+            if(setenv("PWD", old, 0) == -1)
             {
-                perror("failed to set enviroment");
+                perror("problem setting enviroment");
             }
-            if(setenv("OLDPWD", newer, 1) == -1)
+            if(setenv("OLDPWD", home, 0) == -1)
             {
-                perror("new failed to set enviroment");
+                perror("problem setting enviroment");
             }
         }
         else
         {
             char *old;
+            cout << getenv("OLDPWD") << endl;
             if((old = getenv("PWD")) == NULL)
             {
                 perror("get enviroment failed");
             }
-            if(setenv("OLDPWD", old, 1) == -1)
+            if(setenv("OLDPWD", getenv("OLDPWD") ,0) == -1)
             {
                 perror("set enviroment failed");
             }	
@@ -740,6 +747,7 @@ int main(int argc, char **argv)
         add_out = false;
         inputs_G.clear();
         outputs_G.clear();
+        
         string curr_wrkin_dir(get_current_dir_name());
         string fixed_dir;
         int i = 0;
@@ -756,6 +764,9 @@ int main(int argc, char **argv)
             }
         }
         fixed_dir = string(fixed_dir.rbegin(), fixed_dir.rend());
+        
+        //char *pathname;
+        //pathname = getenv("PWD");
         cout << userinfo << "@" << host << "; " << fixed_dir << " ";
         //////////////////////////////////////////////login part done, next is all shell commands
         char prompt_holder[50000];//orginal array to hold prompt
