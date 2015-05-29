@@ -14,8 +14,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#include <csignal>
-#include <signal.h>
+
 
 using namespace std;
 
@@ -91,11 +90,11 @@ void fixing_spacing_command(char *org_prompt, int check_redir)
     }
       strcpy(org_prompt, fin_prompt);        //copies altered version
 }
-
 static void signal_handler(int i, siginfo_t *info, void* ptr)
 {
     if(i == SIGCHLD)
     {
+        
         //cout << "stuff needs to happen here" << endl;
         while(waitpid(-1, NULL, WNOHANG) > 0)
         {
@@ -106,14 +105,6 @@ static void signal_handler(int i, siginfo_t *info, void* ptr)
     {
         wait(0);
         cout << endl;
-        return;
-    }
-    if(i == 19)
-    {
-        cout << "stuff needs to happen here" << endl;
-        cout << endl;
-        system("bin/rshell");
-        raise(SIGSTOP);
         return;
     }
 }
@@ -131,107 +122,97 @@ bool check_change_DIR(char* arr[])
             char *home, *old;
             if((home = getenv("HOME")) == NULL)
             {
-                perror("problems with getenv");
+                perror("get enviromente");
             }
             if((old = getenv("PWD")) == NULL)
-            {
-                perror("problems with getenv");
+            {    
+                perror("get enviromente2");
             }
             if(chdir(home) == -1)
-            {
-                perror("problems changing directories");
+            {    
+                perror("changing directories 1");	
             }
-            if(setenv("PWD", old, 0) == -1)
-            {
-                perror("problem setting enviroment");
+            if(setenv("PWD", home, 1) == -1)
+            {    
+                perror("set those directories1");
             }
-            if(setenv("OLDPWD", home, 0) == -1)
-            {
-                perror("problem setting enviroment");
+            if(setenv("OLDPWD", old, 1) == -1)
+            {    
+                perror("set those directories12");
             }
         }
         else if(!strcmp(path, "-"))
         {
-            char *home, *old;
-            if((old = getenv("OLDPWD")) == NULL)
-            {
-                perror("problems with getenv");
+            char *old, *newDir;
+            if((old = getenv("PWD")) == NULL)
+            { 
+                perror("get working dir");
             }
-            cout << getenv("OLDPWD") << endl;
-            if((home = getenv("PWD")) == NULL)
-            {
-                perror("problems with getenv");
+            if((newDir = getenv("OLDPWD")) == NULL) 
+            {    
+                perror("get old working dir");
             }
-            if(chdir(getenv("OLDPWD")) == -1)
-            {
-                perror("problems changing directories");
+            if(chdir(newDir) == -1)
+            {    
+                perror("change dir");
             }
-            if(setenv("PWD", old, 0) == -1)
-            {
-                perror("problem setting enviroment");
+            if(setenv("PWD", newDir, 1) == -1)
+            {    
+                perror("set dir");
             }
-            if(setenv("OLDPWD", home, 0) == -1)
-            {
-                perror("problem setting enviroment");
+            if(setenv("OLDPWD", old, 1) == -1) 
+            {    
+                perror("setting old direcory");
             }
         }
         else
         {
-            char *old;
-            cout << getenv("OLDPWD") << endl;
-            if((old = getenv("PWD")) == NULL)
+           string strPath;
+           for(int x = 0; path[x] != '\0'; x++)
+           {
+               strPath.push_back(path[x]);
+           }
+            if(strPath.size() > 0 && strPath.at(0) == '~')
             {
-                perror("get enviroment failed");
-            }
-            if(setenv("OLDPWD", getenv("OLDPWD") ,0) == -1)
-            {
-                perror("set enviroment failed");
-            }	
-            if(chdir(path) == -1)
-            {
-                perror("change path failed");
-            }
-            string new_enviroment(old);
-            string new_path(path);
-            if(strcmp(path, ".."))
-            {
-                new_enviroment = new_enviroment + "/" + new_path;
-                set_last = true;
-            }
-            else if(!strcmp(path, "..") == 0)
-            {
-                set_last = true;
-                char *hi;
-                hi = getenv("PWD");
-                string temp(hi);
-                string convert(temp);
-                while(temp.at(temp.size() - 1 != '/'))
+                if(strPath.size() == 1 || strPath.at(1) == '/')
                 {
-                    temp.erase(temp.size() - 1);
-                }
-                temp.erase(temp.size() -1);
-                new_enviroment = temp;
-            }
-            if(set_last)
-            {
-                if(setenv("PWD", new_enviroment.c_str(), 0) == -1)
-                {
-                    perror("set enviroment failed");
+                    strPath = strPath.substr(1);
+                    string tempString = getenv("HOME");
+                    strPath = tempString + strPath;
                 }
             }
-                
-                
+            char fullPath[50000];
+            if(NULL == realpath(strPath.c_str(), fullPath))
+            {
+                perror("something happened while finding full path"); 
+                return -1;
+            }
+            if(-1 == chdir(fullPath))
+            {
+                perror("changing those directories");
+                return -1;
+            }
+            if(-1 == setenv("OLDPWD", getenv("PWD"), 1))
+            {
+                perror("setting good oldPWD");
+                return -1;
+            }
+            if(-1 == setenv("PWD", fullPath, 1))
+            {
+                perror("setting the usual PWD");
+                return -1;
+            }
         }
         return true;
     }
     return false;
 }
-
 bool in = false;
 bool out = false;
 bool add_out = false;
 int exec_status;
 bool str_continue = true;
+int process_ID = 0;
 int return_file_descrption = 0;     //file descriptor of what file descriptor to change it to
 int status;
 bool execute(char* command, char* command_list[], int conect_type, bool redir, string path_name)
@@ -243,7 +224,7 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
     char *envp[] = {name, NULL};
     if(!cd_check)
     {
-        int process_ID = fork();
+        process_ID = fork();
         if(process_ID <= -1)
         {
             perror("Error occured during forking()"); 
@@ -349,7 +330,15 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
                     }
                 }
                 //cout << "output right before exec " << endl;
-                exec_status = execvpe(command, command_list, envp);
+                exec_status = execvp(command, command_list);
+                int wpid;
+                do {
+                    wpid = wait(&status);
+                } while (wpid == -1 && errno == EINTR);
+                if(wpid == -1) {
+                    perror("wait error");
+                    exit(-1);
+                }
                 //cout << "output exec status////////////////: " << exec_status << endl;
                 if(exec_status == -1)
                 {
@@ -361,7 +350,15 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
             else 
             {
                 //cout << "is this going in there" << endl;
-                exec_status = (execvpe(command, command_list, envp));
+                exec_status = (execvp(command, command_list));
+                int wpid;
+					do {
+						wpid = wait(&status);
+					} while (wpid == -1 && errno == EINTR);
+					if(wpid == -1) {
+						perror("wait error");
+
+					}
                 if(exec_status == -1)
                 {
                     perror("error with passed in argument list");
@@ -374,12 +371,20 @@ bool execute(char* command, char* command_list[], int conect_type, bool redir, s
         {
             if(waitpid(process_ID, &status,0) == -1)
             {
-                perror("error with waitpid()");
+                //perror("error with waitpid()");
+            }
+        }
+        else
+        {
+            if(waitpid(process_ID, &status,0) == -1)
+            {
+                //perror("error with waitpid()");
             }
         }
     }
     return(!(status == 0 && conect_type == -1) ||( status > 0 && conect_type == 2));
 }
+
 
 
 int check_connections(char* check)
@@ -674,6 +679,7 @@ void push_piping_string(string s)
     //~ {
         //~ piparr[r] = const_cast<char*> (piping_str.at(r).c_str());
     //~ }
+    
 }
 void fix_pipe_argument(string& s)
 {
@@ -715,18 +721,36 @@ void fix_pipe_argument(string& s)
         s.push_back(fixed.at(x));
     }
 }
+int permanent = 0;
+static void handle_ctrl_Z(int i, siginfo_t *info, void* ptr)
+{
+    permanent = process_ID;
+    cout << endl;
+}
+
+void call_exit()
+{
+    exit(0);
+}
+
+//~ //string final_file_name;
+//~ string fix_file_name(string s)
+//~ {
+    //~ final_file_name.clear();
+    //~ int sz = s.size();
+    //~ for(int x = 0; x < sz; x++)
+    //~ {
+        //~ if(s.at(x) != ' ')
+        //~ {
+            //~ final_file_name.push_back(s.at(x));
+        //~ }
+    //~ }
+    //~ return final_file_name;
+//~ }
 
 int main(int argc, char **argv)
 {
-    cd_check = true;
-    //~ if(signal(SIGINT, signal_handler) == SIG_ERR)
-    //~ {
-        //~ perror("problem with the signals");
-        //~ exit(1);
-    //~ }
- 
-    cout.flush();
-    
+    bool continue_program = true;
     outputs_G.clear();
     inputs_G.clear();
     int check_redir = 0;
@@ -753,6 +777,8 @@ int main(int argc, char **argv)
     //outputs the userinfo with login and host
     while(prompter)
     {
+        continue_program = true;
+        cd_check = true;
         cin.clear();
         struct sigaction new_one = {0};
         struct sigaction old_one = {0};
@@ -760,17 +786,19 @@ int main(int argc, char **argv)
         new_one.sa_mask = foo;
         new_one.sa_sigaction = signal_handler;
         
+        struct sigaction new_two = {0};
+        struct sigaction old_two = {0};
+        sigset_t bang;
+        new_two.sa_mask = bang;
+        new_two.sa_sigaction = handle_ctrl_Z;
+        
         if(sigaction(SIGINT, &new_one, &old_one) == -1)
         {
             perror("problem with SIGINT");
         }
-        if(sigaction(SIGTSTP, &new_one, &old_one) == -1)
+        if(sigaction(SIGTSTP, &new_two, &old_two) == -1)
         {
             perror("problem with SIGSTP");
-        }
-        if(sigaction(SIGCHLD, &new_one, &old_one) == -1)
-        {
-            perror("problem with SIGCHILD");
         }
         i = 0;
             //reset counter for increment for pipe checker
@@ -780,7 +808,6 @@ int main(int argc, char **argv)
         add_out = false;
         inputs_G.clear();
         outputs_G.clear();
-        
         string curr_wrkin_dir(get_current_dir_name());
         string fixed_dir;
         int i = 0;
@@ -814,7 +841,36 @@ int main(int argc, char **argv)
         //string converter; //converts all bits of string into one piece
         string to_be_tokenized;
         getline(cin, to_be_tokenized);
-        if(to_be_tokenized.size() > 0)
+        if(to_be_tokenized.find("exit") != string::npos)
+        {
+            call_exit();
+        }
+        if(to_be_tokenized.find("fg") != string::npos)
+        {
+            if(process_ID != 0)
+            {
+                kill(permanent, SIGCONT);
+            }
+            else
+            {
+                cout << "fb no process exist in the background" << endl;
+            }
+            continue_program = false;
+        }
+        if(to_be_tokenized.find("bg") != string::npos)
+        {
+            if(process_ID != 0)
+            {
+                kill(permanent, SIGCONT);
+                process_ID = 0;
+            }
+            else
+            {
+                cout << "bg background has no processes" << endl;
+            }
+            continue_program = false;
+        }
+        if(continue_program)
         {
             //gets user input
             checks_pipes = chk_pipes(to_be_tokenized);
