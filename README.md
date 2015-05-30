@@ -10,20 +10,16 @@ Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It o
 * Clear functionality
 * User login recognition
 * Comment recognition
+* Ability to change directories
 
-## How to use piping 
+## How to use cd 
 
-* First compile the program by typing ``make``
-* After compiling, type in ``bin/rshell`
-* Type in ``make clean`` to clear out the old bin
-* ``make cp`` compiles the code for cp
-* ``make rm`` compiles the code for rm
-* ``make ls`` compiles ls for you
-* ``make mv`` compiles mv command
-* Input redirection < input redirection into a program like wc ``Word Count``
-* Output redirection >, >>,`` >`` truncates orginal file, ``>>`` appends onto what was already in folder
-* ls | cat, redirects the output of ls into input end of cat
-* input and output redirection can be combined ``wc < file > file 1 >> file2``
+* To change directories, type ``cd <path>``
+* Path can be changed for example ``cd home/rshell/bin/rshell``
+* ``cd`` will change back to the home directory
+* ``cd -`` will change to the previous directory
+* the current directory will be printed after the prompt
+* ``^C`` will kill the child process without exiting out of my current rshell 
 
 ## Bugs
 
@@ -45,5 +41,3 @@ Rshell is a c++ shell that is meant to replicate the same one used in UNIX. It o
 * `` cat < existingInputFile | tr A-Z a-z | tee newOutputfile1 | tr a-z A-Z > newOutputFile2`` this does not work
 * Make file is not attached to other functions like rm, cp, or ls. Will fix in future so make file and deal with other functionality
 
-##Sidenote
-* I have two script files for piping assignment. One is long while the second one is short, I did it just to test one of the extra credit more. Please take a look.
