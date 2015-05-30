@@ -59,8 +59,6 @@ string out_hold;
 string add_hold;
 bool files_descriptor_change = false;       //true if there is need to change file descriptor
 string fix_file_name(string s);
-char* host = (char*)malloc(500);
-char *fin_prompt = (char*)malloc(50000);
 vector<string> inputs_G;
 vector<string> outputs_G;
 vector<string> output_append_G;
@@ -578,47 +576,28 @@ int main(int argc, char **argv)
         continue_program = true;
         cd_check = true;
         cin.clear();
-        struct sigaction new_one = {0};
-        struct sigaction old_one = {0};
+        struct sigaction new_one ;
+        struct sigaction old_one ;
         sigset_t foo;
         new_one.sa_mask = foo;
         new_one.sa_sigaction = signal_handler;
         
-        struct sigaction new_two = {0};
-        struct sigaction old_two = {0};
-        sigset_t bang;
-        new_two.sa_mask = bang;
-        new_two.sa_sigaction = handle_ctrl_Z;
         
         if(sigaction(SIGINT, &new_one, &old_one) == -1)
         {
             perror("problem with SIGINT");
         }
-        if(sigaction(SIGTSTP, &new_two, &old_two) == -1)
+        char *homepath, *home;
+        string newpath(getenv("PWD")), HHome(getenv("HOME"));
+        if(newpath.find(HHome) != string::npos)
         {
-            perror("problem with SIGSTP");
+            newpath.erase(newpath.begin(), newpath.begin() + HHome.size());
+            newpath.insert(newpath.begin(), '~');
         }
-        string curr_wrkin_dir(get_current_dir_name());
-        string fixed_dir;
-        int i = 0;
-        for(int x = curr_wrkin_dir.size(); x > 0; x--)
-        {
-            fixed_dir += curr_wrkin_dir[x];
-            if(curr_wrkin_dir[x] == '/')
-            {
-                i++;
-                if(i == 2)
-                {
-                    x = 0;
-                }
-            }
-        }
-        fixed_dir = string(fixed_dir.rbegin(), fixed_dir.rend());
-        
-        //char *pathname;
-        //pathname = getenv("PWD");
-        cout << userinfo << "@" << host << "; " << fixed_dir << " ";
+
+        cout << userinfo << "@" << host << "; "<< newpath  << " ";
         //////////////////////////////////////////////login part done, next is all shell commands
+        
         char prompt_holder[50000];//orginal array to hold prompt
         char *comd_arr[50000];
         for(int x = 0; x < 50001; x++)
@@ -637,7 +616,7 @@ int main(int argc, char **argv)
             {
                 prompt_holder[x] = to_be_tokenized.at(x);
             }   
-            fixing_spacing_command(prompt_holder);
+            //fixing_spacing_command(prompt_holder);
             int connect_check; //indicates which connection is in token
             token = strtok(prompt_holder, "\t ");
             exec_result = true;
