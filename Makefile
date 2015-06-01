@@ -6,7 +6,6 @@ RMPATH = ./src/rm.cpp
 LSPATH = ./src/ls.cpp
 MVPATH = ./src/mv.cpp
 OUTPATH = ./bin/rshell
-
 all: 
 		mkdir -p ./bin
 		$(CXX) $(CFLAGS) $(FILEPATH) -o $(OUTPATH)
