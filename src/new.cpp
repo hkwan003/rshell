@@ -121,13 +121,13 @@ void execute(vector<string> filenames, const vector<bool> flags, string currentp
 				cout << displaytime.substr(4, 12) << "\t";
 				totalblocks += info.st_blocks;
 			}
-            if(flags[1] || flags[2])
+            if(!flags[1] || !flags[2])
             { 
-		        cout << displayColorText(info.st_mode, filenames[i]) << endl;
+		        cout << displayColorText(info.st_mode, filenames[i]) << "  ";
             }
 	        else
             {
-                cout << displayColorText(info.st_mode, filenames[i]) << "  ";
+                cout << displayColorText(info.st_mode, filenames[i]) << endl;
             }
 		}
 	}
