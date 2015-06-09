@@ -1,6 +1,6 @@
-Script started on Tue 09 Jun 2015 07:14:51 AM PDT
+Script started on Tue 09 Jun 2015 07:24:35 AM PDT
 ~
-hkwan003@hammer $ cs2100[K[K[K[K100
+hkwan003@hammer $ cs100
 [0;91m
 ===============================================================================
 |                                                                             |
@@ -21,1134 +21,666 @@ hkwan003@hammer $ cs2100[K[K[K[K100
 |                                                                             |
 ===============================================================================
 [0m
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cs[K[Kcd Documents/
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents[0;95m [0;36m$[0m kls
-bash: kls: command not found
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents[0;95m [0;36m$[0m ls
-a.out  ls1.cpp	pip.cpp  recursive.cpp	rshell	test.cpp
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents[0;95m [0;36m$[0m cd rshell/
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m make clean
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m ls
+61 FOLDEER  CS100  CS61       Downloads  hello.cpp  Public  rshell-1	 tester_files  WINDOWS
+bin	    cs12   Desktop    file.txt	 ls.cpp     quiz    sendspam.sh  test.sh
+calvin	    CS-14  Documents  gitlearn	 Pictures   rshell  Templates	 Videos
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~[0;95m [0;36m$[0m cd rshell
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m make clean
 rm -rf ./bin
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m make
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m make
 mkdir -p ./bin
 g++  ./src/ls.cpp -o ./bin/ls
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m bin/ls 
-[1;49;34mbin[0;00m  [1;49;mLICENSE[0;00m  [1;49;mMakefile[0;00m  [1;49;mREADME.md[0;00m  [1;49;34msrc[0;00m  [1;49;34mtests[0;00m  
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m bin/ls -l -R
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mbin[0;00m
-rw-------	1	hkwan003	csmajs	1079	May 24 18:48	[1;49;mLICENSE[0;00m
-rw-------	1	hkwan003	csmajs	255	Jun  9 07:02	[1;49;mMakefile[0;00m
-rw-------	1	hkwan003	csmajs	783	Jun  9 07:02	[1;49;mREADME.md[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:03	[1;49;34msrc[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mtests[0;00m
-Total blocks: 24
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m bin/ls -Al[K[KalR
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	57	hkwan003	csmajs	8192	Jun  9 07:17	[1;100;34m..[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.git[0;00m
+rw-------	1	hkwan003	csmajs	16	Jun  9 07:13	[1;100;m.gitignore[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mbin[0;00m
+rw-------	1	hkwan003	csmajs	1079	Jun  9 07:13	[1;49;mLICENSE[0;00m
+rw-------	1	hkwan003	csmajs	255	Jun  9 07:13	[1;49;mMakefile[0;00m
+rw-------	1	hkwan003	csmajs	783	Jun  9 07:13	[1;49;mREADME.md[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34msrc[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mtests[0;00m
+Total blocks: 40
 
-rw-------	1	hkwan003	csmajs	7720	May 24 18:48	[1;49;mexec.script[0;00m
-rw-------	1	hkwan003	csmajs	0	Jun  9 07:07	[1;49;mls.script[0;00m
-Total blocks: 8
-
-rw-------	1	hkwan003	csmajs	4365	Jun  9 07:02	[1;49;mcp.cpp[0;00m
-rw-------	1	hkwan003	csmajs	5960	Jun  9 07:02	[1;49;mls.cpp[0;00m
-rw-------	1	hkwan003	csmajs	6677	Jun  9 07:02	[1;49;mmain.cpp[0;00m
-rw-------	1	hkwan003	csmajs	2698	Jun  9 07:02	[1;49;mTimer.h[0;00m
-Total blocks: 28
-
-rwx------	1	hkwan003	csmajs	84563	Jun  9 07:07	[1;49;32mls[0;00m
-Total blocks: 88
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m bin/ls -R -l
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mbin[0;00m
-rw-------	1	hkwan003	csmajs	1079	May 24 18:48	[1;49;mLICENSE[0;00m
-rw-------	1	hkwan003	csmajs	255	Jun  9 07:02	[1;49;mMakefile[0;00m
-rw-------	1	hkwan003	csmajs	783	Jun  9 07:02	[1;49;mREADME.md[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:03	[1;49;34msrc[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mtests[0;00m
-Total blocks: 24
-
-rw-------	1	hkwan003	csmajs	7720	May 24 18:48	[1;49;mexec.script[0;00m
-rw-------	1	hkwan003	csmajs	0	Jun  9 07:07	[1;49;mls.script[0;00m
-Total blocks: 8
-
-rw-------	1	hkwan003	csmajs	4365	Jun  9 07:02	[1;49;mcp.cpp[0;00m
-rw-------	1	hkwan003	csmajs	5960	Jun  9 07:02	[1;49;mls.cpp[0;00m
-rw-------	1	hkwan003	csmajs	6677	Jun  9 07:02	[1;49;mmain.cpp[0;00m
-rw-------	1	hkwan003	csmajs	2698	Jun  9 07:02	[1;49;mTimer.h[0;00m
-Total blocks: 28
-
-rwx------	1	hkwan003	csmajs	84563	Jun  9 07:07	[1;49;32mls[0;00m
-Total blocks: 88
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m binl[K/ls -al
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m.[0;00m
-drwx------	3	hkwan003	csmajs	4096	Jun  9 06:58	[1;100;34m..[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.git[0;00m
-rw-------	1	hkwan003	csmajs	16	May 25 23:53	[1;100;m.gitignore[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mbin[0;00m
-rw-------	1	hkwan003	csmajs	1079	May 24 18:48	[1;49;mLICENSE[0;00m
-rw-------	1	hkwan003	csmajs	255	Jun  9 07:02	[1;49;mMakefile[0;00m
-rw-------	1	hkwan003	csmajs	783	Jun  9 07:02	[1;49;mREADME.md[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:03	[1;49;34msrc[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mtests[0;00m
-Total blocks: 36
-
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m bin/ls -Rl
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mbin[0;00m
-rw-------	1	hkwan003	csmajs	1079	May 24 18:48	[1;49;mLICENSE[0;00m
-rw-------	1	hkwan003	csmajs	255	Jun  9 07:02	[1;49;mMakefile[0;00m
-rw-------	1	hkwan003	csmajs	783	Jun  9 07:02	[1;49;mREADME.md[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:03	[1;49;34msrc[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mtests[0;00m
-Total blocks: 24
-
-rw-------	1	hkwan003	csmajs	7720	May 24 18:48	[1;49;mexec.script[0;00m
-rw-------	1	hkwan003	csmajs	0	Jun  9 07:07	[1;49;mls.script[0;00m
-Total blocks: 8
-
-rw-------	1	hkwan003	csmajs	4365	Jun  9 07:02	[1;49;mcp.cpp[0;00m
-rw-------	1	hkwan003	csmajs	5960	Jun  9 07:02	[1;49;mls.cpp[0;00m
-rw-------	1	hkwan003	csmajs	6677	Jun  9 07:02	[1;49;mmain.cpp[0;00m
-rw-------	1	hkwan003	csmajs	2698	Jun  9 07:02	[1;49;mTimer.h[0;00m
-Total blocks: 28
-
-rwx------	1	hkwan003	csmajs	84563	Jun  9 07:07	[1;49;32mls[0;00m
-Total blocks: 88
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m binl[K/,ls[K[K[Ks[Kls -alR
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m.[0;00m
-drwx------	3	hkwan003	csmajs	4096	Jun  9 06:58	[1;100;34m..[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.git[0;00m
-rw-------	1	hkwan003	csmajs	16	May 25 23:53	[1;100;m.gitignore[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mbin[0;00m
-rw-------	1	hkwan003	csmajs	1079	May 24 18:48	[1;49;mLICENSE[0;00m
-rw-------	1	hkwan003	csmajs	255	Jun  9 07:02	[1;49;mMakefile[0;00m
-rw-------	1	hkwan003	csmajs	783	Jun  9 07:02	[1;49;mREADME.md[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:03	[1;49;34msrc[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mtests[0;00m
-Total blocks: 36
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m.[0;00m
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	7720	May 24 18:48	[1;49;mexec.script[0;00m
-rw-------	1	hkwan003	csmajs	0	Jun  9 07:07	[1;49;mls.script[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	7720	Jun  9 07:13	[1;49;mexec.script[0;00m
+rw-------	1	hkwan003	csmajs	0	Jun  9 07:17	[1;49;mls.script[0;00m
 Total blocks: 16
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:03	[1;100;34m.[0;00m
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	4365	Jun  9 07:02	[1;49;mcp.cpp[0;00m
-rw-------	1	hkwan003	csmajs	5960	Jun  9 07:02	[1;49;mls.cpp[0;00m
-rw-------	1	hkwan003	csmajs	6677	Jun  9 07:02	[1;49;mmain.cpp[0;00m
-rw-------	1	hkwan003	csmajs	2698	Jun  9 07:02	[1;49;mTimer.h[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	4365	Jun  9 07:13	[1;49;mcp.cpp[0;00m
+rw-------	1	hkwan003	csmajs	5960	Jun  9 07:13	[1;49;mls.cpp[0;00m
+rw-------	1	hkwan003	csmajs	6677	Jun  9 07:13	[1;49;mmain.cpp[0;00m
+rw-------	1	hkwan003	csmajs	2698	Jun  9 07:13	[1;49;mTimer.h[0;00m
 Total blocks: 36
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m.[0;00m
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m..[0;00m
-rwx------	1	hkwan003	csmajs	84563	Jun  9 07:07	[1;49;32mls[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rwx------	1	hkwan003	csmajs	84563	Jun  9 07:17	[1;49;32mls[0;00m
 Total blocks: 96
 
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mbranches[0;00m
-rw-------	1	hkwan003	csmajs	9	Jun  9 07:04	[1;49;mCOMMIT_EDITMSG[0;00m
-rw-------	1	hkwan003	csmajs	375	Jun  7 00:31	[1;49;mconfig[0;00m
-rw-------	1	hkwan003	csmajs	73	May 24 18:48	[1;49;mdescription[0;00m
-rw-------	1	hkwan003	csmajs	19	Jun  9 07:02	[1;49;mHEAD[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mhooks[0;00m
-rw-------	1	hkwan003	csmajs	808	Jun  9 07:03	[1;49;mindex[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34minfo[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mlogs[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34mobjects[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  1 14:21	[1;49;mORIG_HEAD[0;00m
-rw-------	1	hkwan003	csmajs	417	Jun  9 07:04	[1;49;mpacked-refs[0;00m
-drwx------	5	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mrefs[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mbranches[0;00m
+rw-------	1	hkwan003	csmajs	317	Jun  9 07:15	[1;49;mconfig[0;00m
+rw-------	1	hkwan003	csmajs	73	Jun  9 07:13	[1;49;mdescription[0;00m
+rw-------	1	hkwan003	csmajs	19	Jun  9 07:15	[1;49;mHEAD[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mhooks[0;00m
+rw-------	1	hkwan003	csmajs	808	Jun  9 07:15	[1;49;mindex[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34minfo[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mlogs[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mobjects[0;00m
+rw-------	1	hkwan003	csmajs	596	Jun  9 07:13	[1;49;mpacked-refs[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mrefs[0;00m
 Total blocks: 48
 
-drwx------	5	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34mheads[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mremotes[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34mtags[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;49;34mheads[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mremotes[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mtags[0;00m
 Total blocks: 20
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	5	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	41	May 30 11:21	[1;49;mhw3[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
 Total blocks: 8
 
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	5	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;49;34morigin[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34morigin[0;00m
 Total blocks: 12
 
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;100;34m.[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	32	May 24 18:48	[1;49;mHEAD[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  7 00:31	[1;49;mmaster[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  1 14:21	[1;49;msignals[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	32	Jun  9 07:13	[1;49;mHEAD[0;00m
 Total blocks: 8
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	5	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	41	May 25 23:00	[1;49;mexec[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  9 07:04	[1;49;mls[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  9 07:02	[1;49;mmaster[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  1 14:21	[1;49;msignals[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	41	Jun  9 07:15	[1;49;mls[0;00m
+rw-------	1	hkwan003	csmajs	41	Jun  9 07:13	[1;49;mmaster[0;00m
 Total blocks: 8
 
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;49;34m07[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;49;34m0a[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;49;34m15[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 26 00:14	[1;49;34m16[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;49;34m1b[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 00:05	[1;49;34m1d[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;49;34m1e[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34m22[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;49;34m2d[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;49;34m2e[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:20	[1;49;34m35[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;49;34m3e[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;49;34m3f[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 21:35	[1;49;34m43[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;49;34m44[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 26 00:13	[1;49;34m47[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;49;34m48[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;49;34m4e[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;49;34m5c[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 00:05	[1;49;34m63[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:21	[1;49;34m6a[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 26 00:13	[1;49;34m6c[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;49;34m70[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;49;34m78[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34m79[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;49;34m7a[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 22:12	[1;49;34m7c[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34m85[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34m86[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;49;34m8d[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;49;34m90[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;49;34m92[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;49;34m97[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;49;34m9d[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34ma0[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;49;34ma4[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;49;34mac[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 22:13	[1;49;34mb0[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;49;34mb3[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;49;34mb6[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;49;34mb7[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;49;34mc5[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;49;34mcc[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:20	[1;49;34md2[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 26 00:14	[1;49;34md7[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 22:13	[1;49;34mdb[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;49;34mdc[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 16:10	[1;49;34me0[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;49;34me4[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;49;34me6[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;49;34mee[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;49;34mf9[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:29	[1;49;34mfa[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;49;34mfd[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;49;34mff[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34minfo[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mpack[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34minfo[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mpack[0;00m
+Total blocks: 16
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+r--------	1	hkwan003	csmajs	14064	Jun  9 07:13	[1;49;mpack-dd88585b0cff6049f3ea4ae6c6daa0c8335c174d.idx[0;00m
+r--------	1	hkwan003	csmajs	210350	Jun  9 07:13	[1;49;mpack-dd88585b0cff6049f3ea4ae6c6daa0c8335c174d.pack[0;00m
 Total blocks: 236
 
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	12104	May 24 18:48	[1;49;mpack-19ebd04ea5f78dee5d2516392e76ecaa2727c171.idx[0;00m
-r--------	1	hkwan003	csmajs	189841	May 24 18:48	[1;49;mpack-19ebd04ea5f78dee5d2516392e76ecaa2727c171.pack[0;00m
-Total blocks: 212
-
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
 Total blocks: 8
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	248	May 29 02:09	[1;49;mc9b86cbc482e40d6a7aa4f1ccb17fff9f931c6[0;00m
-r--------	1	hkwan003	csmajs	248	Jun  9 07:02	[1;49;mdc67abfd0beaf3e33c17b91a95db2243449a4d[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	567	Jun  9 07:15	[1;49;mHEAD[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mrefs[0;00m
 Total blocks: 16
 
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	7557	May 28 00:13	[1;49;m30bfa4c8d0fd68215116a7d5ccbe2817866e27[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;49;34mheads[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mremotes[0;00m
 Total blocks: 16
 
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:29	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1934	Jun  7 00:29	[1;49;md4c7db6c5285b507ae2145bc5f0b347c48b9a0[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34morigin[0;00m
 Total blocks: 12
 
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	6649	May 24 18:50	[1;49;m3a81d70f3436be538f1dedde6469060acb09a6[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	188	Jun  9 07:13	[1;49;mHEAD[0;00m
+Total blocks: 12
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	181	Jun  9 07:15	[1;49;mls[0;00m
+rw-------	1	hkwan003	csmajs	188	Jun  9 07:13	[1;49;mmaster[0;00m
 Total blocks: 16
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1940	Jun  9 07:02	[1;49;m87e952b75f3d422710e02d208423f7b62f0c2e[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	240	Jun  9 07:13	[1;49;mexclude[0;00m
 Total blocks: 12
 
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	192	May 24 18:51	[1;49;m3dc7ab57c8a38f389f9ef0dd8015bc387d3bd0[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	221	May 29 21:36	[1;49;mbe2ac7d741e3f722689a483ea5c80a148675de[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 27 16:10	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	7554	May 27 16:10	[1;49;mf770a214e861eec47452cdd79c262cdaee216c[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	160	May 28 00:13	[1;49;m950f546a704620d599feac8820640787b7b31f[0;00m
-Total blocks: 12
-
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	2	hkwan003	csmajs	4096	May 29 22:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 29 22:13	[1;49;m4600a5f841fb406e8462d0fd6d50c5fc4a8d21[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 26 00:14	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	155	May 26 00:14	[1;49;md464235983f51f2b4d6a3af9f52015f21a35d4[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	248	Jun  1 14:20	[1;49;m5975fd1c768c7d2b7fd23a821a9d6df3f797ae[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	242	May 29 02:09	[1;49;m280334008da63868155f3e2144352c1b54cab4[0;00m
-r--------	1	hkwan003	csmajs	220	May 30 11:20	[1;49;mba5a1050c24cff353a3aaba6d4244d9f24057b[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1161	May 24 18:51	[1;49;m4d1545cd79ab115b016ce7685696d0f8fa0e1f[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 27 00:05	[1;49;m0672622e6911f616e85fefc072ae6957f6d437[0;00m
-r--------	1	hkwan003	csmajs	5044	May 30 11:20	[1;49;m95cbb7d7294e592349946ac45608bc9fef4e01[0;00m
-Total blocks: 20
-
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;100;34m.[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	151	May 30 11:20	[1;49;m6d47e9a777c98fe4ee86985fc564db749a8964[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	152	May 24 18:53	[1;49;ma3c19457c76e3dea11c32d07441206f7bcb147[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 22:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	171	May 29 22:13	[1;49;ma972da3f0a48e96bea5f4fd73aa2d64bf71951[0;00m
-r--------	1	hkwan003	csmajs	152	May 29 22:13	[1;49;mec60d0505c97c2ad0fdd5f3c0236270e87fc30[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	193	May 24 18:50	[1;49;m5ad96e74a0156693222216ec389aaec205c725[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	192	May 24 18:48	[1;49;m04441c939b6349a4d24e23d4c2f0c93376abd4[0;00m
-r--------	1	hkwan003	csmajs	241	May 28 00:13	[1;49;m63afc5c4f9335fd3abc7db319f3db8f29be63b[0;00m
-r--------	1	hkwan003	csmajs	241	May 24 18:51	[1;49;m9ec6eb8e9121fc4ac3ea6d9b9200e7583311d9[0;00m
-Total blocks: 20
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	160	May 24 18:48	[1;49;m5cc289421f2051499fe5c444a2d6073b403c08[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	169	Jun  7 00:31	[1;49;m9380e3a7c2d28c681f331cca8bd86ab0969de7[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 30 11:20	[1;49;ma1cbf6ef860f2bf06d532ceb22fec0227c0e83[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 29 21:36	[1;49;mc52094beb950ca7bf1889c737cf74c99c5c41f[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;100;34m.[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	7839	May 29 02:09	[1;49;m1471ea1b93618ae4cd2189204d9321a4e942f1[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	165	Jun  9 07:02	[1;49;m49b51a9ac40ab739ab4b278f1b1423c7db0cd0[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 24 18:53	[1;49;m06db41b47bab1a9458e9ad129270782742a5f7[0;00m
-r--------	1	hkwan003	csmajs	139	Jun  9 07:04	[1;49;mcf210d83f54e7eb2501cb037631f7d98215cef[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	6651	May 24 18:48	[1;49;m30621f31b840d0e92602a02f8b4dd318ba6a2d[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 29 22:12	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1980	May 29 22:12	[1;49;m884c8f6d307d1d75aab0fb211e9cd5b7a3e377[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	Jun  9 07:02	[1;49;m34b6245bf2873e31f6e8a2c852d54b1c000efd[0;00m
-r--------	1	hkwan003	csmajs	241	May 26 00:14	[1;49;m3f557dcc07f3dc26091fb1e97311bdcab8f6be[0;00m
-r--------	1	hkwan003	csmajs	241	May 24 18:48	[1;49;m8d50d82d217f0fe151af844e0bd04de30712e3[0;00m
-Total blocks: 20
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	211	Jun  9 07:04	[1;49;mef33d3fd26bf86058e0417896887c9c4ebb10b[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-r--------	1	hkwan003	csmajs	252	May 28 00:13	[1;49;meb0a15af4cb48b5ac136d696ddeff72ebd2141[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 24 18:50	[1;49;m2cc4f984b353349ac77e11be2e1b5f772db1a7[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 26 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	6805	May 26 00:13	[1;49;mcdcfe7cab2e9ac26d2582db3e2fc23c0e02975[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:21	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	153	Jun  1 14:21	[1;49;m805c763b81d724ab087584ebdedddfa49cd400[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 27 00:05	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	162	May 27 00:05	[1;49;m1a9e022aa50757b8a4ef5deb1bb0d6fa015637[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	157	May 24 18:51	[1;49;m55a8436da2c8cd5c88a35bdee3cfb0f177bc56[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	Jun  7 00:31	[1;49;mf3429dbb7accaa4cce2c4c01b94ebca2cd29c9[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	818	May 29 22:12	[1;49;m8553e17eedbd9c037869ba6f0f7c9f47dec5dc[0;00m
-r--------	1	hkwan003	csmajs	220	Jun  7 00:31	[1;49;md2e46a60e3cf1f1cde01ba65f006bdf907dbf5[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 26 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	90	May 26 00:13	[1;49;m837760fc8d16d0c5bbd3761ab423dfbfb4891a[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	157	May 27 16:11	[1;49;m19bebd7c15c550226567e271636f34509a30de[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 21:35	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	7269	May 27 00:05	[1;49;m360dbb7f42da99f3628e1b930ba6363b918e0e[0;00m
-r--------	1	hkwan003	csmajs	5187	May 29 21:35	[1;49;ma61afca7f616c9c9f7d89c67eabf52f6be397a[0;00m
-Total blocks: 24
-
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-r--------	1	hkwan003	csmajs	8217	May 29 02:09	[1;49;m61f81b4ab93a7494ee3576a93bee81cef1c354[0;00m
-Total blocks: 20
-
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 27 16:11	[1;49;m158827b0730ed229224d656e2a8b6631634ba5[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	152	Jun  1 14:20	[1;49;m6a202fe8619fede686f5e69953e97b1a9a059b[0;00m
-r--------	1	hkwan003	csmajs	241	Jun  1 14:20	[1;49;mcf432ff20c815563f2b4e3b367c2b24a90b1d0[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1068	May 24 18:53	[1;49;me77bef21017c984c213bddaeffb498a4e7de93[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1967	May 28 00:13	[1;49;mcae29841b0ed18445b44068fb1ef51689a5100[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	163	Jun  9 07:04	[1;49;m6e4d687aeb648c3a02f44ede57dea2c4de93fd[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	164	May 29 21:36	[1;49;m508993de8cd5a552dc158889e6e6b2dad0f751[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 27 00:05	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	220	May 27 00:05	[1;49;m8de78d5df55f747855f69f2ff64db6f8be0110[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	165	May 29 02:09	[1;49;m09917dd011be17297c24fdc63f54456b35ef4d[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 26 00:14	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	220	May 26 00:14	[1;49;mf700fb5baf0dfbefb41d8fb4a62caa20ee67ed[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	151	May 24 18:50	[1;49;m5d9062d56e77756945b111e6689cc6790df64d[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	193	May 24 18:53	[1;49;me99db3bae3b9e22a8b3d4ce26187b8c10a0b96[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	220	May 27 16:11	[1;49;m3304b7ffb8deec66ab577ccb066281481bc270[0;00m
-Total blocks: 12
-
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	7422	Jun  9 07:04	[1;49;mHEAD[0;00m
-drwx------	4	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mrefs[0;00m
-Total blocks: 20
-
-drwx------	4	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;49;34mheads[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mremotes[0;00m
-Total blocks: 16
-
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	4	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:54	[1;49;34morigin[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:54	[1;100;34m.[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	176	May 24 18:48	[1;49;mHEAD[0;00m
-rw-------	1	hkwan003	csmajs	570	Jun  7 00:31	[1;49;mmaster[0;00m
-rw-------	1	hkwan003	csmajs	1400	Jun  1 14:21	[1;49;msignals[0;00m
-Total blocks: 20
-
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;100;34m.[0;00m
-drwx------	4	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	171	May 25 23:00	[1;49;mexec[0;00m
-rw-------	1	hkwan003	csmajs	333	Jun  9 07:04	[1;49;mls[0;00m
-rw-------	1	hkwan003	csmajs	1132	Jun  9 07:02	[1;49;mmaster[0;00m
-rw-------	1	hkwan003	csmajs	1964	Jun  1 14:21	[1;49;msignals[0;00m
-Total blocks: 24
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	240	May 24 18:48	[1;49;mexclude[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-rwx------	1	hkwan003	csmajs	452	May 24 18:48	[1;49;32mapplypatch-msg.sample[0;00m
-rwx------	1	hkwan003	csmajs	896	May 24 18:48	[1;49;32mcommit-msg.sample[0;00m
-rwx------	1	hkwan003	csmajs	189	May 24 18:48	[1;49;32mpost-update.sample[0;00m
-rwx------	1	hkwan003	csmajs	398	May 24 18:48	[1;49;32mpre-applypatch.sample[0;00m
-rwx------	1	hkwan003	csmajs	1704	May 24 18:48	[1;49;32mpre-commit.sample[0;00m
-rw-------	1	hkwan003	csmajs	1348	May 24 18:48	[1;49;mpre-push.sample[0;00m
-rwx------	1	hkwan003	csmajs	4951	May 24 18:48	[1;49;32mpre-rebase.sample[0;00m
-rwx------	1	hkwan003	csmajs	1239	May 24 18:48	[1;49;32mprepare-commit-msg.sample[0;00m
-rwx------	1	hkwan003	csmajs	3611	May 24 18:48	[1;49;32mupdate.sample[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rwx------	1	hkwan003	csmajs	452	Jun  9 07:13	[1;49;32mapplypatch-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	896	Jun  9 07:13	[1;49;32mcommit-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	189	Jun  9 07:13	[1;49;32mpost-update.sample[0;00m
+rwx------	1	hkwan003	csmajs	398	Jun  9 07:13	[1;49;32mpre-applypatch.sample[0;00m
+rwx------	1	hkwan003	csmajs	1635	Jun  9 07:13	[1;49;32mpre-commit.sample[0;00m
+rwx------	1	hkwan003	csmajs	1348	Jun  9 07:13	[1;49;32mpre-push.sample[0;00m
+rwx------	1	hkwan003	csmajs	4951	Jun  9 07:13	[1;49;32mpre-rebase.sample[0;00m
+rwx------	1	hkwan003	csmajs	1239	Jun  9 07:13	[1;49;32mprepare-commit-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	3611	Jun  9 07:13	[1;49;32mupdate.sample[0;00m
 Total blocks: 48
 
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
 Total blocks: 8
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m bin/ls -R
-[1;49;34mbin[0;00m
-[1;49;mLICENSE[0;00m
-[1;49;mMakefile[0;00m
-[1;49;mREADME.md[0;00m
-[1;49;34msrc[0;00m
-[1;49;34mtests[0;00m
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m bin/ls -alR[K[K[KRla
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	57	hkwan003	csmajs	8192	Jun  9 07:17	[1;100;34m..[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.git[0;00m
+rw-------	1	hkwan003	csmajs	16	Jun  9 07:13	[1;100;m.gitignore[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mbin[0;00m
+rw-------	1	hkwan003	csmajs	1079	Jun  9 07:13	[1;49;mLICENSE[0;00m
+rw-------	1	hkwan003	csmajs	255	Jun  9 07:13	[1;49;mMakefile[0;00m
+rw-------	1	hkwan003	csmajs	783	Jun  9 07:13	[1;49;mREADME.md[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34msrc[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mtests[0;00m
+Total blocks: 40
 
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	7720	Jun  9 07:13	[1;49;mexec.script[0;00m
+rw-------	1	hkwan003	csmajs	0	Jun  9 07:17	[1;49;mls.script[0;00m
+Total blocks: 16
 
-[1;49;mexec.script[0;00m
-[1;49;mls.script[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	4365	Jun  9 07:13	[1;49;mcp.cpp[0;00m
+rw-------	1	hkwan003	csmajs	5960	Jun  9 07:13	[1;49;mls.cpp[0;00m
+rw-------	1	hkwan003	csmajs	6677	Jun  9 07:13	[1;49;mmain.cpp[0;00m
+rw-------	1	hkwan003	csmajs	2698	Jun  9 07:13	[1;49;mTimer.h[0;00m
+Total blocks: 36
 
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rwx------	1	hkwan003	csmajs	84563	Jun  9 07:17	[1;49;32mls[0;00m
+Total blocks: 96
 
-[1;49;mcp.cpp[0;00m
-[1;49;mls.cpp[0;00m
-[1;49;mmain.cpp[0;00m
-[1;49;mTimer.h[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mbranches[0;00m
+rw-------	1	hkwan003	csmajs	317	Jun  9 07:15	[1;49;mconfig[0;00m
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+rw-------	1	hkwan003	csmajs	73	Jun  9 07:13	[1;49;mdescription[0;00m
+rw-------	1	hkwan003	csmajs	19	Jun  9 07:15	[1;49;mHEAD[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mhooks[0;00m
+rw-------	1	hkwan003	csmajs	808	Jun  9 07:15	[1;49;mindex[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34minfo[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mlogs[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mobjects[0;00m
+rw-------	1	hkwan003	csmajs	596	Jun  9 07:13	[1;49;mpacked-refs[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mrefs[0;00m
+Total blocks: 48
 
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;49;34mheads[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mremotes[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mtags[0;00m
+Total blocks: 20
 
-[1;49;32mls[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+Total blocks: 8
 
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m bin/ls a[K-a           l
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34morigin[0;00m
+Total blocks: 12
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	32	Jun  9 07:13	[1;49;mHEAD[0;00m
+Total blocks: 8
+
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	41	Jun  9 07:15	[1;49;mls[0;00m
+rw-------	1	hkwan003	csmajs	41	Jun  9 07:13	[1;49;mmaster[0;00m
+Total blocks: 8
+
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34minfo[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mpack[0;00m
+Total blocks: 16
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+r--------	1	hkwan003	csmajs	14064	Jun  9 07:13	[1;49;mpack-dd88585b0cff6049f3ea4ae6c6daa0c8335c174d.idx[0;00m
+r--------	1	hkwan003	csmajs	210350	Jun  9 07:13	[1;49;mpack-dd88585b0cff6049f3ea4ae6c6daa0c8335c174d.pack[0;00m
+Total blocks: 236
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+Total blocks: 8
+
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	567	Jun  9 07:15	[1;49;mHEAD[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mrefs[0;00m
+Total blocks: 16
+
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;49;34mheads[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mremotes[0;00m
+Total blocks: 16
+
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34morigin[0;00m
+Total blocks: 12
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	188	Jun  9 07:13	[1;49;mHEAD[0;00m
+Total blocks: 12
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	181	Jun  9 07:15	[1;49;mls[0;00m
+rw-------	1	hkwan003	csmajs	188	Jun  9 07:13	[1;49;mmaster[0;00m
+Total blocks: 16
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	240	Jun  9 07:13	[1;49;mexclude[0;00m
+Total blocks: 12
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rwx------	1	hkwan003	csmajs	452	Jun  9 07:13	[1;49;32mapplypatch-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	896	Jun  9 07:13	[1;49;32mcommit-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	189	Jun  9 07:13	[1;49;32mpost-update.sample[0;00m
+rwx------	1	hkwan003	csmajs	398	Jun  9 07:13	[1;49;32mpre-applypatch.sample[0;00m
+rwx------	1	hkwan003	csmajs	1635	Jun  9 07:13	[1;49;32mpre-commit.sample[0;00m
+rwx------	1	hkwan003	csmajs	1348	Jun  9 07:13	[1;49;32mpre-push.sample[0;00m
+rwx------	1	hkwan003	csmajs	4951	Jun  9 07:13	[1;49;32mpre-rebase.sample[0;00m
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+rwx------	1	hkwan003	csmajs	1239	Jun  9 07:13	[1;49;32mprepare-commit-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	3611	Jun  9 07:13	[1;49;32mupdate.sample[0;00m
+Total blocks: 48
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+Total blocks: 8
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m bin/ls -Rla[K[K[KlA[KaR[K[KRa
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	57	hkwan003	csmajs	8192	Jun  9 07:17	[1;100;34m..[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.git[0;00m
+rw-------	1	hkwan003	csmajs	16	Jun  9 07:13	[1;100;m.gitignore[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mbin[0;00m
+rw-------	1	hkwan003	csmajs	1079	Jun  9 07:13	[1;49;mLICENSE[0;00m
+rw-------	1	hkwan003	csmajs	255	Jun  9 07:13	[1;49;mMakefile[0;00m
+rw-------	1	hkwan003	csmajs	783	Jun  9 07:13	[1;49;mREADME.md[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34msrc[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mtests[0;00m
+Total blocks: 40
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	7720	Jun  9 07:13	[1;49;mexec.script[0;00m
+rw-------	1	hkwan003	csmajs	0	Jun  9 07:17	[1;49;mls.script[0;00m
+Total blocks: 16
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	4365	Jun  9 07:13	[1;49;mcp.cpp[0;00m
+rw-------	1	hkwan003	csmajs	5960	Jun  9 07:13	[1;49;mls.cpp[0;00m
+rw-------	1	hkwan003	csmajs	6677	Jun  9 07:13	[1;49;mmain.cpp[0;00m
+rw-------	1	hkwan003	csmajs	2698	Jun  9 07:13	[1;49;mTimer.h[0;00m
+Total blocks: 36
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rwx------	1	hkwan003	csmajs	84563	Jun  9 07:17	[1;49;32mls[0;00m
+Total blocks: 96
+
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mbranches[0;00m
+rw-------	1	hkwan003	csmajs	317	Jun  9 07:15	[1;49;mconfig[0;00m
+rw-------	1	hkwan003	csmajs	73	Jun  9 07:13	[1;49;mdescription[0;00m
+rw-------	1	hkwan003	csmajs	19	Jun  9 07:15	[1;49;mHEAD[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mhooks[0;00m
+rw-------	1	hkwan003	csmajs	808	Jun  9 07:15	[1;49;mindex[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34minfo[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mlogs[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mobjects[0;00m
+rw-------	1	hkwan003	csmajs	596	Jun  9 07:13	[1;49;mpacked-refs[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mrefs[0;00m
+Total blocks: 48
+
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;49;34mheads[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mremotes[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mtags[0;00m
+Total blocks: 20
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+Total blocks: 8
+
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34morigin[0;00m
+Total blocks: 12
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	32	Jun  9 07:13	[1;49;mHEAD[0;00m
+Total blocks: 8
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	41	Jun  9 07:15	[1;49;mls[0;00m
+rw-------	1	hkwan003	csmajs	41	Jun  9 07:13	[1;49;mmaster[0;00m
+Total blocks: 8
+
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34minfo[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mpack[0;00m
+Total blocks: 16
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+r--------	1	hkwan003	csmajs	14064	Jun  9 07:13	[1;49;mpack-dd88585b0cff6049f3ea4ae6c6daa0c8335c174d.idx[0;00m
+r--------	1	hkwan003	csmajs	210350	Jun  9 07:13	[1;49;mpack-dd88585b0cff6049f3ea4ae6c6daa0c8335c174d.pack[0;00m
+Total blocks: 236
+
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+Total blocks: 8
+
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	567	Jun  9 07:15	[1;49;mHEAD[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mrefs[0;00m
+Total blocks: 16
+
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;49;34mheads[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mremotes[0;00m
+Total blocks: 16
+
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34morigin[0;00m
+Total blocks: 12
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	188	Jun  9 07:13	[1;49;mHEAD[0;00m
+Total blocks: 12
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	181	Jun  9 07:15	[1;49;mls[0;00m
+rw-------	1	hkwan003	csmajs	188	Jun  9 07:13	[1;49;mmaster[0;00m
+Total blocks: 16
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	240	Jun  9 07:13	[1;49;mexclude[0;00m
+Total blocks: 12
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rwx------	1	hkwan003	csmajs	452	Jun  9 07:13	[1;49;32mapplypatch-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	896	Jun  9 07:13	[1;49;32mcommit-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	189	Jun  9 07:13	[1;49;32mpost-update.sample[0;00m
+rwx------	1	hkwan003	csmajs	398	Jun  9 07:13	[1;49;32mpre-applypatch.sample[0;00m
+rwx------	1	hkwan003	csmajs	1635	Jun  9 07:13	[1;49;32mpre-commit.sample[0;00m
+rwx------	1	hkwan003	csmajs	1348	Jun  9 07:13	[1;49;32mpre-push.sample[0;00m
+rwx------	1	hkwan003	csmajs	4951	Jun  9 07:13	[1;49;32mpre-rebase.sample[0;00m
+rwx------	1	hkwan003	csmajs	1239	Jun  9 07:13	[1;49;32mprepare-commit-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	3611	Jun  9 07:13	[1;49;32mupdate.sample[0;00m
+Total blocks: 48
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+Total blocks: 8
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m bin/ls -l -R
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mbin[0;00m
+rw-------	1	hkwan003	csmajs	1079	Jun  9 07:13	[1;49;mLICENSE[0;00m
+rw-------	1	hkwan003	csmajs	255	Jun  9 07:13	[1;49;mMakefile[0;00m
+rw-------	1	hkwan003	csmajs	783	Jun  9 07:13	[1;49;mREADME.md[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34msrc[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mtests[0;00m
+Total blocks: 24
+
+rw-------	1	hkwan003	csmajs	7720	Jun  9 07:13	[1;49;mexec.script[0;00m
+rw-------	1	hkwan003	csmajs	0	Jun  9 07:17	[1;49;mls.script[0;00m
+Total blocks: 8
+
+rw-------	1	hkwan003	csmajs	4365	Jun  9 07:13	[1;49;mcp.cpp[0;00m
+rw-------	1	hkwan003	csmajs	5960	Jun  9 07:13	[1;49;mls.cpp[0;00m
+rw-------	1	hkwan003	csmajs	6677	Jun  9 07:13	[1;49;mmain.cpp[0;00m
+rw-------	1	hkwan003	csmajs	2698	Jun  9 07:13	[1;49;mTimer.h[0;00m
+Total blocks: 28
+
+rwx------	1	hkwan003	csmajs	84563	Jun  9 07:17	[1;49;32mls[0;00m
+Total blocks: 88
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m bin/ls -l -R[K[K[K[K[K-lR
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mbin[0;00m
+rw-------	1	hkwan003	csmajs	1079	Jun  9 07:13	[1;49;mLICENSE[0;00m
+rw-------	1	hkwan003	csmajs	255	Jun  9 07:13	[1;49;mMakefile[0;00m
+rw-------	1	hkwan003	csmajs	783	Jun  9 07:13	[1;49;mREADME.md[0;00m
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34msrc[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mtests[0;00m
+Total blocks: 24
+
+rw-------	1	hkwan003	csmajs	7720	Jun  9 07:13	[1;49;mexec.script[0;00m
+rw-------	1	hkwan003	csmajs	0	Jun  9 07:17	[1;49;mls.script[0;00m
+Total blocks: 8
+
+rw-------	1	hkwan003	csmajs	4365	Jun  9 07:13	[1;49;mcp.cpp[0;00m
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+rw-------	1	hkwan003	csmajs	5960	Jun  9 07:13	[1;49;mls.cpp[0;00m
+rw-------	1	hkwan003	csmajs	6677	Jun  9 07:13	[1;49;mmain.cpp[0;00m
+rw-------	1	hkwan003	csmajs	2698	Jun  9 07:13	[1;49;mTimer.h[0;00m
+Total blocks: 28
+
+rwx------	1	hkwan003	csmajs	84563	Jun  9 07:17	[1;49;32mls[0;00m
+Total blocks: 88
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m bin/ls -lR[K[K[K-Rl
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mbin[0;00m
+rw-------	1	hkwan003	csmajs	1079	Jun  9 07:13	[1;49;mLICENSE[0;00m
+rw-------	1	hkwan003	csmajs	255	Jun  9 07:13	[1;49;mMakefile[0;00m
+rw-------	1	hkwan003	csmajs	783	Jun  9 07:13	[1;49;mREADME.md[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34msrc[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mtests[0;00m
+Total blocks: 24
+
+rw-------	1	hkwan003	csmajs	7720	Jun  9 07:13	[1;49;mexec.script[0;00m
+rw-------	1	hkwan003	csmajs	0	Jun  9 07:17	[1;49;mls.script[0;00m
+Total blocks: 8
+
+rw-------	1	hkwan003	csmajs	4365	Jun  9 07:13	[1;49;mcp.cpp[0;00m
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+rw-------	1	hkwan003	csmajs	5960	Jun  9 07:13	[1;49;mls.cpp[0;00m
+rw-------	1	hkwan003	csmajs	6677	Jun  9 07:13	[1;49;mmain.cpp[0;00m
+rw-------	1	hkwan003	csmajs	2698	Jun  9 07:13	[1;49;mTimer.h[0;00m
+Total blocks: 28
+
+rwx------	1	hkwan003	csmajs	84563	Jun  9 07:17	[1;49;32mls[0;00m
+Total blocks: 88
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m bin/ls -Rl[K[K[K-a -l
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	57	hkwan003	csmajs	8192	Jun  9 07:17	[1;100;34m..[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.git[0;00m
+rw-------	1	hkwan003	csmajs	16	Jun  9 07:13	[1;100;m.gitignore[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mbin[0;00m
+rw-------	1	hkwan003	csmajs	1079	Jun  9 07:13	[1;49;mLICENSE[0;00m
+rw-------	1	hkwan003	csmajs	255	Jun  9 07:13	[1;49;mMakefile[0;00m
+rw-------	1	hkwan003	csmajs	783	Jun  9 07:13	[1;49;mREADME.md[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34msrc[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mtests[0;00m
+Total blocks: 40
+
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m gin[K[K[Kbin/ls
+[1;49;34mbin[0;00m  [1;49;mLICENSE[0;00m  [1;49;mMakefile[0;00m  [1;49;mREADME.md[0;00m  [1;49;34msrc[0;00m  [1;49;34mtests[0;00m  
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m bin/ls -R al
 Error with opendir(): No such file or directory
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m bin/ls -alr[KR
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m.[0;00m
-drwx------	3	hkwan003	csmajs	4096	Jun  9 06:58	[1;100;34m..[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.git[0;00m
-rw-------	1	hkwan003	csmajs	16	May 25 23:53	[1;100;m.gitignore[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mbin[0;00m
-rw-------	1	hkwan003	csmajs	1079	May 24 18:48	[1;49;mLICENSE[0;00m
-rw-------	1	hkwan003	csmajs	255	Jun  9 07:02	[1;49;mMakefile[0;00m
-rw-------	1	hkwan003	csmajs	783	Jun  9 07:02	[1;49;mREADME.md[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:03	[1;49;34msrc[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;49;34mtests[0;00m
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m bin/ls -R al[1Pal
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	57	hkwan003	csmajs	8192	Jun  9 07:17	[1;100;34m..[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.git[0;00m
+rw-------	1	hkwan003	csmajs	16	Jun  9 07:13	[1;100;m.gitignore[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mbin[0;00m
+rw-------	1	hkwan003	csmajs	1079	Jun  9 07:13	[1;49;mLICENSE[0;00m
+rw-------	1	hkwan003	csmajs	255	Jun  9 07:13	[1;49;mMakefile[0;00m
+rw-------	1	hkwan003	csmajs	783	Jun  9 07:13	[1;49;mREADME.md[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34msrc[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;49;34mtests[0;00m
+Total blocks: 40
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	7720	Jun  9 07:13	[1;49;mexec.script[0;00m
+rw-------	1	hkwan003	csmajs	0	Jun  9 07:17	[1;49;mls.script[0;00m
+Total blocks: 16
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	4365	Jun  9 07:13	[1;49;mcp.cpp[0;00m
+rw-------	1	hkwan003	csmajs	5960	Jun  9 07:13	[1;49;mls.cpp[0;00m
+rw-------	1	hkwan003	csmajs	6677	Jun  9 07:13	[1;49;mmain.cpp[0;00m
+rw-------	1	hkwan003	csmajs	2698	Jun  9 07:13	[1;49;mTimer.h[0;00m
 Total blocks: 36
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m.[0;00m
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	7720	May 24 18:48	[1;49;mexec.script[0;00m
-rw-------	1	hkwan003	csmajs	32768	Jun  9 07:08	[1;49;mls.script[0;00m
-Total blocks: 48
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:03	[1;100;34m.[0;00m
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	4365	Jun  9 07:02	[1;49;mcp.cpp[0;00m
-rw-------	1	hkwan003	csmajs	5960	Jun  9 07:02	[1;49;mls.cpp[0;00m
-rw-------	1	hkwan003	csmajs	6677	Jun  9 07:02	[1;49;mmain.cpp[0;00m
-rw-------	1	hkwan003	csmajs	2698	Jun  9 07:02	[1;49;mTimer.h[0;00m
-Total blocks: 36
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m.[0;00m
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m..[0;00m
-rwx------	1	hkwan003	csmajs	84563	Jun  9 07:07	[1;49;32mls[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+rwx------	1	hkwan003	csmajs	84563	Jun  9 07:17	[1;49;32mls[0;00m
 Total blocks: 96
 
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	6	hkwan003	csmajs	4096	Jun  9 07:07	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mbranches[0;00m
-rw-------	1	hkwan003	csmajs	9	Jun  9 07:04	[1;49;mCOMMIT_EDITMSG[0;00m
-rw-------	1	hkwan003	csmajs	375	Jun  7 00:31	[1;49;mconfig[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-rw-------	1	hkwan003	csmajs	73	May 24 18:48	[1;49;mdescription[0;00m
-rw-------	1	hkwan003	csmajs	19	Jun  9 07:02	[1;49;mHEAD[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mhooks[0;00m
-rw-------	1	hkwan003	csmajs	808	Jun  9 07:03	[1;49;mindex[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34minfo[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mlogs[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34mobjects[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  1 14:21	[1;49;mORIG_HEAD[0;00m
-rw-------	1	hkwan003	csmajs	417	Jun  9 07:04	[1;49;mpacked-refs[0;00m
-drwx------	5	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mrefs[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	6	hkwan003	csmajs	4096	Jun  9 07:17	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mbranches[0;00m
+rw-------	1	hkwan003	csmajs	317	Jun  9 07:15	[1;49;mconfig[0;00m
+rw-------	1	hkwan003	csmajs	73	Jun  9 07:13	[1;49;mdescription[0;00m
+rw-------	1	hkwan003	csmajs	19	Jun  9 07:15	[1;49;mHEAD[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mhooks[0;00m
+rw-------	1	hkwan003	csmajs	808	Jun  9 07:15	[1;49;mindex[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34minfo[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mlogs[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mobjects[0;00m
+rw-------	1	hkwan003	csmajs	596	Jun  9 07:13	[1;49;mpacked-refs[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mrefs[0;00m
 Total blocks: 48
 
-drwx------	5	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34mheads[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mremotes[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34mtags[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;49;34mheads[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mremotes[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mtags[0;00m
 Total blocks: 20
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	5	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	41	May 30 11:21	[1;49;mhw3[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
 Total blocks: 8
 
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	5	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;49;34morigin[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34morigin[0;00m
 Total blocks: 12
 
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;100;34m.[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	32	May 24 18:48	[1;49;mHEAD[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  7 00:31	[1;49;mmaster[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  1 14:21	[1;49;msignals[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	32	Jun  9 07:13	[1;49;mHEAD[0;00m
 Total blocks: 8
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	5	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	41	May 25 23:00	[1;49;mexec[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  9 07:04	[1;49;mls[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  9 07:02	[1;49;mmaster[0;00m
-rw-------	1	hkwan003	csmajs	41	Jun  1 14:21	[1;49;msignals[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	5	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	41	Jun  9 07:15	[1;49;mls[0;00m
+rw-------	1	hkwan003	csmajs	41	Jun  9 07:13	[1;49;mmaster[0;00m
 Total blocks: 8
 
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;49;34m07[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34minfo[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mpack[0;00m
+Total blocks: 16
+
 do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;49;34m0a[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;49;34m15[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 26 00:14	[1;49;34m16[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;49;34m1b[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 00:05	[1;49;34m1d[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;49;34m1e[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34m22[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;49;34m2d[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;49;34m2e[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:20	[1;49;34m35[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;49;34m3e[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;49;34m3f[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 21:35	[1;49;34m43[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;49;34m44[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 26 00:13	[1;49;34m47[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;49;34m48[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;49;34m4e[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;49;34m5c[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 00:05	[1;49;34m63[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:21	[1;49;34m6a[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 26 00:13	[1;49;34m6c[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;49;34m70[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;49;34m78[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34m79[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;49;34m7a[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 22:12	[1;49;34m7c[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34m85[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;49;34m86[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;49;34m8d[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;49;34m90[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;49;34m92[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;49;34m97[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;49;34m9d[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34ma0[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;49;34ma4[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;49;34mac[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 22:13	[1;49;34mb0[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;49;34mb3[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;49;34mb6[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;49;34mb7[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;49;34mc5[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;49;34mcc[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:20	[1;49;34md2[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 26 00:14	[1;49;34md7[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	2	hkwan003	csmajs	4096	May 29 22:13	[1;49;34mdb[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;49;34mdc[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 27 16:10	[1;49;34me0[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;49;34me4[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;49;34me6[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;49;34mee[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;49;34mf9[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:29	[1;49;34mfa[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;49;34mfd[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;49;34mff[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34minfo[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mpack[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+r--------	1	hkwan003	csmajs	14064	Jun  9 07:13	[1;49;mpack-dd88585b0cff6049f3ea4ae6c6daa0c8335c174d.idx[0;00m
+r--------	1	hkwan003	csmajs	210350	Jun  9 07:13	[1;49;mpack-dd88585b0cff6049f3ea4ae6c6daa0c8335c174d.pack[0;00m
 Total blocks: 236
 
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	12104	May 24 18:48	[1;49;mpack-19ebd04ea5f78dee5d2516392e76ecaa2727c171.idx[0;00m
-r--------	1	hkwan003	csmajs	189841	May 24 18:48	[1;49;mpack-19ebd04ea5f78dee5d2516392e76ecaa2727c171.pack[0;00m
-Total blocks: 212
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
 Total blocks: 8
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;100;34m.[0;00m
 do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	248	May 29 02:09	[1;49;mc9b86cbc482e40d6a7aa4f1ccb17fff9f931c6[0;00m
-r--------	1	hkwan003	csmajs	248	Jun  9 07:02	[1;49;mdc67abfd0beaf3e33c17b91a95db2243449a4d[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	567	Jun  9 07:15	[1;49;mHEAD[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mrefs[0;00m
 Total blocks: 16
 
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;100;34m.[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	7557	May 28 00:13	[1;49;m30bfa4c8d0fd68215116a7d5ccbe2817866e27[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;49;34mheads[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34mremotes[0;00m
 Total blocks: 16
 
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:29	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-r--------	1	hkwan003	csmajs	1934	Jun  7 00:29	[1;49;md4c7db6c5285b507ae2145bc5f0b347c48b9a0[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;49;34morigin[0;00m
 Total blocks: 12
 
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	6649	May 24 18:50	[1;49;m3a81d70f3436be538f1dedde6469060acb09a6[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	3	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	188	Jun  9 07:13	[1;49;mHEAD[0;00m
+Total blocks: 12
+
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m.[0;00m
+drwx------	4	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	181	Jun  9 07:15	[1;49;mls[0;00m
+rw-------	1	hkwan003	csmajs	188	Jun  9 07:13	[1;49;mmaster[0;00m
 Total blocks: 16
 
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1940	Jun  9 07:02	[1;49;m87e952b75f3d422710e02d208423f7b62f0c2e[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rw-------	1	hkwan003	csmajs	240	Jun  9 07:13	[1;49;mexclude[0;00m
 Total blocks: 12
 
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	192	May 24 18:51	[1;49;m3dc7ab57c8a38f389f9ef0dd8015bc387d3bd0[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	221	May 29 21:36	[1;49;mbe2ac7d741e3f722689a483ea5c80a148675de[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 27 16:10	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	7554	May 27 16:10	[1;49;mf770a214e861eec47452cdd79c262cdaee216c[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	160	May 28 00:13	[1;49;m950f546a704620d599feac8820640787b7b31f[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 22:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 29 22:13	[1;49;m4600a5f841fb406e8462d0fd6d50c5fc4a8d21[0;00m
-Total blocks: 12
-
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	2	hkwan003	csmajs	4096	May 26 00:14	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	155	May 26 00:14	[1;49;md464235983f51f2b4d6a3af9f52015f21a35d4[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	248	Jun  1 14:20	[1;49;m5975fd1c768c7d2b7fd23a821a9d6df3f797ae[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	242	May 29 02:09	[1;49;m280334008da63868155f3e2144352c1b54cab4[0;00m
-r--------	1	hkwan003	csmajs	220	May 30 11:20	[1;49;mba5a1050c24cff353a3aaba6d4244d9f24057b[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1161	May 24 18:51	[1;49;m4d1545cd79ab115b016ce7685696d0f8fa0e1f[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 27 00:05	[1;49;m0672622e6911f616e85fefc072ae6957f6d437[0;00m
-r--------	1	hkwan003	csmajs	5044	May 30 11:20	[1;49;m95cbb7d7294e592349946ac45608bc9fef4e01[0;00m
-Total blocks: 20
-
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	151	May 30 11:20	[1;49;m6d47e9a777c98fe4ee86985fc564db749a8964[0;00m
-Total blocks: 12
-
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	152	May 24 18:53	[1;49;ma3c19457c76e3dea11c32d07441206f7bcb147[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 22:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	171	May 29 22:13	[1;49;ma972da3f0a48e96bea5f4fd73aa2d64bf71951[0;00m
-r--------	1	hkwan003	csmajs	152	May 29 22:13	[1;49;mec60d0505c97c2ad0fdd5f3c0236270e87fc30[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	193	May 24 18:50	[1;49;m5ad96e74a0156693222216ec389aaec205c725[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	192	May 24 18:48	[1;49;m04441c939b6349a4d24e23d4c2f0c93376abd4[0;00m
-r--------	1	hkwan003	csmajs	241	May 28 00:13	[1;49;m63afc5c4f9335fd3abc7db319f3db8f29be63b[0;00m
-r--------	1	hkwan003	csmajs	241	May 24 18:51	[1;49;m9ec6eb8e9121fc4ac3ea6d9b9200e7583311d9[0;00m
-Total blocks: 20
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	160	May 24 18:48	[1;49;m5cc289421f2051499fe5c444a2d6073b403c08[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	169	Jun  7 00:31	[1;49;m9380e3a7c2d28c681f331cca8bd86ab0969de7[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 30 11:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 30 11:20	[1;49;ma1cbf6ef860f2bf06d532ceb22fec0227c0e83[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;100;34m.[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 29 21:36	[1;49;mc52094beb950ca7bf1889c737cf74c99c5c41f[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	7839	May 29 02:09	[1;49;m1471ea1b93618ae4cd2189204d9321a4e942f1[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	165	Jun  9 07:02	[1;49;m49b51a9ac40ab739ab4b278f1b1423c7db0cd0[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 24 18:53	[1;49;m06db41b47bab1a9458e9ad129270782742a5f7[0;00m
-r--------	1	hkwan003	csmajs	139	Jun  9 07:04	[1;49;mcf210d83f54e7eb2501cb037631f7d98215cef[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	6651	May 24 18:48	[1;49;m30621f31b840d0e92602a02f8b4dd318ba6a2d[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 29 22:12	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1980	May 29 22:12	[1;49;m884c8f6d307d1d75aab0fb211e9cd5b7a3e377[0;00m
-Total blocks: 12
-
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:02	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	Jun  9 07:02	[1;49;m34b6245bf2873e31f6e8a2c852d54b1c000efd[0;00m
-r--------	1	hkwan003	csmajs	241	May 26 00:14	[1;49;m3f557dcc07f3dc26091fb1e97311bdcab8f6be[0;00m
-r--------	1	hkwan003	csmajs	241	May 24 18:48	[1;49;m8d50d82d217f0fe151af844e0bd04de30712e3[0;00m
-Total blocks: 20
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	211	Jun  9 07:04	[1;49;mef33d3fd26bf86058e0417896887c9c4ebb10b[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	252	May 28 00:13	[1;49;meb0a15af4cb48b5ac136d696ddeff72ebd2141[0;00m
-Total blocks: 12
-
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 24 18:50	[1;49;m2cc4f984b353349ac77e11be2e1b5f772db1a7[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 26 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	6805	May 26 00:13	[1;49;mcdcfe7cab2e9ac26d2582db3e2fc23c0e02975[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:21	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	153	Jun  1 14:21	[1;49;m805c763b81d724ab087584ebdedddfa49cd400[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 27 00:05	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	162	May 27 00:05	[1;49;m1a9e022aa50757b8a4ef5deb1bb0d6fa015637[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:51	[1;100;34m.[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-r--------	1	hkwan003	csmajs	157	May 24 18:51	[1;49;m55a8436da2c8cd5c88a35bdee3cfb0f177bc56[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	Jun  7 00:31	[1;49;mf3429dbb7accaa4cce2c4c01b94ebca2cd29c9[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	818	May 29 22:12	[1;49;m8553e17eedbd9c037869ba6f0f7c9f47dec5dc[0;00m
-r--------	1	hkwan003	csmajs	220	Jun  7 00:31	[1;49;md2e46a60e3cf1f1cde01ba65f006bdf907dbf5[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 26 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	90	May 26 00:13	[1;49;m837760fc8d16d0c5bbd3761ab423dfbfb4891a[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	157	May 27 16:11	[1;49;m19bebd7c15c550226567e271636f34509a30de[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 21:35	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	7269	May 27 00:05	[1;49;m360dbb7f42da99f3628e1b930ba6363b918e0e[0;00m
-r--------	1	hkwan003	csmajs	5187	May 29 21:35	[1;49;ma61afca7f616c9c9f7d89c67eabf52f6be397a[0;00m
-Total blocks: 24
-
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	8217	May 29 02:09	[1;49;m61f81b4ab93a7494ee3576a93bee81cef1c354[0;00m
-Total blocks: 20
-
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	241	May 27 16:11	[1;49;m158827b0730ed229224d656e2a8b6631634ba5[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  1 14:20	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	152	Jun  1 14:20	[1;49;m6a202fe8619fede686f5e69953e97b1a9a059b[0;00m
-r--------	1	hkwan003	csmajs	241	Jun  1 14:20	[1;49;mcf432ff20c815563f2b4e3b367c2b24a90b1d0[0;00m
-Total blocks: 16
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1068	May 24 18:53	[1;49;me77bef21017c984c213bddaeffb498a4e7de93[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 28 00:13	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	1967	May 28 00:13	[1;49;mcae29841b0ed18445b44068fb1ef51689a5100[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	163	Jun  9 07:04	[1;49;m6e4d687aeb648c3a02f44ede57dea2c4de93fd[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 21:36	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	164	May 29 21:36	[1;49;m508993de8cd5a552dc158889e6e6b2dad0f751[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 27 00:05	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	220	May 27 00:05	[1;49;m8de78d5df55f747855f69f2ff64db6f8be0110[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 29 02:09	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	165	May 29 02:09	[1;49;m09917dd011be17297c24fdc63f54456b35ef4d[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 26 00:14	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	220	May 26 00:14	[1;49;mf700fb5baf0dfbefb41d8fb4a62caa20ee67ed[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:50	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	151	May 24 18:50	[1;49;m5d9062d56e77756945b111e6689cc6790df64d[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:53	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	193	May 24 18:53	[1;49;me99db3bae3b9e22a8b3d4ce26187b8c10a0b96[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 27 16:11	[1;100;34m.[0;00m
-drwx------	59	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-r--------	1	hkwan003	csmajs	220	May 27 16:11	[1;49;m3304b7ffb8deec66ab577ccb066281481bc270[0;00m
-Total blocks: 12
-
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	7422	Jun  9 07:04	[1;49;mHEAD[0;00m
-drwx------	4	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mrefs[0;00m
-Total blocks: 20
-
-drwx------	4	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;49;34mheads[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;49;34mremotes[0;00m
-Total blocks: 16
-
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	4	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-drwx------	2	hkwan003	csmajs	4096	May 24 18:54	[1;49;34morigin[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:54	[1;100;34m.[0;00m
-drwx------	3	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-rw-------	1	hkwan003	csmajs	176	May 24 18:48	[1;49;mHEAD[0;00m
-rw-------	1	hkwan003	csmajs	570	Jun  7 00:31	[1;49;mmaster[0;00m
-rw-------	1	hkwan003	csmajs	1400	Jun  1 14:21	[1;49;msignals[0;00m
-Total blocks: 20
-
-drwx------	2	hkwan003	csmajs	4096	Jun  7 00:31	[1;100;34m.[0;00m
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-drwx------	4	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	171	May 25 23:00	[1;49;mexec[0;00m
-rw-------	1	hkwan003	csmajs	333	Jun  9 07:04	[1;49;mls[0;00m
-rw-------	1	hkwan003	csmajs	1132	Jun  9 07:02	[1;49;mmaster[0;00m
-rw-------	1	hkwan003	csmajs	1964	Jun  1 14:21	[1;49;msignals[0;00m
-Total blocks: 24
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-rw-------	1	hkwan003	csmajs	240	May 24 18:48	[1;49;mexclude[0;00m
-Total blocks: 12
-
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
-rwx------	1	hkwan003	csmajs	452	May 24 18:48	[1;49;32mapplypatch-msg.sample[0;00m
-rwx------	1	hkwan003	csmajs	896	May 24 18:48	[1;49;32mcommit-msg.sample[0;00m
-rwx------	1	hkwan003	csmajs	189	May 24 18:48	[1;49;32mpost-update.sample[0;00m
-rwx------	1	hkwan003	csmajs	398	May 24 18:48	[1;49;32mpre-applypatch.sample[0;00m
-rwx------	1	hkwan003	csmajs	1704	May 24 18:48	[1;49;32mpre-commit.sample[0;00m
-rw-------	1	hkwan003	csmajs	1348	May 24 18:48	[1;49;mpre-push.sample[0;00m
-rwx------	1	hkwan003	csmajs	4951	May 24 18:48	[1;49;32mpre-rebase.sample[0;00m
-rwx------	1	hkwan003	csmajs	1239	May 24 18:48	[1;49;32mprepare-commit-msg.sample[0;00m
-rwx------	1	hkwan003	csmajs	3611	May 24 18:48	[1;49;32mupdate.sample[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
+rwx------	1	hkwan003	csmajs	452	Jun  9 07:13	[1;49;32mapplypatch-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	896	Jun  9 07:13	[1;49;32mcommit-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	189	Jun  9 07:13	[1;49;32mpost-update.sample[0;00m
+rwx------	1	hkwan003	csmajs	398	Jun  9 07:13	[1;49;32mpre-applypatch.sample[0;00m
+rwx------	1	hkwan003	csmajs	1635	Jun  9 07:13	[1;49;32mpre-commit.sample[0;00m
+rwx------	1	hkwan003	csmajs	1348	Jun  9 07:13	[1;49;32mpre-push.sample[0;00m
+rwx------	1	hkwan003	csmajs	4951	Jun  9 07:13	[1;49;32mpre-rebase.sample[0;00m
+rwx------	1	hkwan003	csmajs	1239	Jun  9 07:13	[1;49;32mprepare-commit-msg.sample[0;00m
+rwx------	1	hkwan003	csmajs	3611	Jun  9 07:13	[1;49;32mupdate.sample[0;00m
 Total blocks: 48
 
-drwx------	2	hkwan003	csmajs	4096	May 24 18:48	[1;100;34m.[0;00m
-drwx------	8	hkwan003	csmajs	4096	Jun  9 07:04	[1;100;34m..[0;00m
+drwx------	2	hkwan003	csmajs	4096	Jun  9 07:13	[1;100;34m.[0;00m
+drwx------	8	hkwan003	csmajs	4096	Jun  9 07:15	[1;100;34m..[0;00m
 Total blocks: 8
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m bin/r[Kls
-[1;49;34mbin[0;00m  [1;49;mLICENSE[0;00m  [1;49;mMakefile[0;00m  [1;49;mREADME.md[0;00m  [1;49;34msrc[0;00m  [1;49;34mtests[0;00m  
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m bin/ls -a
-[1;100;34m.[0;00m  [1;100;34m..[0;00m  [1;100;34m.git[0;00m  [1;100;m.gitignore[0;00m  [1;49;34mbin[0;00m  [1;49;mLICENSE[0;00m  [1;49;mMakefile[0;00m  [1;49;mREADME.md[0;00m  [1;49;34msrc[0;00m  [1;49;34mtests[0;00m  
-[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/Documents/rshell[0;95m (ls) [0;36m$[0m exit
+[s%%%%%%%%%%[u[0;32mhkwan003[0;36m@[0;32mcs100[0;36m:[0;32m~/rshell[0;95m (ls) [0;36m$[0m exit
 exit
 ~
 hkwan003@hammer $ exit
 exit
 
-Script done on Tue 09 Jun 2015 07:18:12 AM PDT
+Script done on Tue 09 Jun 2015 07:25:42 AM PDT
